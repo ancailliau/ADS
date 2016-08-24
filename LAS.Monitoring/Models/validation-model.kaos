@@ -1,0 +1,411 @@
+﻿declare goal
+  name "Achieve [At Hospital When Incident Reported]"
+  refinedby mobilized_when_reported, at_hospital_when_mobilized
+end
+
+declare goal
+  id at_hospital_when_mobilized
+  name "Achieve [Ambulance At Hospital When Mobilized]"
+  refinedby ambulance_at_hospital_when_mobilized, ambulance_on_scene_when_mobilized
+end
+
+declare goal
+  id mobilized_when_reported
+  name "Achieve [Ambulance Mobilized When Incident Reported]"
+  refinedby ambulance_allocated, mobilized_when_allocated
+end
+
+declare goal
+  id ambulance_allocated
+  name "Achieve [Ambulance Allocated When Incident Reported]"
+  refinedby ambulance_allocated_based_on_info, position_updated, availability_known
+end
+
+  declare goal
+    id ambulance_allocated_based_on_info
+    name "Achieve [Ambulance Allocated Based On Ambulance Info]"
+    assignedto ads
+    obstructedby no_ambulance_allocated
+  end
+
+  declare goal
+    id position_updated
+    name "Maintain [Ambulance Position Known]"
+    refinedby position_sent, position_received, position_known_when_received
+  end
+  
+    declare goal
+      id position_sent
+      name "Maintain [Ambulance Position Sent]"
+      assignedto avls
+      obstructedby position_not_updated
+    end
+  
+    declare goal
+      id position_received
+      name "Achieve [Sent Position Received]"
+      assignedto ci
+    end
+  
+    declare goal
+      id position_known_when_received
+      name "Achieve [Received Position Known]"
+      assignedto ads
+    end
+
+  declare goal
+    id availability_known
+    name "Maintain [Ambulance Availability Known]"
+    refinedby radio_availability_known, at_station_known
+  end
+  
+    declare goal 
+      id radio_availability_known
+      name "Achieve [Radio Availability Known]"
+      refinedby availability_sent, availability_received, availability_known_when_received
+    end
+
+      declare goal
+        id availability_sent
+        name "Achieve [Ambulance Availability Sent]"
+        refinedby availability_encoded, availability_sent_when_encoded
+      end
+      
+        declare goal
+          id availability_encoded
+          name "Achieve [Ambulance Availability Encoded]"
+          assignedto staff
+        end
+      
+        declare goal
+          id availability_sent_when_encoded
+          name "Achieve [Encoded Ambulance Availability Sent]"
+          assignedto mdt
+        end
+
+      declare goal
+        id availability_received
+        name "Maintain [Encoded Availability Received]"
+        assignedto ci
+      end
+
+      declare goal
+        id availability_known_when_received
+        name "Maintain [Sent Availability Known]"
+        assignedto ads
+      end
+
+declare goal
+  id mobilized_when_allocated
+  name "Achieve [Allocated Ambulance Mobilized]"
+  refinedby moborder_sent_when_allocated, moborder_received, mobilized_when_moborder_received
+end
+
+  declare goal
+    id moborder_sent_when_allocated
+    name "Achieve [Mobilization Order Sent When Ambulance Allocated]"
+    assignedto cad
+  end
+
+  declare goal
+    id moborder_received
+    name "Achieve [Mobilization Order Received When Sent]"
+    assignedto ci
+  end
+
+  declare goal
+    id mobilized_when_moborder_received
+    name "Achieve [Ambulance Mobilized When Mobilization Order Received]"
+    refinedby moborder_displayed, mobilized_when_displayed
+  end
+  
+    declare goal
+      id moborder_displayed
+      name "Achieve [Mobilization Order Displayed]"
+      assignedto mdt
+    end  
+  
+    declare goal
+      id mobilized_when_displayed
+      name "Achieve [Ambulance Mobilized When MobOrder Displayed]"
+      assignedto staff
+      obstructedby ambulance_not_mobilized_when_moborder_received
+    end
+
+declare goal
+  id ambulance_on_scene_when_mobilized
+  name "Achieve [Ambulance On Scene When Mobilized]"
+  refinedby ambulance_on_scene_location_when_mobilized, onscene_known
+end
+
+  declare goal
+    id ambulance_on_scene_location_when_mobilized
+    name "Achieve [Ambulance On Scene Location When Mobilized]"
+    assignedto staff
+    obstructedby not_ambulance_on_scene_when_mobilized
+  end
+
+  declare goal
+    id onscene_known
+    name "Achieve [On Scene Known When On Scene]"
+    refinedby onscene_button_pressed, onscene_received, onscene_known_when_received
+  end
+
+    declare goal
+      id onscene_button_pressed
+      name "Achieve [On Scene Status Sent]"
+      refinedby onscene_encoded, onscene_sent_when_encoded
+    end
+    
+        declare goal
+          id onscene_encoded
+          name "Achieve [On Scene Status Encoded]"
+          assignedto staff
+          obstructedby onscene_button_not_pressed
+        end
+        
+        declare goal
+          id onscene_sent_when_encoded
+          name "Achieve [Status Sent When Encoded]"
+          assignedto mdt
+        end
+
+    declare goal
+      id onscene_received
+      name "Achieve [Sent On Scene Status Received]"
+      assignedto ci
+    end
+
+    declare goal
+      id onscene_known_when_received
+      name "Achieve [On Scene Status Known When Status Received]"
+      assignedto ads
+    end
+
+declare goal
+  id ambulance_at_hospital_when_mobilized
+  name "Achieve [Ambulance At Hospital When On Scene]"
+  refinedby ambulance_at_hospital_locaiton_when_mobilized, at_hospital_known
+end
+
+  declare goal
+    id ambulance_at_hospital_locaiton_when_mobilized
+    name "Achieve [Ambulance At Hospital Location In Time]"
+    assignedto staff
+    obstructedby not_ambulance_at_hospital_when_mobilized
+  end
+  
+  declare goal
+    id at_hospital_known
+    name "Achieve [At Hospital Known When At Hospital]"
+    refinedby at_hospital_button_pressed, at_hospital_received, at_hospital_known_when_received
+  end
+
+    declare goal
+      id at_hospital_button_pressed
+      name "Achieve [At Hospital Status Sent]"
+      refinedby at_hospital_encoded, at_hospital_sent_when_encoded
+    end
+    
+        declare goal
+          id at_hospital_encoded
+          name "Achieve [At Hospital Status Encoded]"
+          assignedto staff
+          obstructedby athospital_button_not_pressed
+        end
+        
+        declare goal
+          id at_hospital_sent_when_encoded
+          name "Achieve [Status Sent When Encoded]"
+          assignedto mdt
+        end
+
+    declare goal
+      id at_hospital_received
+      name "Achieve [Sent At Hospital Status Received]"
+      assignedto ci
+    end
+
+    declare goal
+      id at_hospital_known_when_received
+      name "Achieve [At Hospital Status Known When Status Received]"
+      assignedto ads
+    end
+
+declare goal
+  id at_station_known
+  name "Achieve [At Station Known When At Station]"
+  refinedby at_station_button_pressed, at_station_received, at_station_known_when_received
+end
+
+  declare goal
+    id at_station_button_pressed
+    name "Achieve [At Station Status Sent]"
+    refinedby at_station_encoded, at_station_sent_when_encoded
+  end
+    
+    declare goal
+      id at_station_encoded
+      name "Achieve [At Station Status Encoded]"
+      assignedto staff
+      obstructedby atstation_button_not_pressed
+    end
+    
+    declare goal
+      id at_station_sent_when_encoded
+      name "Achieve [Status Sent When Encoded]"
+      assignedto mdt
+    end
+
+  declare goal
+    id at_station_received
+    name "Achieve [Sent At Station Status Received]"
+    assignedto ci
+  end
+
+  declare goal
+    id at_station_known_when_received
+    name "Achieve [At Station Status Known When Status Received]"
+    assignedto ads
+  end
+
+# Non-monitored obstacles (i.e. non leaf)
+
+declare obstacle
+  id no_ambulance_allocated
+  name "NoAmbulanceAllocated"
+  refinedby no_ambulance_available
+end
+
+declare obstacle
+  id ambulance_not_mobilized_when_moborder_received
+  name "Ambulance Not Mobilized And MobOrder Received"
+  refinedby moborder_not_confirmed
+  refinedby moborder_refused
+end
+
+declare obstacle
+  id not_ambulance_on_scene_when_mobilized
+  name "Mobilized Ambulance Not On Scene In Time"
+  refinedby stuck_while_leaving
+  refinedby destination_unreachable
+end
+
+declare obstacle
+  id not_ambulance_at_hospital_when_mobilized
+  name "Mobilized Ambulance Not At Hospital In Time"
+  refinedby stuck_while_tohosp
+  refinedby hospital_too_far
+end
+
+# Monitored obstacles
+
+declare obstacle # OK
+	id no_ambulance_available
+	name "NoAmbulanceAvailable"
+	formalspec sooner-or-later (
+		((IncReported1() and not IncAllocated1()) 
+		 or (IncReported2() and not IncAllocated2()) 
+		 or (IncReported3()) and not IncAllocated3()) 
+		and always, for 2 minutes, not AmbAvailable())
+end
+
+declare obstacle # OK
+	id position_not_updated
+	name "Position Not Sent"
+	formalspec sooner-or-later (
+		( always, for 5 minutes, not AmbA9PositionKnown() )
+		or ( always, for 5 minutes, not AmbA2PositionKnown() )
+		or ( always, for 5 minutes, not AmbA15PositionKnown() )
+	)
+end
+
+declare obstacle # OK
+	id moborder_not_confirmed
+	name "Mobilization Order Not Confirmed In Time"
+	formalspec sooner-or-later (
+		(IncAllocated1() and always, for 2 minutes, MobilizationOrderNotConfirmed1())
+		or (IncAllocated2() and always, for 2 minutes, MobilizationOrderNotConfirmed2())
+		or (IncAllocated3() and always, for 2 minutes, MobilizationOrderNotConfirmed3())
+	)
+end
+
+declare obstacle # OK
+	id moborder_refused
+	name "Mobilization Refused"
+	formalspec sooner-or-later (
+		(IncAllocated1() and always, for 2 minutes, MobilizationOrderRefused1())
+		or (IncAllocated2() and always, for 2 minutes, MobilizationOrderRefused2())
+		or (IncAllocated3() and always, for 2 minutes, MobilizationOrderRefused3())
+	)
+end
+
+declare obstacle # OK
+	id stuck_while_leaving
+	name "Ambulance Stuck In Traffic Jam Toward Incident"
+	formalspec sooner-or-later (
+		(AmbA9MobilizedAndLeaving() and always, for 5 minutes, AmbA9StuckInTraffic())
+		or (AmbA2MobilizedAndLeaving() and always, for 5 minutes, AmbA2StuckInTraffic())
+		or (AmbA15MobilizedAndLeaving() and always, for 5 minutes, AmbA15StuckInTraffic())
+	)
+end
+
+declare obstacle # OK
+	id destination_unreachable
+	name "Destination Unreachable"
+	formalspec sooner-or-later (
+		(AmbulanceOnScene1() and always, for 2 minutes, DestinationUnreachable1())
+		or (AmbulanceOnScene2() and always, for 2 minutes, DestinationUnreachable2())
+		or (AmbulanceOnScene3() and always, for 2 minutes, DestinationUnreachable3())
+	)
+end
+
+declare obstacle # OK
+	id stuck_while_tohosp
+	name "Ambulance Stuck In Traffic Jam Toward Hospital"
+	formalspec sooner-or-later (
+		(AmbA9MobilizedAndToHospital() and always, for 5 minutes, AmbA9StuckInTraffic())
+		or (AmbA2MobilizedToHospital() and always, for 5 minutes, AmbA2StuckInTraffic())
+		or (AmbA15MobilizedAndToHospital() and always, for 5 minutes, AmbA15StuckInTraffic())
+	)
+end
+
+declare obstacle # OK
+	id hospital_too_far
+	name "Hospital Too Far"
+	formalspec sooner-or-later (
+		(AmbA9MobilizedAndToHospital() and always, for 5 minutes, (AmbA9NotStuckInTrafficAndNotAmbA9AtHospital() ))
+		or (AmbA2MobilizedToHospital() and always, for 5 minutes, (AmbA2NotStuckInTrafficAndNotAmbA2AtHospital() ))
+		or (AmbA15MobilizedAndToHospital() and always, for 5 minutes, (AmbA15NotStuckInTrafficAndNotAmbA15AtHospital() ))
+	)
+end
+
+declare obstacle # OK
+	id onscene_button_not_pressed
+	name "On Scene Button Not Pressed"
+	formalspec sooner-or-later (
+		(AmbulanceA9OnSceneLocation() and always, for 2 minutes, not AmbulanceA9OnScene())
+		or (AmbulanceA2OnSceneLocation() and always, for 2 minutes, not AmbulanceA2OnScene())
+		or (AmbulanceA15OnSceneLocation() and always, for 2 minutes, not AmbulanceA15OnScene())
+	)
+end
+
+declare obstacle # OK
+	id athospital_button_not_pressed
+	name "At Hospital Button Not Pressed"
+	formalspec sooner-or-later (
+		(AmbulanceA9AtHospitalLocation() and always, for 2 minutes, not AmbulanceA9AtHospital())
+		or (AmbulanceA2AtHospitalLocation() and always, for 2 minutes, not AmbulanceA2AtHospital())
+		or (AmbulanceA15AtHospitalLocation() and always, for 2 minutes, not AmbulanceA15AtHospital())
+	)
+end
+
+declare obstacle # OK
+	id atstation_button_not_pressed
+	name "At Station Button Not Pressed"
+	formalspec sooner-or-later (
+		(AmbulanceA9AtStationLocation() and always, for 2 minutes, not AmbulanceA9AtStation())
+		or (AmbulanceA2AtStationLocation() and always, for 2 minutes, not AmbulanceA2AtStation())
+		or (AmbulanceA15AtStationLocation() and always, for 2 minutes, not AmbulanceA15AtStation())
+	)
+end

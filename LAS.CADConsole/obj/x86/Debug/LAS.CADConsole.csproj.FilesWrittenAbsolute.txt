@@ -1,0 +1,7 @@
+/Users/acailliau/Projects/LAS/LAS.CADConsole/obj/x86/Debug/.NETFramework,Version=v4.5.AssemblyAttribute.cs
+/Users/acailliau/Projects/LAS/LAS.CADConsole/bin/Debug/LAS.Core.dll
+/Users/acailliau/Projects/LAS/LAS.CADConsole/bin/Debug/LAS.Core.dll.mdb
+/Users/acailliau/Projects/LAS/LAS.CADConsole/bin/Debug/LAS.CADConsole.exe.mdb
+/Users/acailliau/Projects/LAS/LAS.CADConsole/bin/Debug/LAS.CADConsole.exe
+/Users/acailliau/Projects/LAS/LAS.CADConsole/obj/x86/Debug/LAS.CADConsole.exe
+/Users/acailliau/Projects/LAS/LAS.CADConsole/obj/x86/Debug/LAS.CADConsole.exe.mdb

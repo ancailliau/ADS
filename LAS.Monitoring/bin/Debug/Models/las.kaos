@@ -1,0 +1,371 @@
+
+@title "London Ambulance System"
+@author "Antoine Cailliau, Axel van Lamsweerde"
+@version "0.2"
+
+@experts.quantiles "(.1, .5, .9)"
+
+# Goals
+
+declare goal
+  id achieve_incident_resolved
+  name "Achieve [Incident Resolved]"
+  rds 95%
+  refinedby achieve_incident_reported, 
+            achieve_ambulance_intervention, 
+            achieve_incident_resolved_by_intervention
+end
+
+# begin refinement of achieve_incident_resolved
+
+declare goal
+  id achieve_incident_reported
+  name "Achieve [Incident Reported]"
+  assignedto public
+end
+
+declare goal
+  id achieve_ambulance_intervention
+  name "Achieve [Ambulance Intervention]"
+  refinedby achieve_ambulance_mobilization, 
+            achieve_mobilized_ambulance_intervention
+end
+
+declare goal
+  id achieve_incident_resolved_by_intervention
+  name "Achieve [Incident Resolved By Ambulance Intervention]"
+  assignedto staff
+end
+
+# endof refinement
+
+# begin refinement of achieve_ambulance_intervention
+
+declare goal
+  id achieve_ambulance_mobilization
+  name "Achieve [Ambulance Mobilization]"
+  refinedby maintain_accurate_incident_form,
+            achieve_ambulance_mobilization_based_on_if
+end
+
+declare goal
+  id achieve_mobilized_ambulance_intervention
+  name "Achieve [Mobilized Ambulance Intervention]"
+  assignedto staff
+end
+
+# endof refinement
+
+# begin refinement of achieve_ambulance_mobilization
+
+declare goal
+  id maintain_accurate_incident_form
+  name "Maintain [Accurate Incident Form]"
+  assignedto operator
+end
+
+declare goal
+  id achieve_ambulance_mobilization_based_on_if
+  name "Achieve [Ambulance Mobilization Based On Incident Form]"
+  refinedby achieve_ambulance_allocation_based_on_if,
+            achieve_allocated_ambulance_mobilization
+end
+
+# endof refinement
+
+# begin refinement of achieve_ambulance_mobilization_based_on_if
+
+declare goal
+  id achieve_ambulance_allocation_based_on_if
+  name "Achieve [Ambulance Allocation Based On Incident Form]"
+  refinedby maintain_ambulance_available, 
+            achieve_ambulance_allocation_based_on_if_when_available
+end
+
+declare goal
+  id achieve_allocated_ambulance_mobilization
+  name "Achieve [Allocated Ambulance Mobilization]"
+  refinedby achieve_allocation_at_station,
+            achieve_allocation_on_road
+end
+
+# endof refinement
+
+# begin refinement of achieve_ambulance_allocation_based_on_if
+
+declare goal
+  id maintain_ambulance_available
+  name "Maintain [Ambulance Available]"
+end
+
+declare goal
+  id achieve_ambulance_allocation_based_on_if_when_available
+  name "Achieve [Ambulance Allocation Based On Incident Form When Ambulance Available]"
+  refinedby maintain_ambulance_info_available,
+            achieve_ambulance_allocation_based_on_if_and_af_when_available
+end
+
+# endof refinement
+
+# begin refinement of achieve_allocated_ambulance_mobilization
+
+declare goal
+  id achieve_allocation_at_station
+  name "Achieve [Allocated Ambulance Mobilization At Station]"
+  refinedby achieve_allocation_at_station_based_on_info, 
+            maintain_location_info_known
+end
+
+declare goal
+  id achieve_allocation_on_road
+  name "Achieve [Allocated Ambulance Mobilization On Road]"
+  refinedby achieve_allocation_on_road_based_on_info, 
+            maintain_location_info_known
+end
+
+# endof refinement
+
+# begin refinement of achieve_ambulance_allocation_based_on_if_when_available
+
+declare goal
+  id maintain_ambulance_info_available
+  name "Maintain [Accurate Ambulance Information Known]"
+  refinedby maintain_location_info_known, 
+            maintain_ambulance_availability_available
+end
+
+declare goal
+  id achieve_ambulance_allocation_based_on_if_and_af_when_available
+  name "Achieve [Ambulance Allocation Based On Incident Form And Ambulance Info When Ambulance Available]"
+  assignedto cad
+end
+
+# endof refinement
+
+# begin refinement of achieve_allocation_at_station and achieve_allocation_on_road
+
+declare goal
+  id achieve_allocation_at_station_based_on_info
+  name "Achieve [Allocated Ambulance Mobilization At Station Based On Location Info]"
+  refinedby moborder_printed_at_station,
+            achieve_allocation_when_moborder_printed
+end
+
+declare goal
+  id achieve_allocation_on_road_based_on_info
+  name "Achieve [Allocated Ambulance Mobilization On Road Based On Location Info]"
+  refinedby moborder_displayed_on_mdt,
+            achieve_allocation_when_moborder_displayed
+end
+
+declare goal
+  id maintain_location_info_known
+  name "Maintain [Accurate Ambulance Location Known]"
+  assignedto avls
+end
+
+# endof refinement
+
+
+# begin refinement of maintain_ambulance_info_available
+
+declare goal
+  id maintain_ambulance_availability_available
+  name "Maintain [Accurate Ambulance Availability Known]"
+  refinedby accurate_availability_information_encoded,
+            accurate_availability_info_based_on_ei
+end
+
+# endof refinement
+
+# begin refinement of maintain_ambulance_availability_available
+
+declare goal
+  id accurate_availability_information_encoded
+  name "Maintain [Accurate Information Encoded On MDT]"
+  assignedto staff
+end
+
+declare goal
+  id accurate_availability_info_based_on_ei
+  name "Maintain [Availability Known Based On Encoded Information]"
+  refinedby accurate_mapping,
+            accurate_availability_info_based_on_ei_and_am
+end
+
+declare goal
+  id accurate_mapping
+  name "Maintain [Accurate Mapping]"
+end
+
+declare goal
+  id accurate_availability_info_based_on_ei_and_am
+  name "Maintain [Availability Known Based On Encoded Information And Accurate Mapping]"
+  refinedby accurate_availability_info_sent,
+            accurate_availability_info_transmitted,
+            accurate_availability_info_recorded
+end
+
+declare goal
+  id accurate_availability_info_sent
+  name "Achieve [Availability Information Sent]"
+  assignedto mdt
+end
+
+declare goal
+  id accurate_availability_info_transmitted
+  name "Achieve [Availability Information Transmitted]"
+  assignedto ci
+end
+
+declare goal
+  id accurate_availability_info_recorded
+  name "Maintain [Availability Information Recorded]"
+  assignedto cad
+end
+
+# endof refinement
+
+# begin refinement of achieve_allocation_at_station_based_on_info
+
+declare goal
+  id moborder_printed_at_station
+  name "Achieve [Mobilization Order Printed At Station]"
+  refinedby moborder_sent_to_printer,
+            moborder_transmitted_to_printer,
+            moborder_printed
+end
+
+declare goal
+  id achieve_allocation_when_moborder_printed
+  name "Achieve [Allocated Ambulance Mobilization When Mobilization Order Printed]"
+  assignedto staff
+end
+
+declare goal
+  id moborder_sent_to_printer
+  name "Achieve [Mobilization Order Sent To Printer]"
+  refinedby accurate_mapping_printer, 
+            moborder_sent_to_printer_based_on_am
+end
+
+declare goal
+  id accurate_mapping_printer
+  name "Maintain [Accurate Printer Mapping]"
+end
+
+declare goal
+  id moborder_sent_to_printer_based_on_am
+  name "Achieve [Mobilization Order Sent To Printer Based On Mapping]"
+  assignedto cad
+end
+
+declare goal
+  id moborder_transmitted_to_printer
+  name "Achieve [Mobilization Order Transmitted]"
+  assignedto ci
+end
+
+declare goal
+  id moborder_printed
+  name "Achieve [Mobilization Order Printed]"
+  assignedto printer
+end
+
+# endof refinement
+
+
+# begin refinement of achieve_allocation_on_road_based_on_info
+
+declare goal
+  id moborder_displayed_on_mdt
+  name "Achieve [Mobilization Order Displayed On MDT]"
+  refinedby moborder_sent_to_mdt,
+            moborder_transmitted_to_mdt,
+            moborder_displayed
+end
+
+declare goal
+  id achieve_allocation_when_moborder_displayed
+  name "Achieve [Allocated Ambulance Mobilization When Mobilization Order Displayed]"
+  assignedto staff
+end
+
+declare goal
+  id moborder_sent_to_mdt
+  name "Achieve [Mobilization Order Sent To MDT]"
+  refinedby accurate_mapping_mdt, 
+            moborder_sent_to_mdt_based_on_am
+end
+
+declare goal
+  id accurate_mapping_mdt
+  name "Maintain [Accurate MDT Mapping]"
+end
+
+declare goal
+  id moborder_sent_to_mdt_based_on_am
+  name "Achieve [Mobilization Order Sent To MDT Based On Mapping]"
+  assignedto cad
+end
+
+declare goal
+  id moborder_transmitted_to_mdt
+  name "Achieve [Mobilization Order Transmitted]"
+  assignedto ci
+end
+
+declare goal
+  id moborder_displayed
+  name "Achieve [Mobilization Order Displayed]"
+  assignedto mdt
+end
+
+# endof refinement
+
+# Agents
+
+declare agent
+  id public
+  name "Public"
+end
+
+declare agent
+  id staff
+  name "Ambulance Staff"
+end
+
+declare agent
+  id operator
+  name "Operator"
+end
+
+declare agent
+  id cad
+  name "CAD"
+end
+
+declare agent
+  id avls
+  name "AVLS"
+end
+
+declare agent
+  id mdt
+  name "MDT"
+end
+
+declare agent
+  id ci
+  name "Communication Infrastructure"
+end
+
+declare agent
+  id printer
+  name "Printer"
+end
+
+# Obstacles and resolutions
+
+import "obstacles.kaos"
+import "resolutions.kaos"

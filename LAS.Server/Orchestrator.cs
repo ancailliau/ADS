@@ -1,0 +1,151 @@
+﻿using System;
+using LAS.Core.Domain;
+using LAS.Core.Messages;
+using LAS.Core.Utils;
+using NLog;
+using LAS.Core.Repository;
+using System.Threading;
+using System.Threading.Tasks;
+using System.Linq;
+using PetaPoco;
+using LAS.Server.Allocators;
+
+namespace LAS.Server
+{
+	public class Orchestrator
+	{
+		static readonly Logger logger = LogManager.GetCurrentClassLogger();
+
+		IncidentProcessor ip;
+		//AmbulanceAllocator allocator;
+		//AmbulanceMobilizator mobilizator;
+		//TrafficJamReallocator trafficJamReallocator;
+		//Cancelator cancelator;
+
+		internal readonly AmbulanceRepository ambulanceRepository;
+		internal readonly HospitalRepository hospitalRepository;
+		internal readonly IncidentRepository incidentRepository;
+		internal readonly AllocationRepository allocationRepository;
+
+		internal MapService mapService;
+
+		public Orchestrator(IDatabaseBuildConfiguration config)
+		{
+			var db = new Database(config);
+			ambulanceRepository = new AmbulanceRepository(db);
+			hospitalRepository = new HospitalRepository(db);
+			incidentRepository = new IncidentRepository(db);
+			allocationRepository = new AllocationRepository(db);
+
+			mapService = new MapService();
+
+			ip = new IncidentProcessor(this);
+			//allocator = new AmbulanceAllocator(mapService, new LoggedDatabase(config));
+			//mobilizator = new AmbulanceMobilizator(new Database (config));
+			//trafficJamReallocator = new TrafficJamReallocator(mapService, new LoggedDatabase(config));
+			//cancelator = new Cancelator(new Database(config));
+
+			var checker = new Checker(config);
+			checker.Start();
+
+		}
+
+		internal void Start()
+		{
+			var listener = new TCPListeningServer(this);
+			var ts = new ThreadStart(listener.Run);
+			var t = new Thread(ts);
+			t.Start();
+		}
+
+		public void Process(Message m)
+		{
+			try {
+				if (m is IncidentForm) {
+					NewIncident((IncidentForm)m);
+
+				} else if (m is RegisterAmbulanceMessage) {
+					RegisterNewAmbulance((RegisterAmbulanceMessage)m);
+
+				} else if (m is PositionMessage) {
+					UpdatePosition((PositionMessage)m);
+
+				} else if (m is AmbulanceStatusMessage) {
+					UpdateStatus((AmbulanceStatusMessage)m);
+
+				} else if (m is MobilizationOrderRefusal) {
+					var refusal = (MobilizationOrderRefusal)m;
+					allocationRepository.RefuseMobilization(refusal.AllocationId);
+
+				} else if (m is DestinationUnreachableMessage) {
+					allocationRepository.MarkUnreachable(((DestinationUnreachableMessage)m).AllocationId);
+
+				} else if (m is InTrafficJamMessage) {
+					ambulanceRepository.MarkInTrafficJam(((InTrafficJamMessage)m).AmbulanceId, true);
+
+				} else if (m is NotInTrafficJamMessage) {
+					ambulanceRepository.MarkInTrafficJam(((NotInTrafficJamMessage)m).AmbulanceId, false);
+
+				} else {
+					throw new NotImplementedException();
+				}
+			} catch (Exception e) {
+				logger.Error("Error in processing message: " + m);
+				logger.Error(e.Message);
+				logger.Error(e.StackTrace);
+			}
+		}
+
+		public void RegisterNewAmbulance(RegisterAmbulanceMessage m)
+		{
+			Ambulance a;
+			if (ambulanceRepository.Contains(m.Identifier)) {
+				logger.Info("Updating already registered ambulance");
+				a = ambulanceRepository.Get(m.Identifier);
+				a.SetStatus(AmbulanceStatus.Unavailable);
+				a.SetPort(m.ListeningPort);
+				a.SetPosition(m.Latitude, m.Longitude);
+				ambulanceRepository.Update(a);
+
+				allocationRepository.CancelAllOpenAllocation(a.AmbulanceId, true);
+
+			} else {
+				logger.Info("Registering new ambulance");
+				a = ambulanceRepository.AddAmbulance(m.Identifier,
+				                                     m.Latitude,
+				                                     m.Longitude,
+				                                     AmbulanceStatus.Unavailable,
+				                                     m.ListeningPort);
+			}
+		}
+
+		public void UpdatePosition(PositionMessage m)
+		{
+			logger.Info("UpdatePosition: {0} - {1},{2}", m.AmbulanceIdentifier, m.Latitude, m.Longitude);
+			ambulanceRepository.UpdatePosition (m.AmbulanceIdentifier, m.Latitude, m.Longitude);
+		}
+
+		public void UpdateStatus(AmbulanceStatusMessage m)
+		{
+			logger.Info("UpdateStatus: {0} - {1}", m.AmbulanceIdentifier, m.Status);
+			ambulanceRepository.UpdateStatus(m.AmbulanceIdentifier, m.Status);
+
+			if (m.Status == AmbulanceStatus.AvailableAtStation
+				|| m.Status == AmbulanceStatus.AvailableRadio
+			    || m.Status == AmbulanceStatus.Unavailable) {
+
+				incidentRepository.CloseAllocatedIncidents(m.AmbulanceIdentifier);
+			}
+
+			if (m.Status == AmbulanceStatus.Leaving) {
+				allocationRepository.SetMobilizationConfirmation(m.AmbulanceIdentifier);
+			}
+		}
+
+		internal void NewIncident(IncidentForm i)
+		{
+			ip.Process(i);
+		}
+
+	}
+}

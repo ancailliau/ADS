@@ -1,0 +1,206 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>BDDSharp</name>
+    </assembly>
+    <members>
+        <member name="T:BDDSharp.BDDManager">
+             <summary>
+             Represents a BDD
+             </summary>
+            </member>
+        <member name="P:BDDSharp.BDDManager.Zero">
+             <summary>
+             Gets the node representing zero.
+             </summary>
+             <value>The node zero.</value>
+            </member>
+        <member name="P:BDDSharp.BDDManager.One">
+             <summary>
+             Gets the node representing one.
+             </summary>
+             <value>The node one.</value>
+            </member>
+        <member name="P:BDDSharp.BDDManager.N">
+             <summary>
+             The number of variables
+             </summary>
+            </member>
+        <member name="M:BDDSharp.BDDManager.#ctor(System.Int32)">
+             <summary>
+             Initializes a new instance of the <see cref="T:BDDSharp.BDDManager" /> class.
+             </summary>
+             <param name="n">The number of variables</param>
+            </member>
+        <member name="M:BDDSharp.BDDManager.Create(System.Int32,BDDSharp.BDDNode,BDDSharp.BDDNode)">
+             <summary>
+             Creates a new instance of the <see cref="T:BDDSharp.BDDNode" /> class.
+             </summary>
+             <param name="index">Index of the variable the node represents</param>
+             <param name="high">The high node (aka 1-node).</param>
+             <param name="low">The low node (aka 0-node).</param>
+            </member>
+        <member name="M:BDDSharp.BDDManager.Create(System.Int32,System.Boolean)">
+             <summary>
+             Creates a new instance of the <see cref="T:BDDSharp.BDDNode" /> class.
+             </summary>
+             <param name="index">The index for the sink node (shall be <c>n+1</c> where <c>n</c> is the number of variables).</param>
+             <param name="value">Value represented by the sink node.</param>
+            </member>
+        <member name="M:BDDSharp.BDDManager.Swap(BDDSharp.BDDNode,System.Int32,System.Int32)">
+             <summary>
+             Swap the specified variables
+             </summary>
+             <remarks>The two variables shall be adjacent. <c>index</c> shall be followed by <c>index2</c> in the variable order.</remarks>
+             <param name="node">The root node of the BDD.</param>
+             <param name="index">Variable.</param>
+             <param name="index2">Variable.</param>
+            </member>
+        <member name="M:BDDSharp.BDDManager.Reduce(BDDSharp.BDDNode)">
+             <summary>
+             Reduce the specified BDD.
+             </summary>
+             <param name="v">BDD to reduce.</param>
+            </member>
+        <member name="M:BDDSharp.BDDManager.Restrict(BDDSharp.BDDNode,System.Collections.Generic.ISet{System.Int32},System.Collections.Generic.ISet{System.Int32},System.Collections.Generic.Dictionary{BDDSharp.BDDNode,BDDSharp.BDDNode})">
+             <summary>
+             Restrict the specified bdd using the <c>positive</c> and <c>negative</c> sets.
+             </summary>
+             <param name="n">Node.</param>
+             <param name="positive">Indexes of positive variables.</param>
+             <param name="negative">Indexes of negative variables.</param>
+             <param name="cache">Cache.</param>
+            </member>
+        <member name="M:BDDSharp.BDDManager.And(BDDSharp.BDDNode,BDDSharp.BDDNode)">
+             <summary>
+             Performs the and operation between the specified f and g.
+             </summary>
+             <param name="f">The left node.</param>
+             <param name="g">The right node.</param>
+            </member>
+        <member name="M:BDDSharp.BDDManager.Or(BDDSharp.BDDNode,BDDSharp.BDDNode)">
+             <summary>
+             Performs the or operation between the specified f and g.
+             </summary>
+             <param name="f">The left node.</param>
+             <param name="g">The right node.</param>
+            </member>
+        <member name="M:BDDSharp.BDDManager.ITE(BDDSharp.BDDNode,BDDSharp.BDDNode,BDDSharp.BDDNode)">
+             <summary>
+             Performs the If-Then-Else operation on nodes <c>f</c>, <c>g</c>, <c>h</c>.
+             </summary>
+             <param name="f">Node.</param>
+             <param name="g">Node.</param>
+             <param name="h">Node.</param>
+            </member>
+        <member name="M:BDDSharp.BDDManager.Negate(BDDSharp.BDDNode)">
+             <summary>
+             Negate the specified node.
+             </summary>
+             <param name="n">The node.</param>
+            </member>
+        <member name="M:BDDSharp.BDDManager.ToDot(BDDSharp.BDDNode,System.Func{BDDSharp.BDDNode,System.String})">
+             <summary>
+             Returns the dot representation of the given node.
+             </summary>
+             <returns>The dot code.</returns>
+            </member>
+        <member name="T:BDDSharp.BDDNode">
+             <summary>
+             Represents a BDD node.
+             </summary>
+            </member>
+        <member name="P:BDDSharp.BDDNode.Id">
+             <summary>
+             Gets or sets the identifier.
+             </summary>
+             <value>The identifier.</value>
+            </member>
+        <member name="P:BDDSharp.BDDNode.Value">
+             <summary>
+             Gets or sets the value.
+             </summary>
+             <value>The value.</value>
+            </member>
+        <member name="P:BDDSharp.BDDNode.Index">
+             <summary>
+             Gets or sets the index.
+             </summary>
+             <value>The index.</value>
+            </member>
+        <member name="P:BDDSharp.BDDNode.Low">
+             <summary>
+             Gets or sets the low node, i.e. the node to follow when variable <c>index</c> is false.
+             </summary>
+             <value>The low.</value>
+            </member>
+        <member name="P:BDDSharp.BDDNode.High">
+             <summary>
+             Gets or sets the high node, i.e. the node to follow when variable <c>index</c> is true.
+             </summary>
+             <value>The high.</value>
+            </member>
+        <member name="P:BDDSharp.BDDNode.Mark">
+             <summary>
+             Gets or sets a value indicating whether this <see cref="T:BDDSharp.BDDNode" /> has been visited or not.
+             </summary>
+             <value><c>true</c> if visited; otherwise, <c>false</c>.</value>
+            </member>
+        <member name="P:BDDSharp.BDDNode.Nodes">
+             <summary>
+             Gets all the nodes, including descendants.
+             </summary>
+             <value>The nodes.</value>
+            </member>
+        <member name="P:BDDSharp.BDDNode.Key">
+             <summary>
+             Gets the key composed by <c>(Low.Id, High.Id)</c>
+             </summary>
+             <value>The key.</value>
+            </member>
+        <member name="P:BDDSharp.BDDNode.IsOne">
+             <summary>
+             Gets a value indicating whether this instance is the node one.
+             </summary>
+             <value><c>true</c> if this instance is one; otherwise, <c>false</c>.</value>
+            </member>
+        <member name="P:BDDSharp.BDDNode.IsZero">
+             <summary>
+             Gets a value indicating whether this instance is the node zero.
+             </summary>
+             <value><c>true</c> if this instance is zero; otherwise, <c>false</c>.</value>
+            </member>
+        <member name="M:BDDSharp.BDDNode.#ctor">
+             <summary>
+             Initializes a new instance of the <see cref="T:BDDSharp.BDDNode" /> class.
+             </summary>
+            </member>
+        <member name="M:BDDSharp.BDDNode.#ctor(System.Int32,BDDSharp.BDDNode,BDDSharp.BDDNode)">
+             <summary>
+             Initializes a new instance of the <see cref="T:BDDSharp.BDDNode" /> class.
+             </summary>
+             <remarks>
+             Don't use this method to create new nodes, use <see cref="M:BDDSharp.BDDManager.Create(System.Int32,BDDSharp.BDDNode,BDDSharp.BDDNode)" />.
+             </remarks>
+             <param name="index">Index of the variable the node represents</param>
+             <param name="high">The high node (aka 1-node).</param>
+             <param name="low">The low node (aka 0-node).</param>
+            </member>
+        <member name="M:BDDSharp.BDDNode.#ctor(System.Int32,System.Boolean)">
+             <summary>
+             Initializes a new instance of the <see cref="T:BDDSharp.BDDNode" /> class.
+             </summary>
+             <remarks>
+             Don't use this method to create new nodes, use <see cref="M:BDDSharp.BDDManager.Create(System.Int32,System.Boolean)" />.
+             </remarks>
+             <param name="index">The index for the sink node (shall be <c>n+1</c> where <c>n</c> is the number of variables).</param>
+             <param name="value">Value represented by the sink node.</param>
+            </member>
+        <member name="M:BDDSharp.BDDNode.ToString">
+             <summary>
+             Returns a <see cref="T:System.String" /> that represents the current <see cref="T:BDDSharp.BDDNode" />.
+             </summary>
+             <returns>A <see cref="T:System.String" /> that represents the current <see cref="T:BDDSharp.BDDNode" />.</returns>
+            </member>
+    </members>
+</doc>

@@ -1,0 +1,19 @@
+﻿<Properties StartupConfiguration="{2F67A7DD-C296-4B55-88C7-4D20AE2647C3}|Default" NuGet.AddPackagesDialog.IncludePrerelease="True">
+  <MonoDevelop.Ide.Workbench ActiveDocument="../MinePump/Simulator/MonitorProcessor/CSVGoalExportProcessor.cs">
+    <Files>
+      <File FileName="LAS.Monitoring/Program.cs" Line="97" Column="37" />
+      <File FileName="LAS.Simulator/SimulatedEnvironment.cs" Line="43" Column="5" />
+      <File FileName="LAS.Simulator/SimulatedAmbulance.cs" Line="15" Column="33" />
+      <File FileName="../MinePump/Simulator/MonitorProcessor/CSVGoalExportProcessor.cs" Line="19" Column="10" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|x86" />
+  <MonoDevelop.Ide.ItemProperties.LAS.CADConsole PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.ItemProperties.LAS.MdtClient PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches>
+    <Watch file="../ReqTesting/TestCaseGenerator/Program.cs" line="199" offsetX="329" offsetY="2970" expression="currentTestSuite" liveUpdate="False" />
+  </MonoDevelop.Ide.DebuggingService.PinnedWatches>
+</Properties>

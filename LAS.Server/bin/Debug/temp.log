@@ -1,0 +1,157 @@
+Hello World!
+Mono: Assembly Loader probing location: '/Library/Frameworks/Mono.framework/Versions/4.6.0/lib/mono/4.5/mscorlib.dll'.
+Mono: Image addref mscorlib[0x79f68680] -> /Library/Frameworks/Mono.framework/Versions/4.6.0/lib/mono/4.5/mscorlib.dll[0x7b36b400]: 2
+Mono: Assembly Loader probing location: '/Library/Frameworks/Mono.framework/Versions/4.6.0/lib/mono/4.5/mscorlib.dll'.
+Mono: Assembly Loader loaded assembly from location: '/Library/Frameworks/Mono.framework/Versions/4.6.0/lib/mono/4.5/mscorlib.dll'.
+Mono: Assembly mscorlib[0x79f68680] added to domain LAS.Server.exe, ref_count=1
+Mono: Assembly Loader probing location: 'LAS.Server.exe'.
+Mono: Image addref LAS.Server[0x79f74be0] -> /Users/acailliau/Projects/LAS/LAS.Server/bin/Debug/LAS.Server.exe[0x7b375000]: 3
+Mono: Assembly LAS.Server[0x79f74be0] added to domain LAS.Server.exe, ref_count=1
+Mono: Assembly Loader loaded assembly from location: 'LAS.Server.exe'.
+Mono: Assembly Loader probing location: 'LAS.Server.exe'.
+Mono: Assembly Ref addref LAS.Server[0x79f74be0] -> mscorlib[0x79f68680]: 2
+Mono: Assembly Loader probing location: '/Users/acailliau/Projects/LAS/LAS.Server/bin/Debug/LAS.Core.dll'.
+Mono: Image addref LAS.Core[0x79f78f40] -> /Users/acailliau/Projects/LAS/LAS.Server/bin/Debug/LAS.Core.dll[0x7b427a00]: 2
+Mono: Assembly LAS.Core[0x79f78f40] added to domain LAS.Server.exe, ref_count=1
+Mono: Assembly Loader loaded assembly from location: '/Users/acailliau/Projects/LAS/LAS.Server/bin/Debug/LAS.Core.dll'.
+Mono: Assembly Ref addref LAS.Server[0x79f74be0] -> LAS.Core[0x79f78f40]: 2
+Mono: Assembly Ref addref LAS.Core[0x79f78f40] -> mscorlib[0x79f68680]: 3
+Mono: Assembly Loader probing location: '/Users/acailliau/Projects/LAS/LAS.Server/bin/Debug/NLog.dll'.
+Mono: Image addref NLog[0x79f7a1a0] -> /Users/acailliau/Projects/LAS/LAS.Server/bin/Debug/NLog.dll[0x7b429400]: 2
+Mono: Assembly NLog[0x79f7a1a0] added to domain LAS.Server.exe, ref_count=1
+Mono: Assembly Loader loaded assembly from location: '/Users/acailliau/Projects/LAS/LAS.Server/bin/Debug/NLog.dll'.
+Mono: Assembly Ref addref LAS.Server[0x79f74be0] -> NLog[0x79f7a1a0]: 2
+Mono: Assembly Ref addref NLog[0x79f7a1a0] -> mscorlib[0x79f68680]: 4
+Mono: Assembly Loader probing location: '/Library/Frameworks/Mono.framework/Versions/4.6.0/lib/mono/gac/System/4.0.0.0__b77a5c561934e089/System.dll'.
+Mono: Image addref System[0x79f96e00] -> /Library/Frameworks/Mono.framework/Versions/4.6.0/lib/mono/gac/System/4.0.0.0__b77a5c561934e089/System.dll[0x7b44f600]: 2
+Mono: Assembly System[0x79f96e00] added to domain LAS.Server.exe, ref_count=1
+Mono: Assembly Loader loaded assembly from location: '/Library/Frameworks/Mono.framework/Versions/4.6.0/lib/mono/gac/System/4.0.0.0__b77a5c561934e089/System.dll'.
+Mono: Assembly Ref addref LAS.Server[0x79f74be0] -> System[0x79f96e00]: 2
+Mono: Assembly Ref addref System[0x79f96e00] -> mscorlib[0x79f68680]: 5
+Mono: Assembly Loader probing location: '/Users/acailliau/Projects/LAS/LAS.Server/bin/Debug/Itinero.dll'.
+Mono: Image addref Itinero[0x79f9fc50] -> /Users/acailliau/Projects/LAS/LAS.Server/bin/Debug/Itinero.dll[0x7b468200]: 2
+Mono: Assembly Itinero[0x79f9fc50] added to domain LAS.Server.exe, ref_count=1
+Mono: Assembly Loader loaded assembly from location: '/Users/acailliau/Projects/LAS/LAS.Server/bin/Debug/Itinero.dll'.
+Mono: Assembly Ref addref LAS.Server[0x79f74be0] -> Itinero[0x79f9fc50]: 2
+Mono: The request to load the retargetable assembly mscorlib v2.0.5.0 was remapped to mscorlib v4.0.0.0
+Mono: Assembly Ref addref Itinero[0x79f9fc50] -> mscorlib[0x79f68680]: 6
+Mono: Assembly Ref addref NLog[0x79f7a1a0] -> System[0x79f96e00]: 3
+Mono: Assembly Loader probing location: '/Library/Frameworks/Mono.framework/Versions/4.6.0/lib/mono/gac/System.Configuration/4.0.0.0__b03f5f7f11d50a3a/System.Configuration.dll'.
+Mono: Image addref System.Configuration[0x79e644c0] -> /Library/Frameworks/Mono.framework/Versions/4.6.0/lib/mono/gac/System.Configuration/4.0.0.0__b03f5f7f11d50a3a/System.Configuration.dll[0x7bb75600]: 2
+Mono: Assembly System.Configuration[0x79e644c0] added to domain LAS.Server.exe, ref_count=1
+Mono: Assembly Loader loaded assembly from location: '/Library/Frameworks/Mono.framework/Versions/4.6.0/lib/mono/gac/System.Configuration/4.0.0.0__b03f5f7f11d50a3a/System.Configuration.dll'.
+Mono: Assembly Ref addref NLog[0x79f7a1a0] -> System.Configuration[0x79e644c0]: 2
+Mono: Assembly Ref addref System.Configuration[0x79e644c0] -> mscorlib[0x79f68680]: 7
+Mono: Assembly Ref addref System.Configuration[0x79e644c0] -> System[0x79f96e00]: 4
+Mono: Assembly Loader probing location: '/Library/Frameworks/Mono.framework/Versions/4.6.0/lib/mono/gac/System.Xml/4.0.0.0__b77a5c561934e089/System.Xml.dll'.
+Mono: Image addref System.Xml[0x79e660d0] -> /Library/Frameworks/Mono.framework/Versions/4.6.0/lib/mono/gac/System.Xml/4.0.0.0__b77a5c561934e089/System.Xml.dll[0x7bb76600]: 2
+Mono: Assembly System.Xml[0x79e660d0] added to domain LAS.Server.exe, ref_count=1
+Mono: Assembly Loader loaded assembly from location: '/Library/Frameworks/Mono.framework/Versions/4.6.0/lib/mono/gac/System.Xml/4.0.0.0__b77a5c561934e089/System.Xml.dll'.
+Mono: Assembly Ref addref System.Configuration[0x79e644c0] -> System.Xml[0x79e660d0]: 2
+Mono: Assembly Ref addref System.Xml[0x79e660d0] -> mscorlib[0x79f68680]: 8
+Mono: Assembly Ref addref System.Xml[0x79e660d0] -> System[0x79f96e00]: 5
+Mono: Assembly Ref addref System[0x79f96e00] -> System.Configuration[0x79e644c0]: 3
+Mono: Assembly Loader probing location: '/Library/Frameworks/Mono.framework/Versions/4.6.0/lib/mono/gac/Mono.Security/4.0.0.0__0738eb9f132ed756/Mono.Security.dll'.
+Mono: Image addref Mono.Security[0x79e84d50] -> /Library/Frameworks/Mono.framework/Versions/4.6.0/lib/mono/gac/Mono.Security/4.0.0.0__0738eb9f132ed756/Mono.Security.dll[0x7bbcf000]: 2
+Mono: Assembly Mono.Security[0x79e84d50] added to domain LAS.Server.exe, ref_count=1
+Mono: Assembly Loader loaded assembly from location: '/Library/Frameworks/Mono.framework/Versions/4.6.0/lib/mono/gac/Mono.Security/4.0.0.0__0738eb9f132ed756/Mono.Security.dll'.
+Mono: Assembly Ref addref Mono.Security[0x79e84d50] -> mscorlib[0x79f68680]: 9
+Mono: Assembly Ref addref NLog[0x79f7a1a0] -> System.Xml[0x79e660d0]: 3
+Mono: Assembly Loader probing location: '/Library/Frameworks/Mono.framework/Versions/4.6.0/lib/mono/gac/System.Core/4.0.0.0__b77a5c561934e089/System.Core.dll'.
+Mono: Image addref System.Core[0x79ea43d0] -> /Library/Frameworks/Mono.framework/Versions/4.6.0/lib/mono/gac/System.Core/4.0.0.0__b77a5c561934e089/System.Core.dll[0x7bc38c00]: 2
+Mono: Assembly System.Core[0x79ea43d0] added to domain LAS.Server.exe, ref_count=1
+Mono: Assembly Loader loaded assembly from location: '/Library/Frameworks/Mono.framework/Versions/4.6.0/lib/mono/gac/System.Core/4.0.0.0__b77a5c561934e089/System.Core.dll'.
+Mono: Assembly Ref addref NLog[0x79f7a1a0] -> System.Core[0x79ea43d0]: 2
+Mono: Assembly Ref addref System.Core[0x79ea43d0] -> mscorlib[0x79f68680]: 10
+Mono: Assembly Loader probing location: '/Library/Frameworks/Mono.framework/Versions/4.6.0/lib/mono/gac/System.ServiceModel/4.0.0.0__b77a5c561934e089/System.ServiceModel.dll'.
+Mono: Image addref System.ServiceModel[0x79eb57b0] -> /Library/Frameworks/Mono.framework/Versions/4.6.0/lib/mono/gac/System.ServiceModel/4.0.0.0__b77a5c561934e089/System.ServiceModel.dll[0x7bc17e00]: 2
+Mono: Assembly System.ServiceModel[0x79eb57b0] added to domain LAS.Server.exe, ref_count=1
+Mono: Assembly Loader loaded assembly from location: '/Library/Frameworks/Mono.framework/Versions/4.6.0/lib/mono/gac/System.ServiceModel/4.0.0.0__b77a5c561934e089/System.ServiceModel.dll'.
+Mono: Assembly Ref addref NLog[0x79f7a1a0] -> System.ServiceModel[0x79eb57b0]: 2
+Mono: Assembly Ref addref System.ServiceModel[0x79eb57b0] -> mscorlib[0x79f68680]: 11
+Mono: Assembly Ref addref System.ServiceModel[0x79eb57b0] -> System[0x79f96e00]: 6
+Mono: Assembly Loader probing location: '/Library/Frameworks/Mono.framework/Versions/4.6.0/lib/mono/gac/System.Runtime.Serialization/4.0.0.0__b77a5c561934e089/System.Runtime.Serialization.dll'.
+Mono: Image addref System.Runtime.Serialization[0x79ec29c0] -> /Library/Frameworks/Mono.framework/Versions/4.6.0/lib/mono/gac/System.Runtime.Serialization/4.0.0.0__b77a5c561934e089/System.Runtime.Serialization.dll[0x7bc4e400]: 2
+Mono: Assembly System.Runtime.Serialization[0x79ec29c0] added to domain LAS.Server.exe, ref_count=1
+Mono: Assembly Loader loaded assembly from location: '/Library/Frameworks/Mono.framework/Versions/4.6.0/lib/mono/gac/System.Runtime.Serialization/4.0.0.0__b77a5c561934e089/System.Runtime.Serialization.dll'.
+Mono: Assembly Ref addref NLog[0x79f7a1a0] -> System.Runtime.Serialization[0x79ec29c0]: 2
+Mono: Assembly Ref addref System.Runtime.Serialization[0x79ec29c0] -> mscorlib[0x79f68680]: 12
+Mono: Assembly Ref addref System.Core[0x79ea43d0] -> System[0x79f96e00]: 7
+Mono: Remapped public key token of retargetable assembly System.Core from 7cec85d7bea7798e to b77a5c561934e089
+Mono: The request to load the retargetable assembly System.Core v2.0.5.0 was remapped to System.Core v4.0.0.0
+Mono: Assembly Ref addref Itinero[0x79f9fc50] -> System.Core[0x79ea43d0]: 3
+Mono: Assembly Loader probing location: '/Users/acailliau/Projects/LAS/LAS.Server/bin/Debug/Itinero.IO.Osm.dll'.
+Mono: Image addref Itinero.IO.Osm[0x79fcf340] -> /Users/acailliau/Projects/LAS/LAS.Server/bin/Debug/Itinero.IO.Osm.dll[0x7b498400]: 2
+Mono: Assembly Itinero.IO.Osm[0x79fcf340] added to domain LAS.Server.exe, ref_count=1
+Mono: Assembly Loader loaded assembly from location: '/Users/acailliau/Projects/LAS/LAS.Server/bin/Debug/Itinero.IO.Osm.dll'.
+Mono: Assembly Ref addref LAS.Server[0x79f74be0] -> Itinero.IO.Osm[0x79fcf340]: 2
+Mono: The request to load the retargetable assembly mscorlib v2.0.5.0 was remapped to mscorlib v4.0.0.0
+Mono: Assembly Ref addref Itinero.IO.Osm[0x79fcf340] -> mscorlib[0x79f68680]: 13
+Mono: Assembly Ref addref Itinero.IO.Osm[0x79fcf340] -> Itinero[0x79f9fc50]: 3
+Mono: Remapped public key token of retargetable assembly System.Core from 7cec85d7bea7798e to b77a5c561934e089
+Mono: The request to load the retargetable assembly System.Core v2.0.5.0 was remapped to System.Core v4.0.0.0
+Mono: Assembly Ref addref Itinero.IO.Osm[0x79fcf340] -> System.Core[0x79ea43d0]: 4
+Mono: Remapped public key token of retargetable assembly System from 7cec85d7bea7798e to b77a5c561934e089
+Mono: The request to load the retargetable assembly System v2.0.5.0 was remapped to System v4.0.0.0
+Mono: Assembly Ref addref Itinero[0x79f9fc50] -> System[0x79f96e00]: 8
+Mono: Remapped public key token of retargetable assembly System.Xml from 7cec85d7bea7798e to b77a5c561934e089
+Mono: The request to load the retargetable assembly System.Xml v2.0.5.0 was remapped to System.Xml v4.0.0.0
+Mono: Assembly Ref addref Itinero[0x79f9fc50] -> System.Xml[0x79e660d0]: 4
+Mono: Assembly Loader probing location: '/Users/acailliau/Projects/LAS/LAS.Server/bin/Debug/Reminiscence.dll'.
+Mono: Image addref Reminiscence[0x79fd0a20] -> /Users/acailliau/Projects/LAS/LAS.Server/bin/Debug/Reminiscence.dll[0x7b4c0800]: 2
+Mono: Assembly Reminiscence[0x79fd0a20] added to domain LAS.Server.exe, ref_count=1
+Mono: Assembly Loader loaded assembly from location: '/Users/acailliau/Projects/LAS/LAS.Server/bin/Debug/Reminiscence.dll'.
+Mono: Assembly Ref addref Itinero[0x79f9fc50] -> Reminiscence[0x79fd0a20]: 2
+Mono: Assembly Loader probing location: '/Library/Frameworks/Mono.framework/Versions/4.6.0/lib/mono/gac/System.Runtime/4.0.0.0__b03f5f7f11d50a3a/System.Runtime.dll'.
+Mono: Assembly Loader probing location: '/Library/Frameworks/Mono.framework/Versions/4.6.0/lib/System.Runtime.dll'.
+Mono: Assembly Loader probing location: '/Library/Frameworks/Mono.framework/Versions/4.6.0/lib/mono/4.5//Facades/System.Runtime.dll'.
+Mono: Image addref System.Runtime[0x79fd1bb0] -> /Library/Frameworks/Mono.framework/Versions/4.6.0/lib/mono/4.5/Facades/System.Runtime.dll[0x7b4d8600]: 2
+Mono: Assembly System.Runtime[0x79fd1bb0] added to domain LAS.Server.exe, ref_count=1
+Mono: Assembly Loader loaded assembly from location: '/Library/Frameworks/Mono.framework/Versions/4.6.0/lib/mono/4.5//Facades/System.Runtime.dll'.
+Mono: Assembly Ref addref Reminiscence[0x79fd0a20] -> System.Runtime[0x79fd1bb0]: 2
+Mono: Assembly Ref addref System.Runtime[0x79fd1bb0] -> mscorlib[0x79f68680]: 14
+Mono: Assembly Loader probing location: '/Library/Frameworks/Mono.framework/Versions/4.6.0/lib/mono/gac/System.IO/4.0.0.0__b03f5f7f11d50a3a/System.IO.dll'.
+Mono: Assembly Loader probing location: '/Library/Frameworks/Mono.framework/Versions/4.6.0/lib/System.IO.dll'.
+Mono: Assembly Loader probing location: '/Library/Frameworks/Mono.framework/Versions/4.6.0/lib/mono/4.5//Facades/System.IO.dll'.
+Mono: Image addref System.IO[0x79fd5000] -> /Library/Frameworks/Mono.framework/Versions/4.6.0/lib/mono/4.5/Facades/System.IO.dll[0x7b4dc800]: 2
+Mono: Assembly System.IO[0x79fd5000] added to domain LAS.Server.exe, ref_count=1
+Mono: Assembly Loader loaded assembly from location: '/Library/Frameworks/Mono.framework/Versions/4.6.0/lib/mono/4.5//Facades/System.IO.dll'.
+Mono: Assembly Ref addref Reminiscence[0x79fd0a20] -> System.IO[0x79fd5000]: 2
+Mono: Assembly Ref addref System.IO[0x79fd5000] -> mscorlib[0x79f68680]: 15
+Mono: Assembly Loader probing location: '/Library/Frameworks/Mono.framework/Versions/4.6.0/lib/mono/gac/System.Resources.ResourceManager/4.0.0.0__b03f5f7f11d50a3a/System.Resources.ResourceManager.dll'.
+Mono: Assembly Loader probing location: '/Library/Frameworks/Mono.framework/Versions/4.6.0/lib/System.Resources.ResourceManager.dll'.
+Mono: Assembly Loader probing location: '/Library/Frameworks/Mono.framework/Versions/4.6.0/lib/mono/4.5//Facades/System.Resources.ResourceManager.dll'.
+Mono: Image addref System.Resources.ResourceManager[0x79fd6960] -> /Library/Frameworks/Mono.framework/Versions/4.6.0/lib/mono/4.5/Facades/System.Resources.ResourceManager.dll[0x7b4d4600]: 2
+Mono: Assembly System.Resources.ResourceManager[0x79fd6960] added to domain LAS.Server.exe, ref_count=1
+Mono: Assembly Loader loaded assembly from location: '/Library/Frameworks/Mono.framework/Versions/4.6.0/lib/mono/4.5//Facades/System.Resources.ResourceManager.dll'.
+Mono: Assembly Ref addref Reminiscence[0x79fd0a20] -> System.Resources.ResourceManager[0x79fd6960]: 2
+Mono: Assembly Ref addref System.Resources.ResourceManager[0x79fd6960] -> mscorlib[0x79f68680]: 16
+Mono: Assembly Loader probing location: '/Library/Frameworks/Mono.framework/Versions/4.6.0/lib/mono/gac/System.Runtime.Extensions/4.0.0.0__b03f5f7f11d50a3a/System.Runtime.Extensions.dll'.
+Mono: Assembly Loader probing location: '/Library/Frameworks/Mono.framework/Versions/4.6.0/lib/System.Runtime.Extensions.dll'.
+Mono: Assembly Loader probing location: '/Library/Frameworks/Mono.framework/Versions/4.6.0/lib/mono/4.5//Facades/System.Runtime.Extensions.dll'.
+Mono: Image addref System.Runtime.Extensions[0x79fd72a0] -> /Library/Frameworks/Mono.framework/Versions/4.6.0/lib/mono/4.5/Facades/System.Runtime.Extensions.dll[0x7b4d4c00]: 2
+Mono: Assembly System.Runtime.Extensions[0x79fd72a0] added to domain LAS.Server.exe, ref_count=1
+Mono: Assembly Loader loaded assembly from location: '/Library/Frameworks/Mono.framework/Versions/4.6.0/lib/mono/4.5//Facades/System.Runtime.Extensions.dll'.
+Mono: Assembly Ref addref Reminiscence[0x79fd0a20] -> System.Runtime.Extensions[0x79fd72a0]: 2
+Mono: Assembly Ref addref System.Runtime.Extensions[0x79fd72a0] -> mscorlib[0x79f68680]: 17
+Mono: Assembly Loader probing location: '/Library/Frameworks/Mono.framework/Versions/4.6.0/lib/mono/gac/System.Collections/4.0.0.0__b03f5f7f11d50a3a/System.Collections.dll'.
+Mono: Assembly Loader probing location: '/Library/Frameworks/Mono.framework/Versions/4.6.0/lib/System.Collections.dll'.
+Mono: Assembly Loader probing location: '/Library/Frameworks/Mono.framework/Versions/4.6.0/lib/mono/4.5//Facades/System.Collections.dll'.
+Mono: Image addref System.Collections[0x79fe0300] -> /Library/Frameworks/Mono.framework/Versions/4.6.0/lib/mono/4.5/Facades/System.Collections.dll[0x7b511e00]: 2
+Mono: Assembly System.Collections[0x79fe0300] added to domain LAS.Server.exe, ref_count=1
+Mono: Assembly Loader loaded assembly from location: '/Library/Frameworks/Mono.framework/Versions/4.6.0/lib/mono/4.5//Facades/System.Collections.dll'.
+Mono: Assembly Ref addref Reminiscence[0x79fd0a20] -> System.Collections[0x79fe0300]: 2
+Mono: Assembly Ref addref System.Collections[0x79fe0300] -> mscorlib[0x79f68680]: 18
+Mono: Assembly Loader probing location: '/Library/Frameworks/Mono.framework/Versions/4.6.0/lib/mono/gac/System.Threading/4.0.0.0__b03f5f7f11d50a3a/System.Threading.dll'.
+Mono: Assembly Loader probing location: '/Library/Frameworks/Mono.framework/Versions/4.6.0/lib/System.Threading.dll'.
+Mono: Assembly Loader probing location: '/Library/Frameworks/Mono.framework/Versions/4.6.0/lib/mono/4.5//Facades/System.Threading.dll'.
+Mono: Image addref System.Threading[0x79e415d0] -> /Library/Frameworks/Mono.framework/Versions/4.6.0/lib/mono/4.5/Facades/System.Threading.dll[0x7bd6d400]: 2
+Mono: Assembly System.Threading[0x79e415d0] added to domain LAS.Server.exe, ref_count=1
+Mono: Assembly Loader loaded assembly from location: '/Library/Frameworks/Mono.framework/Versions/4.6.0/lib/mono/4.5//Facades/System.Threading.dll'.
+Mono: Assembly Ref addref Reminiscence[0x79fd0a20] -> System.Threading[0x79e415d0]: 2
+Mono: Assembly Ref addref System.Threading[0x79e415d0] -> mscorlib[0x79f68680]: 19
+Mono: Assembly Loader probing location: '/Users/acailliau/Projects/LAS/LAS.Server/bin/Debug/OsmSharp.dll'.
+Mono: Image addref OsmSharp[0x79e39220] -> /Users/acailliau/Projects/LAS/LAS.Server/bin/Debug/OsmSharp.dll[0x7bd1c600]: 2
+Mono: Assembly OsmSharp[0x79e39220] added to domain LAS.Server.exe, ref_count=1
+Mono: Assembly Loader loaded assembly from location: '/Users/acailliau/Projects/LAS/LAS.Server/bin/Debug/OsmSharp.dll'.
+Mono: Assembly Ref addref Itinero.IO.Osm[0x79fcf340] -> OsmSharp[0x79e39220]: 2

@@ -1,0 +1,76 @@
+﻿<nav class="navbar navbar-fixed-top navbar-dark bg-inverse">
+  <a class="navbar-brand" href="#">Ambulance Dispatching Server</a>
+  <ul class="nav navbar-nav">
+    <li class="nav-item active">
+      <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+    </li>
+  </ul>
+</nav>
+
+<div class="container">
+
+  <div class="starter-template">
+    <h1>Brussels Ambulance Dispatching</h1>
+  </div>
+
+  <div id="mapid" style="width: 100%; height: 580px; margin: 1em 0;"></div>
+
+  <div class="row">
+    <div class="col-sm-6">
+	<p class="tableTitle"><strong>Ambulances</strong></p>
+<table class="table">
+  <thead>
+    <tr>
+      <th>Identifier</th>
+      <th>Status</th>
+      <th>InTrafficJam</th>
+    </tr>
+  </thead>
+  <tbody id="ambulanceTable">
+  </tbody>
+</table>
+    </div>
+    <div class="col-sm-6">
+	<p class="tableTitle"><strong>Incidents</strong></p>
+<table class="table">
+  <thead>
+    <tr>
+      <th>Identifier</th>
+      <th>Resolved</th>
+    </tr>
+  </thead>
+  <tbody id="incidentTable">
+  </tbody>
+</table>
+    </div>
+  </div>
+
+<div class="row">
+    <div class="col-sm-12">
+	<p class="tableTitle"><strong>Allocations</strong></p>
+<table class="table" style="font-size: .8em;">
+  <thead>
+    <tr>
+      <th>AllocationId</th>
+      <th>IncidentId</th>
+      <th>AmbulanceId</th>
+      <th>HospitalId</th>
+      <th>Allocation Timestamp</th>
+      <th>Mobilization Sent Timestamp</th>
+      <th>Mobilization Received Timestamp</th>
+      <th>Mobilization Confirmed Timestamp</th>
+      <th>Refused</th>
+      <th>Cancelled</th>
+      <th>CancelConfirmed</th>
+    </tr>
+  </thead>
+  <tbody id="allocationTable">
+  </tbody>
+</table>
+    </div>
+</div>
+	
+</div>
+
+
+	
