@@ -1,9 +1,9 @@
-using System;
+﻿using System;
 using PetaPoco;
 using System.Globalization;
 using NLog;
 
-namespace LAS.Core.Domain
+namespace UCLouvain.AmbulanceSystem.Core.Domain
 {
 	[PetaPoco.TableName("ambulances")]
 	[PetaPoco.PrimaryKey("ambulanceId", AutoIncrement = false)]

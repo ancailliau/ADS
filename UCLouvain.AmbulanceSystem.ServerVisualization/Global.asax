@@ -1,1 +1,1 @@
-﻿<%@ Application Inherits="LAS.ServerVisualization.Global" %>
+﻿<%@ Application Inherits="UCLouvain.AmbulanceSystem.ServerVisualization.Global" %>

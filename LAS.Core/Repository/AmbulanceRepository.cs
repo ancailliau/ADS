@@ -1,13 +1,13 @@
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Data;
-using LAS.Core.Domain;
+using UCLouvain.AmbulanceSystem.Core.Domain;
 using PetaPoco;
 using System.Linq;
 using NLog;
 
-namespace LAS.Core.Repository
+namespace UCLouvain.AmbulanceSystem.Core.Repository
 {
 	public class AmbulanceRepository
 	{

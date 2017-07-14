@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Concurrent;
-using LAS.Core.Messages;
+using UCLouvain.AmbulanceSystem.Core.Messages;
 using System.Threading;
 using NLog;
 
-namespace LAS.Server
+namespace UCLouvain.AmbulanceSystem.Server
 {
 	public class MessageProcessor
 	{

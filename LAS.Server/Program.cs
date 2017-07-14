@@ -5,8 +5,8 @@ using Itinero.IO.Osm;
 using Itinero.Osm.Vehicles;
 using System.Diagnostics;
 using System.Threading;
-using LAS.Server;
-using LAS.Core.Domain;
+using UCLouvain.AmbulanceSystem.Server;
+using UCLouvain.AmbulanceSystem.Core.Domain;
 using Mono.Data.Sqlite;
 using PetaPoco;
 
@@ -19,9 +19,9 @@ using FluentMigrator;
 using FluentMigrator.Runner;
 
 using NLog;
-using LAS.Server.Utils;
-using LAS.Core.Repository;
-using LAS.Core.Utils;
+using UCLouvain.AmbulanceSystem.Server.Utils;
+using UCLouvain.AmbulanceSystem.Core.Repository;
+using UCLouvain.AmbulanceSystem.Core.Utils;
 using FluentMigrator.Runner.Processors.Postgres;
 
 namespace LAS
@@ -43,7 +43,7 @@ namespace LAS
 			var assembly = Assembly.GetExecutingAssembly();
 
 			var migrationContext = new RunnerContext(announcer) {
-				Namespace = "LAS.Server.Migrations"
+				Namespace = "UCLouvain.AmbulanceSystem.Server.Migrations"
 			};
 
 			var options = new MigrationOptions { PreviewOnly = false, Timeout = 60 };

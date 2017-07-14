@@ -1,5 +1,5 @@
 ﻿using System;
-namespace LAS.Server
+namespace UCLouvain.AmbulanceSystem.Server
 {
 	public class UnreachableResolver
 	{

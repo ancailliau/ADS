@@ -2,7 +2,7 @@
 //      Apache License, Version 2.0 https://github.com/CollaboratingPlatypus/PetaPoco/blob/master/LICENSE.txt
 // </copyright>
 // <author>PetaPoco - CollaboratingPlatypus</author>
-// <date>2016/08/06</date>
+// <date>2017/05/17</date>
 
 // --------------------------WARNING--------------------------------
 // -----------------------------------------------------------------
@@ -37,7 +37,7 @@ namespace PetaPoco
     /// <summary>
     ///     The main PetaPoco Database class.  You can either use this class directly, or derive from it.
     /// </summary>
-    public class Database : IDisposable, IDatabase
+    public class Database : IDatabase
     {
         #region IDisposable
 
@@ -307,6 +307,17 @@ namespace PetaPoco
         #endregion
 
         #region Transaction Management
+
+        /// <summary>
+        ///     Gets the current transaction instance.
+        /// </summary>
+        /// <returns>
+        ///     The current transaction instance; else, <c>null</c> if not transaction is in progress.
+        /// </returns>
+        IDbTransaction ITransactionAccessor.Transaction
+        {
+            get { return _transaction; }
+        }
 
         // Helper to create a transaction scope
 
@@ -3101,7 +3112,7 @@ namespace PetaPoco
     /// <summary>
     ///     Specifies the database contract.
     /// </summary>
-    public interface IDatabase : IDisposable, IQuery, IAlterPoco, IExecute
+    public interface IDatabase : IDisposable, IQuery, IAlterPoco, IExecute, ITransactionAccessor
     {
         /// <summary>
         ///     Gets the default mapper. (Default is <see cref="ConventionMapper" />)
@@ -3930,6 +3941,21 @@ namespace PetaPoco
     }
 
 
+    /// <summary>
+    ///     Represents a contract which exposes the current <see cref="IDbTransaction" /> instance.
+    /// </summary>
+    public interface ITransactionAccessor
+    {
+        /// <summary>
+        ///     Gets the current transaction instance.
+        /// </summary>
+        /// <returns>
+        ///     The current transaction instance; else, <c>null</c> if not transaction is in progress.
+        /// </returns>
+        IDbTransaction Transaction { get; }
+    }
+
+
     /* 
 	Thanks to Adam Schroder (@schotime) for this.
 	
@@ -4591,7 +4617,7 @@ namespace PetaPoco
         public virtual object MapParameterValue(object value)
         {
             if (value is bool)
-                return ((bool) value) ? 1 : 0;
+                return ((bool)value) ? 1 : 0;
 
             return value;
         }
@@ -4667,17 +4693,26 @@ namespace PetaPoco
         /// <summary>
         ///     Returns the .net standard conforming DbProviderFactory.
         /// </summary>
-        /// <param name="assemblyQualifiedName">The assembly qualified name of the provider factory.</param>
+        /// <param name="assemblyQualifiedNames">The assembly qualified name of the provider factory.</param>
         /// <returns>The db provider factory.</returns>
-        /// <exception cref="ArgumentException">Thrown when <paramref name="assemblyQualifiedName" /> does not match a type.</exception>
-        protected DbProviderFactory GetFactory(string assemblyQualifiedName)
+        /// <exception cref="ArgumentException">Thrown when <paramref name="assemblyQualifiedNames" /> does not match a type.</exception>
+        protected DbProviderFactory GetFactory(params string[] assemblyQualifiedNames)
         {
-            var ft = Type.GetType(assemblyQualifiedName);
+            Type ft = null;
+            foreach (var assemblyName in assemblyQualifiedNames)
+            {
+                ft = Type.GetType(assemblyName);
+
+                if (ft != null)
+                {
+                    break;
+                }
+            }
 
             if (ft == null)
                 throw new ArgumentException("Could not load the " + GetType().Name + " DbProviderFactory.");
 
-            return (DbProviderFactory) ft.GetField("Instance").GetValue(null);
+            return (DbProviderFactory)ft.GetField("Instance").GetValue(null);
         }
 
         /// <summary>
@@ -5678,6 +5713,7 @@ namespace PetaPoco
     {
         private static Cache<Type, PocoData> _pocoDatas = new Cache<Type, PocoData>();
         private static List<Func<object, object>> _converters = new List<Func<object, object>>();
+        private static object _converterLock = new object();
         private static MethodInfo fnGetValue = typeof(IDataRecord).GetMethod("GetValue", new Type[] {typeof(int)});
         private static MethodInfo fnIsDBNull = typeof(IDataRecord).GetMethod("IsDBNull");
         private static FieldInfo fldConverters = typeof(PocoData).GetField("_converters", BindingFlags.Static | BindingFlags.GetField | BindingFlags.NonPublic);
@@ -5972,8 +6008,13 @@ namespace PetaPoco
             if (converter != null)
             {
                 // Add the converter
-                int converterIndex = _converters.Count;
-                _converters.Add(converter);
+                int converterIndex;
+
+                lock (_converterLock)
+                {
+                    converterIndex = _converters.Count;
+                    _converters.Add(converter);
+                }
 
                 // Generate IL to push the converter onto the stack
                 il.Emit(OpCodes.Ldsfld, fldConverters);
@@ -7181,7 +7222,10 @@ namespace PetaPoco
 
         public override DbProviderFactory GetFactory()
         {
-            return GetFactory("Oracle.ManagedDataAccess.Client.OracleClientFactory, Oracle.ManagedDataAccess, Culture=neutral, PublicKeyToken=89b483f429c47342");
+            // "Oracle.ManagedDataAccess.Client.OracleClientFactory, Oracle.ManagedDataAccess" is for Oracle.ManagedDataAccess.dll
+            // "Oracle.DataAccess.Client.OracleClientFactory, Oracle.DataAccess" is for Oracle.DataAccess.dll
+            return GetFactory("Oracle.ManagedDataAccess.Client.OracleClientFactory, Oracle.ManagedDataAccess, Culture=neutral, PublicKeyToken=89b483f429c47342",
+                              "Oracle.DataAccess.Client.OracleClientFactory, Oracle.DataAccess");
         }
 
         public override string EscapeSqlIdentifier(string sqlIdentifier)
@@ -7334,15 +7378,18 @@ namespace PetaPoco
             return GetFactory("System.Data.SqlClient.SqlClientFactory, System.Data, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089");
         }
 
-        private static readonly Regex simpleRegexOrderBy = new Regex(@"\bORDER\s+BY\s+", RegexOptions.RightToLeft | RegexOptions.IgnoreCase | RegexOptions.Multiline | RegexOptions.Singleline | RegexOptions.Compiled);
-
         public override string BuildPageQuery(long skip, long take, SQLParts parts, ref object[] args)
         {
             var helper = (PagingHelper)PagingUtility;
             // when the query does not contain an "order by", it is very slow
-            if (simpleRegexOrderBy.IsMatch(parts.SqlSelectRemoved))
+            if (helper.SimpleRegexOrderBy.IsMatch(parts.SqlSelectRemoved))
             {
-                parts.SqlSelectRemoved = helper.RegexOrderBy.Replace(parts.SqlSelectRemoved, "", 1);
+                var m = helper.SimpleRegexOrderBy.Match(parts.SqlSelectRemoved);
+                if (m.Success)
+                {
+                    var g = m.Groups[0];
+                    parts.SqlSelectRemoved = parts.SqlSelectRemoved.Substring(0, g.Index);
+                }
             }
             if (helper.RegexDistinct.IsMatch(parts.SqlSelectRemoved))
             {
@@ -7568,6 +7615,8 @@ namespace PetaPoco
                 @"\bORDER\s+BY\s+(?!.*?(?:\)|\s+)AS\s)(?:\((?>\((?<depth>)|\)(?<-depth>)|.?)*(?(depth)(?!))\)|[\[\]`""\w\(\)\.])+(?:\s+(?:ASC|DESC))?(?:\s*,\s*(?:\((?>\((?<depth>)|\)(?<-depth>)|.?)*(?(depth)(?!))\)|[\[\]`""\w\(\)\.])+(?:\s+(?:ASC|DESC))?)*",
                 RegexOptions.RightToLeft | RegexOptions.IgnoreCase | RegexOptions.Multiline | RegexOptions.Singleline | RegexOptions.Compiled);
 
+        public Regex SimpleRegexOrderBy = new Regex(@"\bORDER\s+BY\s+", RegexOptions.RightToLeft | RegexOptions.IgnoreCase | RegexOptions.Multiline | RegexOptions.Singleline | RegexOptions.Compiled);
+
         public static IPagingHelper Instance { get; private set; }
 
         static PagingHelper()
@@ -7603,12 +7652,12 @@ namespace PetaPoco
                 parts.SqlCount = sql.Substring(0, g.Index) + "COUNT(*) " + sql.Substring(g.Index + g.Length);
 
             // Look for the last "ORDER BY <whatever>" clause not part of a ROW_NUMBER expression
-            m = RegexOrderBy.Match(parts.SqlCount);
+            m = SimpleRegexOrderBy.Match(parts.SqlCount);
             if (m.Success)
             {
                 g = m.Groups[0];
-                parts.SqlOrderBy = g.ToString();
-                parts.SqlCount = parts.SqlCount.Substring(0, g.Index) + parts.SqlCount.Substring(g.Index + g.Length);
+                parts.SqlOrderBy = g + parts.SqlCount.Substring(g.Index + g.Length);
+                parts.SqlCount = parts.SqlCount.Substring(0, g.Index);
             }
 
             return true;

@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Text;
-using LAS.Core.Messages;
+using UCLouvain.AmbulanceSystem.Core.Messages;
 using RabbitMQ.Client;
 
-namespace LAS.Core.Utils
+namespace UCLouvain.AmbulanceSystem.Core.Utils
 {
     public class RabbitMQMessageSender
     {

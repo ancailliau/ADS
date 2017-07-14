@@ -4,7 +4,7 @@ using FluentMigrator.Runner;
 using FluentMigrator.Runner.Processors;
 using FluentMigrator.Runner.Processors.SQLite;
 
-namespace LAS.Server.Utils
+namespace UCLouvain.AmbulanceSystem.Server.Utils
 {
 	public class MonoSQLiteDbFactory : ReflectionBasedDbFactory
 	{

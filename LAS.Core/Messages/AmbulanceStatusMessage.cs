@@ -1,7 +1,7 @@
 ﻿using System;
-using LAS.Core.Domain;
+using UCLouvain.AmbulanceSystem.Core.Domain;
 
-namespace LAS.Core.Messages
+namespace UCLouvain.AmbulanceSystem.Core.Messages
 {
 	public class AmbulanceStatusMessage : Message
 	{

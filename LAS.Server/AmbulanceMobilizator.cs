@@ -1,15 +1,15 @@
-using System;
-using LAS.Core.Domain;
-using LAS.Core.Messages;
-using LAS.Core.Utils;
+﻿using System;
+using UCLouvain.AmbulanceSystem.Core.Domain;
+using UCLouvain.AmbulanceSystem.Core.Messages;
+using UCLouvain.AmbulanceSystem.Core.Utils;
 using NLog;
 using System.Collections.Concurrent;
 using System.Threading;
-using LAS.Core.Repository;
+using UCLouvain.AmbulanceSystem.Core.Repository;
 using PetaPoco;
 using System.Linq;
 
-namespace LAS.Server
+namespace UCLouvain.AmbulanceSystem.Server
 {
 	/// <summary>
 	/// This module is responsible for mobilizing ambulances in its own thread. 

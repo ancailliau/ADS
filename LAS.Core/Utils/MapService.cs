@@ -7,7 +7,7 @@ using NLog;
 using OsmSharp.Osm.PBF.Streams;
 using Itinero.Exceptions;
 
-namespace LAS.Core.Utils
+namespace UCLouvain.AmbulanceSystem.Core.Utils
 {
 	public class MapService
 	{

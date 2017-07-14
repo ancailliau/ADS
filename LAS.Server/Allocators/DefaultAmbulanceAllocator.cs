@@ -1,18 +1,18 @@
 ﻿using System;
 using System.Linq;
 using System.Threading;
-using LAS.Core.Domain;
+using UCLouvain.AmbulanceSystem.Core.Domain;
 using NLog;
 using System.Threading.Tasks;
 using System.Collections.Concurrent;
-using LAS.Core.Repository;
+using UCLouvain.AmbulanceSystem.Core.Repository;
 using PetaPoco;
-using LAS.Core.Utils;
+using UCLouvain.AmbulanceSystem.Core.Utils;
 using Itinero.Exceptions;
 using Itinero;
 using System.Collections.Generic;
 
-namespace LAS.Server.Allocators
+namespace UCLouvain.AmbulanceSystem.Server.Allocators
 {
 	/// <summary>
 	/// This module is responsible for allocating ambulance in its own thread.
@@ -29,7 +29,7 @@ namespace LAS.Server.Allocators
 		BlockingCollection<Incident> incidentsToProcess;
 
 		/// <summary>
-		/// Initializes a new instance of the <see cref="T:LAS.Server.AmbulanceAllocator"/> class.
+		/// Initializes a new instance of the <see cref="T:UCLouvain.AmbulanceSystem.Server.AmbulanceAllocator"/> class.
 		/// </summary>
 		/// <param name="db">Db. Do not share among threads.</param>
 		public DefaultAmbulanceAllocator(MapService mapService, IDatabase db)

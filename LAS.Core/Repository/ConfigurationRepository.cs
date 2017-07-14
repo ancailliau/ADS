@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using LAS.Core.Domain;
+using UCLouvain.AmbulanceSystem.Core.Domain;
 using NLog;
 using PetaPoco;
 
-namespace LAS.Core.Repository
+namespace UCLouvain.AmbulanceSystem.Core.Repository
 {
 	public class ConfigurationRepository
 	{

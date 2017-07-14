@@ -4,7 +4,7 @@ using PetaPoco;
 using System.Linq;
 using System.Data.Common;
 
-namespace LAS.Server
+namespace UCLouvain.AmbulanceSystem.Server
 {
 	public class LoggedDatabase : Database
 	{

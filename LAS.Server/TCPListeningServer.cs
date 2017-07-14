@@ -3,9 +3,9 @@ using NLog;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
-using LAS.Core.Messages;
+using UCLouvain.AmbulanceSystem.Core.Messages;
 using System.Threading;
-using LAS.Server;
+using UCLouvain.AmbulanceSystem.Server;
 
 namespace LAS
 {

@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Text;
-using LAS.Core.Messages;
+using UCLouvain.AmbulanceSystem.Core.Messages;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
 using System.Threading;
 
-namespace LAS.Server
+namespace UCLouvain.AmbulanceSystem.Server
 {
     public class RabbitMQListeningServer
     {

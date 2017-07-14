@@ -1,12 +1,12 @@
-﻿using System;
+﻿﻿using System;
 using PetaPoco;
-using LAS.Core.Repository;
+using UCLouvain.AmbulanceSystem.Core.Repository;
 using System.Threading;
 using NLog;
-using LAS.Core.Utils;
-using LAS.Core.Messages;
+using UCLouvain.AmbulanceSystem.Core.Utils;
+using UCLouvain.AmbulanceSystem.Core.Messages;
 
-namespace LAS.Simulator
+namespace UCLouvain.AmbulanceSystem.Simulator
 {
 	public class IncidentSimulator
 	{

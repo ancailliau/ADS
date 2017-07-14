@@ -3,10 +3,10 @@ using System.Net;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading;
-using LAS.Core.Messages;
+using UCLouvain.AmbulanceSystem.Core.Messages;
 using NLog;
 
-namespace LAS.Core.Utils
+namespace UCLouvain.AmbulanceSystem.Core.Utils
 {
 	public class StateObject
 	{

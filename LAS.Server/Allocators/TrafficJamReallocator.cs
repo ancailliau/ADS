@@ -3,13 +3,13 @@ using System.Collections.Concurrent;
 using System.Threading;
 using Itinero;
 using Itinero.Exceptions;
-using LAS.Core.Domain;
-using LAS.Core.Repository;
-using LAS.Core.Utils;
+using UCLouvain.AmbulanceSystem.Core.Domain;
+using UCLouvain.AmbulanceSystem.Core.Repository;
+using UCLouvain.AmbulanceSystem.Core.Utils;
 using NLog;
 using PetaPoco;
 
-namespace LAS.Server.Allocators
+namespace UCLouvain.AmbulanceSystem.Server.Allocators
 {
 	public class TrafficJamReallocator
 	{
@@ -24,7 +24,7 @@ namespace LAS.Server.Allocators
 		BlockingCollection<Incident> incidentsToProcess;
 
 		/// <summary>
-		/// Initializes a new instance of the <see cref="T:LAS.Server.AmbulanceAllocator"/> class.
+		/// Initializes a new instance of the <see cref="T:UCLouvain.AmbulanceSystem.Server.AmbulanceAllocator"/> class.
 		/// </summary>
 		/// <param name="db">Db. Do not share among threads.</param>
 		public TrafficJamReallocator(MapService mapService, IDatabase db)

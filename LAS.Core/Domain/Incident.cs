@@ -1,5 +1,5 @@
 ﻿using System;
-namespace LAS.Core.Domain
+namespace UCLouvain.AmbulanceSystem.Core.Domain
 {
 	[PetaPoco.TableName ("incidents")]
 	[PetaPoco.PrimaryKey ("incidentId", AutoIncrement = true)]

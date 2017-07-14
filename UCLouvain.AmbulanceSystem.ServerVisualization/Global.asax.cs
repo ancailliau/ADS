@@ -2,7 +2,7 @@
 using System.Web.Mvc;
 using System.Web.Routing;
 
-namespace LAS.ServerVisualization
+namespace UCLouvain.AmbulanceSystem.ServerVisualization
 {
 	public class Global : HttpApplication
 	{

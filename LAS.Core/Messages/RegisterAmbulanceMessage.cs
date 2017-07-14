@@ -1,5 +1,5 @@
 ﻿using System;
-namespace LAS.Core.Messages
+namespace UCLouvain.AmbulanceSystem.Core.Messages
 {
 	public class RegisterAmbulanceMessage : Message
 	{

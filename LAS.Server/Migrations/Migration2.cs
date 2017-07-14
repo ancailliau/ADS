@@ -1,7 +1,7 @@
 ﻿using System;
 using FluentMigrator;
 
-namespace LAS.Server.Migrations
+namespace UCLouvain.AmbulanceSystem.Server.Migrations
 {
 	[Migration(2)]
 	public class Migration2 : Migration

@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading;
-using LAS.Core.Domain;
-using LAS.Core.Messages;
-using LAS.Core.Utils;
+using UCLouvain.AmbulanceSystem.Core.Domain;
+using UCLouvain.AmbulanceSystem.Core.Messages;
+using UCLouvain.AmbulanceSystem.Core.Utils;
 using NLog;
 
-namespace LAS.MdtClient
+namespace UCLouvain.AmbulanceSystem.MDTClient
 {
 	public class MDT
 	{

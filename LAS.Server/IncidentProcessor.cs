@@ -1,6 +1,6 @@
 ﻿using System;
-using LAS.Core.Messages;
-namespace LAS.Server
+using UCLouvain.AmbulanceSystem.Core.Messages;
+namespace UCLouvain.AmbulanceSystem.Server
 {
 	public class IncidentProcessor
 	{

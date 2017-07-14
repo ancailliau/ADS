@@ -4,10 +4,10 @@ using System.Net;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading;
-using LAS.Core.Messages;
+using UCLouvain.AmbulanceSystem.Core.Messages;
 using System.Threading.Tasks;
 
-namespace LAS.MdtClient
+namespace UCLouvain.AmbulanceSystem.MDTClient
 {
 	public class MDTServerListener
 	{

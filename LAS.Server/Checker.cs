@@ -2,14 +2,14 @@
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using LAS.Core.Domain;
-using LAS.Core.Repository;
-using LAS.Core.Utils;
-using LAS.Server.Allocators;
+using UCLouvain.AmbulanceSystem.Core.Domain;
+using UCLouvain.AmbulanceSystem.Core.Repository;
+using UCLouvain.AmbulanceSystem.Core.Utils;
+using UCLouvain.AmbulanceSystem.Server.Allocators;
 using NLog;
 using PetaPoco;
 
-namespace LAS.Server
+namespace UCLouvain.AmbulanceSystem.Server
 {
 	public class Checker
 	{

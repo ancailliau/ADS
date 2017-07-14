@@ -4,7 +4,7 @@ using System.Web;
 using System.Web.Mvc;
 using Newtonsoft.Json;
 
-namespace LAS.ServerVisualization
+namespace UCLouvain.AmbulanceSystem.ServerVisualization
 {
 	public class JsonNetResult : JsonResult
 	{

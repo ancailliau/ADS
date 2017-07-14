@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Xml.Serialization;
 
-namespace LAS.Core.Domain
+namespace UCLouvain.AmbulanceSystem.Core.Domain
 {
 	public enum AmbulanceStatus
 	{

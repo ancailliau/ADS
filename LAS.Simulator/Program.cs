@@ -1,5 +1,5 @@
 ﻿using System;
-using LAS.Core.Utils;
+using UCLouvain.AmbulanceSystem.Core.Utils;
 using NLog;
 using Itinero.LocalGeo;
 using System.Collections.Generic;
@@ -7,7 +7,7 @@ using PetaPoco;
 using System.Configuration;
 using System.Threading;
 
-namespace LAS.Simulator
+namespace UCLouvain.AmbulanceSystem.Simulator
 {
 	class MainClass
 	{

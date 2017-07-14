@@ -1,16 +1,16 @@
 ﻿using System;
-using LAS.Core.Domain;
-using LAS.Core.Messages;
-using LAS.Core.Utils;
+using UCLouvain.AmbulanceSystem.Core.Domain;
+using UCLouvain.AmbulanceSystem.Core.Messages;
+using UCLouvain.AmbulanceSystem.Core.Utils;
 using NLog;
-using LAS.Core.Repository;
+using UCLouvain.AmbulanceSystem.Core.Repository;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Linq;
 using PetaPoco;
-using LAS.Server.Allocators;
+using UCLouvain.AmbulanceSystem.Server.Allocators;
 
-namespace LAS.Server
+namespace UCLouvain.AmbulanceSystem.Server
 {
 	public class Orchestrator
 	{

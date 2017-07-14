@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Data.Common;
 
-namespace LAS.Core.Utils
+namespace UCLouvain.AmbulanceSystem.Core.Utils
 {
 	public class MonoSQLiteDatabaseProvider : PetaPoco.SQLiteDatabaseProvider
 	{

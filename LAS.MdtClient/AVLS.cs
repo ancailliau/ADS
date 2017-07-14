@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Threading;
-using LAS.Core.Messages;
+using UCLouvain.AmbulanceSystem.Core.Messages;
 
-namespace LAS.MdtClient
+namespace UCLouvain.AmbulanceSystem.MDTClient
 {
 	public class AVLS
 	{

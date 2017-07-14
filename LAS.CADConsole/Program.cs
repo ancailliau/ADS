@@ -1,8 +1,12 @@
-﻿using System;
-using LAS.Core.Messages;
-using LAS.Core.Utils;
+﻿﻿using System;
+using System.Net.Http;
+using Newtonsoft.Json;
+using UCLouvain.AmbulanceSystem.Core.Messages;
+using UCLouvain.AmbulanceSystem.Core.Utils;
+using System.Dynamic;
+using Newtonsoft.Json.Linq;
 
-namespace LAS.CADConsole
+namespace UCLouvain.AmbulanceSystem.CADConsole
 {
 	class MainClass
 	{
@@ -35,8 +39,38 @@ namespace LAS.CADConsole
 			var incidentLat = (float) (minlat + random.NextDouble () * (maxlat - minlat));
 			var incidentLong = (float) (minlon + random.NextDouble() * (maxlon - minlon));
 
-			var m = new IncidentForm(incidentLat, incidentLong);
-			sender.Send(m, "incident_queue");
+
+			var httpClient = new HttpClient();
+            bool _stop = false;
+
+            while (!_stop)
+            {
+                Console.Write("> ");
+                var address = Console.ReadLine().Trim();
+
+                if (address.Equals("quit") | address.Equals("exit"))
+                {
+                    _stop = true;
+                    continue;
+                }
+
+                try
+                {
+                    var httpResult = httpClient.GetAsync("http://nominatim.openstreetmap.org/search?q=" + address + "&format=json&polygon=1&addressdetails=1");
+
+                    var result = httpResult.Result.Content.ReadAsStringAsync().Result;
+                    JArray parsed_result = JsonConvert.DeserializeObject<JArray>(result);
+
+                    Console.WriteLine(parsed_result[0]["lat"]);
+                    Console.WriteLine(parsed_result[0]["lon"]);
+
+                    var m = new IncidentForm(incidentLat, incidentLong);
+                    sender.Send(m, "incident_queue");
+
+                } catch (Exception e) {
+                    Console.WriteLine("An error occured ("+e.Message+")");
+                }
+            }
 		}
 	}
 }

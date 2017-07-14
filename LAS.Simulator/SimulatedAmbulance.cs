@@ -1,6 +1,6 @@
 ﻿using System;
-using LAS.MdtClient;
-using LAS.Core.Utils;
+using UCLouvain.AmbulanceSystem.MDTClient;
+using UCLouvain.AmbulanceSystem.Core.Utils;
 using Itinero;
 using Itinero.LocalGeo;
 using System.Threading;
@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 using System.Collections.Generic;
 using System.Collections.Concurrent;
 using NLog;
-using LAS.Core.Messages;
+using UCLouvain.AmbulanceSystem.Core.Messages;
 
-namespace LAS.Simulator
+namespace UCLouvain.AmbulanceSystem.Simulator
 {
 	public class SimulatedAmbulance
 	{

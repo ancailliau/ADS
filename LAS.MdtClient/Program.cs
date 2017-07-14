@@ -3,11 +3,11 @@ using System.Net;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading;
-using LAS.Core.Domain;
-using LAS.Core.Messages;
-using LAS.MdtClient;
+using UCLouvain.AmbulanceSystem.Core.Domain;
+using UCLouvain.AmbulanceSystem.Core.Messages;
+using UCLouvain.AmbulanceSystem.MDTClient;
 using NLog;
-using LAS.Core.Utils;
+using UCLouvain.AmbulanceSystem.Core.Utils;
 using Itinero.LocalGeo;
 
 namespace LASMDTClient

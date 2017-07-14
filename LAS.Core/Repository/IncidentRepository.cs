@@ -1,12 +1,12 @@
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using LAS.Core.Domain;
-using LAS.Core.Messages;
+using UCLouvain.AmbulanceSystem.Core.Domain;
+using UCLouvain.AmbulanceSystem.Core.Messages;
 using NLog;
 using PetaPoco;
 
-namespace LAS.Core.Repository
+namespace UCLouvain.AmbulanceSystem.Core.Repository
 {
 	public class IncidentRepository
 	{

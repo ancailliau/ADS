@@ -1,7 +1,7 @@
 ﻿using System;
-using LAS.Core.Domain;
+using UCLouvain.AmbulanceSystem.Core.Domain;
 
-namespace LAS.Server.Allocators
+namespace UCLouvain.AmbulanceSystem.Server.Allocators
 {
 	public interface IAmbulanceAllocator
 	{

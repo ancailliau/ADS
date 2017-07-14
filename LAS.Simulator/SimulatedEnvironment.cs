@@ -1,7 +1,7 @@
 ﻿using System;
 using NLog;
 
-namespace LAS.Simulator
+namespace UCLouvain.AmbulanceSystem.Simulator
 {
 	public static class SimulatedEnvironment
 	{

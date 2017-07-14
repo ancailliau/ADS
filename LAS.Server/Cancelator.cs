@@ -1,14 +1,14 @@
 ﻿using System;
 using System.Collections.Concurrent;
-using LAS.Core.Repository;
-using LAS.Core.Utils;
+using UCLouvain.AmbulanceSystem.Core.Repository;
+using UCLouvain.AmbulanceSystem.Core.Utils;
 using NLog;
-using LAS.Core.Domain;
-using LAS.Core.Messages;
+using UCLouvain.AmbulanceSystem.Core.Domain;
+using UCLouvain.AmbulanceSystem.Core.Messages;
 using PetaPoco;
 using System.Threading;
 
-namespace LAS.Server
+namespace UCLouvain.AmbulanceSystem.Server
 {
 	public class Cancelator
 	{

@@ -1,0 +1,58 @@
+
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UCLouvain.AmbulanceSystem.MDTClient", "LAS.MdtClient\UCLouvain.AmbulanceSystem.MdtClient.csproj", "{8F4E5A2D-A24A-49CE-A68B-A56047EF139B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UCLouvain.AmbulanceSystem.Server", "LAS.Server\UCLouvain.AmbulanceSystem.Server.csproj", "{BC186BE7-2FDC-4315-A4BD-1C68163E0214}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UCLouvain.AmbulanceSystem.Core", "LAS.Core\UCLouvain.AmbulanceSystem.Core.csproj", "{6D0D19CE-37E3-4D8F-97B0-3A18E2E220C4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UCLouvain.AmbulanceSystem.CADConsole", "LAS.CADConsole\UCLouvain.AmbulanceSystem.CADConsole.csproj", "{2F67A7DD-C296-4B55-88C7-4D20AE2647C3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UCLouvain.AmbulanceSystem.Simulator", "LAS.Simulator\UCLouvain.AmbulanceSystem.Simulator.csproj", "{5A0C81A1-02EC-407B-B0F2-DB69EAC2205A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UCLouvain.AmbulanceSystem.ServerVisualization", "LAS.ServerVisualization\UCLouvain.AmbulanceSystem.ServerVisualization.csproj", "{1AF262B9-A031-4BED-820F-9F5711F0FF85}"
+EndProject
+Project("{9344BDBB-3E7F-41FC-A0DD-8665D75EE146}") = "LAS.Monitoring", "LAS.Monitoring\LAS.Monitoring.csproj", "{3208E35F-AB26-4CAD-9CAE-46031E30BEA9}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x86 = Debug|x86
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8F4E5A2D-A24A-49CE-A68B-A56047EF139B}.Debug|x86.ActiveCfg = Debug|x86
+		{8F4E5A2D-A24A-49CE-A68B-A56047EF139B}.Debug|x86.Build.0 = Debug|x86
+		{8F4E5A2D-A24A-49CE-A68B-A56047EF139B}.Release|x86.ActiveCfg = Release|x86
+		{8F4E5A2D-A24A-49CE-A68B-A56047EF139B}.Release|x86.Build.0 = Release|x86
+		{BC186BE7-2FDC-4315-A4BD-1C68163E0214}.Debug|x86.ActiveCfg = Debug|x86
+		{BC186BE7-2FDC-4315-A4BD-1C68163E0214}.Debug|x86.Build.0 = Debug|x86
+		{BC186BE7-2FDC-4315-A4BD-1C68163E0214}.Release|x86.ActiveCfg = Release|x86
+		{BC186BE7-2FDC-4315-A4BD-1C68163E0214}.Release|x86.Build.0 = Release|x86
+		{6D0D19CE-37E3-4D8F-97B0-3A18E2E220C4}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{6D0D19CE-37E3-4D8F-97B0-3A18E2E220C4}.Debug|x86.Build.0 = Debug|Any CPU
+		{6D0D19CE-37E3-4D8F-97B0-3A18E2E220C4}.Release|x86.ActiveCfg = Release|Any CPU
+		{6D0D19CE-37E3-4D8F-97B0-3A18E2E220C4}.Release|x86.Build.0 = Release|Any CPU
+		{2F67A7DD-C296-4B55-88C7-4D20AE2647C3}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{2F67A7DD-C296-4B55-88C7-4D20AE2647C3}.Debug|x86.Build.0 = Debug|Any CPU
+		{2F67A7DD-C296-4B55-88C7-4D20AE2647C3}.Release|x86.ActiveCfg = Release|x86
+		{2F67A7DD-C296-4B55-88C7-4D20AE2647C3}.Release|x86.Build.0 = Release|x86
+		{5A0C81A1-02EC-407B-B0F2-DB69EAC2205A}.Debug|x86.ActiveCfg = Debug|x86
+		{5A0C81A1-02EC-407B-B0F2-DB69EAC2205A}.Debug|x86.Build.0 = Debug|x86
+		{5A0C81A1-02EC-407B-B0F2-DB69EAC2205A}.Release|x86.ActiveCfg = Release|x86
+		{5A0C81A1-02EC-407B-B0F2-DB69EAC2205A}.Release|x86.Build.0 = Release|x86
+		{1AF262B9-A031-4BED-820F-9F5711F0FF85}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{1AF262B9-A031-4BED-820F-9F5711F0FF85}.Debug|x86.Build.0 = Debug|Any CPU
+		{1AF262B9-A031-4BED-820F-9F5711F0FF85}.Release|x86.ActiveCfg = Release|Any CPU
+		{1AF262B9-A031-4BED-820F-9F5711F0FF85}.Release|x86.Build.0 = Release|Any CPU
+		{3208E35F-AB26-4CAD-9CAE-46031E30BEA9}.Debug|x86.ActiveCfg = Debug|x86
+		{3208E35F-AB26-4CAD-9CAE-46031E30BEA9}.Debug|x86.Build.0 = Debug|x86
+		{3208E35F-AB26-4CAD-9CAE-46031E30BEA9}.Release|x86.ActiveCfg = Release|x86
+		{3208E35F-AB26-4CAD-9CAE-46031E30BEA9}.Release|x86.Build.0 = Release|x86
+	EndGlobalSection
+	GlobalSection(MonoDevelopProperties) = preSolution
+		Policies = $0
+		$0.DotNetNamingPolicy = $1
+		$1.DirectoryNamespaceAssociation = PrefixedHierarchical
+	EndGlobalSection
+EndGlobal

@@ -4,13 +4,13 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Mvc.Ajax;
-using LAS.Core.Utils;
+using UCLouvain.AmbulanceSystem.Core.Utils;
 using PetaPoco;
 using System.Configuration;
-using LAS.Core.Repository;
+using UCLouvain.AmbulanceSystem.Core.Repository;
 using Newtonsoft.Json;
 
-namespace LAS.ServerVisualization.Controllers
+namespace UCLouvain.AmbulanceSystem.ServerVisualization.Controllers
 {
 	public class ApiController : Controller
 	{

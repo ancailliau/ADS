@@ -4,7 +4,7 @@ using System.IO;
 using System.Xml;
 using System.Text;
 
-namespace LAS.Core.Messages
+namespace UCLouvain.AmbulanceSystem.Core.Messages
 {
 	[XmlInclude(typeof(AmbulanceStatusMessage))]
 	[XmlInclude(typeof(MessageAck))]
