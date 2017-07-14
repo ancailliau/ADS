@@ -42,42 +42,12 @@ namespace LAS.ServerVisualization.Controllers
 
 		public ActionResult Index()
 		{
-			var mvcName = typeof(Controller).Assembly.GetName();
-			var isMono = Type.GetType("Mono.Runtime") != null;
-
-			ViewData["Version"] = mvcName.Version.Major + "." + mvcName.Version.Minor;
-			ViewData["Runtime"] = isMono ? "Mono" : ".NET";
-
 			return View();
 		}
 
-		public JsonResult Ambulances()
-		{
-			var a = ambulanceRepository.GetAllAmbulances();
-			return Json(a, JsonRequestBehavior.AllowGet);
-		}
-
-		public JsonResult Incidents()
-		{
-			var a = incidentRepository.GetAllIncidents();
-			return Json(a, JsonRequestBehavior.AllowGet);
-		}
-
-		public JsonResult Allocations()
-		{
-			var a = allocationRepository.GetAllocations();
-			// var js = JsonConvert.SerializeObject(a);
-			return Json(a, JsonRequestBehavior.AllowGet);
-		}
-
-		protected override JsonResult Json(object data, string contentType, System.Text.Encoding contentEncoding, JsonRequestBehavior behavior)
-		{
-			return new JsonNetResult {
-				Data = data,
-				ContentType = contentType,
-				ContentEncoding = contentEncoding,
-				JsonRequestBehavior = behavior
-			};
-		}
+        public ViewResult Ambulances()
+        {
+            return View();
+        }
 	}
 }

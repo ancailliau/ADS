@@ -1,19 +1,11 @@
-﻿
-//var mymap = L.map('mapid').setView([50.8234575,4.3831473], 14);
-var mymap = L.map('mapid').setView([50.8234575,4.3831473], 14);
+﻿var mymap = L.map('mapid').setView([50.8234575,4.3831473], 14);
+
 L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
     attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
     maxZoom: 18,
     id: 'mapbox.light',
-    accessToken: 'pk.eyJ1IjoiYW5jYWlsbGlhdSIsImEiOiJjajUzbW90NXQwNnF6MzJtd3RrdzB6OWppIn0.SR-d22ltbfWMD_LxkwR4HQ'
+    accessToken: config.mapbox.api_key
 }).addTo(mymap);
-
-// L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}' + accessToken, {
-// 	attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
-//     maxZoom: 18,
-//     id: 'mapbox.streets',
-//     accessToken: 'pk.eyJ1IjoiYW5jYWlsbGlhdSIsImEiOiJjajUzbW90NXQwNnF6MzJtd3RrdzB6OWppIn0.SR-d22ltbfWMD_LxkwR4HQ'
-// }).addTo(mymap);
 
 var ambulances = {};
 var incidents = {};
@@ -44,14 +36,13 @@ var ambulanceStatusName = function(status) {
 }
 
 var updateMap = function () {
-	// console.log("Update");
 	updateAmbulances ();
 	updateIncidents ();
 	updateAllocations ();
 }
 
 var updateIncidents = function () {
-	$.getJSON( "/Home/Incidents", function( data ) {
+	$.getJSON( "/Api/Incidents", function( data ) {
 		data.sort(function(a, b){
     		if(a.IncidentId < b.IncidentId) return -1;
     		if(a.IncidentId > b.IncidentId) return 1;
@@ -87,7 +78,7 @@ var updateIncidents = function () {
 
 
 var updateAmbulances = function () {
-	$.getJSON( "/Home/Ambulances", function( data ) {
+	$.getJSON( "/Api/Ambulances", function( data ) {
 		data.sort(function(a, b){
     		if(a.AmbulanceId < b.AmbulanceId) return -1;
     		if(a.AmbulanceId > b.AmbulanceId) return 1;
@@ -131,7 +122,7 @@ var formatDate = function(date) {
 }
 
 var updateAllocations = function () {
-	$.getJSON( "/Home/Allocations", function( data ) {
+	$.getJSON( "/Api/Allocations", function( data ) {
 		data.sort(function(a, b){
     		if(a.AllocationId < b.AllocationId) return -1;
     		if(a.AllocationId > b.AllocationId) return 1;
