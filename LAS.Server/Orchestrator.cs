@@ -54,10 +54,16 @@ namespace LAS.Server
 
 		internal void Start()
 		{
-			var listener = new TCPListeningServer(this);
+            //var listener = new TCPListeningServer(this);
+            var listener = new RabbitMQListeningServer("incident_queue", new MessageProcessor(this));
 			var ts = new ThreadStart(listener.Run);
 			var t = new Thread(ts);
 			t.Start();
+            
+            var listener_internal_comm = new RabbitMQListeningServer("internal_comm_queue", new MessageProcessor(this));
+            var ts2 = new ThreadStart(listener_internal_comm.Run);
+            var t2 = new Thread(ts2);
+            t2.Start();
 		}
 
 		public void Process(Message m)
@@ -93,7 +99,13 @@ namespace LAS.Server
 					var ma = (DeployAllocatorMessage)m;
 					checker.ReplaceAllocator(ma.Allocator);
 
-				} else {
+				} else if (m is MobilizationConfirmation mobConfirmation) {
+                    allocationRepository.SetMobilizationReceived(mobConfirmation.AllocationId);
+
+                } else if (m is CancellationConfirmation cancelConfirmation) {
+                    allocationRepository.ConfirmCancel(cancelConfirmation.AllocationId);
+
+                } else {
 					throw new NotImplementedException();
 				}
 			} catch (Exception e) {
@@ -110,7 +122,7 @@ namespace LAS.Server
 				logger.Info("Updating already registered ambulance");
 				a = ambulanceRepository.Get(m.Identifier);
 				a.SetStatus(AmbulanceStatus.Unavailable);
-				a.SetPort(m.ListeningPort);
+				a.SetPort(m.ListeningQueue);
 				a.SetPosition(m.Latitude, m.Longitude);
 				ambulanceRepository.Update(a);
 
@@ -122,7 +134,7 @@ namespace LAS.Server
 				                                     m.Latitude,
 				                                     m.Longitude,
 				                                     AmbulanceStatus.Unavailable,
-				                                     m.ListeningPort);
+				                                     m.ListeningQueue);
 			}
 		}
 

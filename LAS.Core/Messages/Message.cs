@@ -18,6 +18,8 @@ namespace LAS.Core.Messages
 	[XmlInclude(typeof(DestinationUnreachableMessage))]
 	[XmlInclude(typeof(MobilizationCancelled))]
 	[XmlInclude(typeof(DeployAllocatorMessage))]
+    [XmlInclude(typeof(MobilizationConfirmation))]
+    [XmlInclude(typeof(CancellationConfirmation))]
 	public abstract class Message
 	{
 		public string MessageId {

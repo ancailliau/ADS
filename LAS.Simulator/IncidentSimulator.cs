@@ -19,7 +19,7 @@ namespace LAS.Simulator
 		float maxlon = 4.455275f;
 
 		static Random random = new Random();
-		MessageSender sender = new MessageSender ();
+		RabbitMQMessageSender sender = new RabbitMQMessageSender ();
 
 		public IncidentSimulator(Database db)
 		{
@@ -44,7 +44,7 @@ namespace LAS.Simulator
 					var incidentLong = (float)(minlon + random.NextDouble() * (maxlon - minlon));
 
 					var m = new IncidentForm(incidentLat, incidentLong);
-					sender.Send(m);
+					sender.Send(m, "incident_queue");
 				} else {
 					logger.Info("10 incidents are yet open");
 				}

@@ -19,7 +19,7 @@ namespace LAS.Server
 		readonly IncidentRepository incidentRepository;
 		readonly AllocationRepository allocationRepository;
 
-		readonly MessageSender sender;
+		readonly RabbitMQMessageSender sender;
 		readonly BlockingCollection<Allocation> allocationsToProcess;
 
 		public Cancelator(IDatabase db)
@@ -29,7 +29,7 @@ namespace LAS.Server
 			incidentRepository = new IncidentRepository(db);
 			allocationRepository = new AllocationRepository(db);
 
-			sender = new MessageSender();
+			sender = new RabbitMQMessageSender();
 			allocationsToProcess = new BlockingCollection<Allocation>();
 
 			new Thread(Start).Start();
@@ -46,13 +46,8 @@ namespace LAS.Server
 				var ambulance = ambulanceRepository.Get(i.AmbulanceId);
 				var m = new MobilizationCancelled(i.AllocationId);
 
-				sender.Send(m, ambulance.Port, () => { }, () => OnCancelReceived(i));
+				sender.Send(m, ambulance.Port);
 			}
-		}
-
-		void OnCancelReceived(Allocation i)
-		{
-			allocationRepository.ConfirmCancel(i.AllocationId);
 		}
 	}
 }

@@ -42,7 +42,7 @@ namespace LAS.Core.Domain
 		}
 
 		[PetaPoco.Column("port")]
-		public int Port {
+		public string Port {
 			get;
 			set;
 		}
@@ -70,9 +70,9 @@ namespace LAS.Core.Domain
 			LastPositionUpdate = DateTime.Now;
 		}
 
-		public void SetPort(int listeningPort)
+		public void SetPort(string listeningQueue)
 		{
-			Port = listeningPort;
+			Port = listeningQueue;
 		}
 
 		public void SetStatus(AmbulanceStatus status)

@@ -23,7 +23,7 @@ namespace LAS.Server
 		readonly IncidentRepository incidentRepository;
 		readonly AllocationRepository allocationRepository;
 
-		readonly MessageSender sender;
+		readonly RabbitMQMessageSender sender;
 		readonly BlockingCollection<Incident> incidentsToProcess;
 
 		public AmbulanceMobilizator(IDatabase db)
@@ -33,7 +33,7 @@ namespace LAS.Server
 			incidentRepository = new IncidentRepository(db);
 			allocationRepository = new AllocationRepository(db);
 
-			sender = new MessageSender();
+			sender = new RabbitMQMessageSender();
 			incidentsToProcess = new BlockingCollection<Incident>();
 
 			new Thread(Start).Start();
@@ -81,9 +81,7 @@ namespace LAS.Server
 														i.Longitude,
 														allocation.HospitalId);
 
-						if (!sender.Send(m, ambulance.Port,
-						                 () => OnMobilizationSent(allocation),
-						                 () => OnMobilizationReceived(allocation))) {
+						if (!sender.Send(m, ambulance.Port)) {
 							logger.Info("Unable to contact to ambulance {0}, cancel allocation {1}", 
 							            allocation.AmbulanceId,
 							            allocation.AllocationId);
@@ -91,6 +89,10 @@ namespace LAS.Server
 							                                 AmbulanceStatus.Unavailable);
 							allocationRepository.CancelAllocation(allocation.AllocationId, true);
 						}
+                        
+                        OnMobilizationSent(allocation);
+                        
+                        // TODO OnMobilizationReceived(allocation)
 					}
 
 				} catch (Exception e) {

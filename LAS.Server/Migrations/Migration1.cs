@@ -13,7 +13,7 @@ namespace LAS.Server.Migrations
 				  .WithColumn("latitude").AsFloat()
 			      .WithColumn("lastPositionUpdate").AsDateTime()
 				  .WithColumn("status").AsInt16()
-				  .WithColumn("port").AsInt16();
+				  .WithColumn("port").AsString();
 
 			Create.Table("hospitals")
 				  .WithColumn("hospitalId").AsString().PrimaryKey()

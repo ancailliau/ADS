@@ -7,7 +7,7 @@
     <OutputType>Library</OutputType>
     <RootNamespace>LAS.Core</RootNamespace>
     <AssemblyName>LAS.Core</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -70,6 +70,9 @@
       <HintPath>..\packages\Itinero.IO.Osm.0.13.1-rc1\lib\net45\Itinero.IO.Osm.dll</HintPath>
     </Reference>
     <Reference Include="System.Xml.Linq" />
+    <Reference Include="RabbitMQ.Client">
+      <HintPath>..\packages\RabbitMQ.Client.4.1.3\lib\net451\RabbitMQ.Client.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -100,6 +103,9 @@
     <Compile Include="Messages\MobilizationCancelled.cs" />
     <Compile Include="Messages\DeployAllocatorMessage.cs" />
     <Compile Include="Repository\ConfigurationRepository.cs" />
+    <Compile Include="Utils\RabbitMQMessageSender.cs" />
+    <Compile Include="Messages\MobilizationConfirmation.cs" />
+    <Compile Include="Messages\CancellationConfirmation.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

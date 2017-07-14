@@ -1,7 +1,7 @@
 ﻿using System;
 namespace LAS.Core.Messages
 {
-    public class MobilizationOrderRefusal : Message
+    public class MobilizationConfirmation : Message
     {
         public string AmbulanceIdentifier {
             get;
@@ -13,11 +13,11 @@ namespace LAS.Core.Messages
             set;
         }
 
-        public MobilizationOrderRefusal()
+        public MobilizationConfirmation()
         {
         }
 
-        public MobilizationOrderRefusal(string ambulanceIdentifier, int incidentIdentifier)
+        public MobilizationConfirmation(string ambulanceIdentifier, int incidentIdentifier)
         {
             AmbulanceIdentifier = ambulanceIdentifier;
             AllocationId = incidentIdentifier;
@@ -25,7 +25,7 @@ namespace LAS.Core.Messages
 
         public override string ToString()
         {
-            return string.Format("[MobilizationOrderRefusal: AmbulanceIdentifier={0}, AllocationId={1}]", AmbulanceIdentifier, AllocationId);
+            return string.Format("[MobilizationConfirmation: AmbulanceIdentifier={0}, AllocationId={1}]", AmbulanceIdentifier, AllocationId);
         }
     }
 }

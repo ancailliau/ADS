@@ -24,6 +24,15 @@ namespace LAS.Core.Repository
 			           allocation.AllocationId);
 		}
 
+        public void SetMobilizationReceived(int allocationId)
+        {
+            db.Execute("update allocations set \"mobilizationReceivedTimestamp\" = @0 " +
+                       "where \"allocationId\" = @1",
+                       DateTime.Now,
+                       allocationId);
+
+        }
+
 		public void SetMobilizationReceived(Allocation allocation)
 		{
 			db.Execute("update allocations set \"mobilizationReceivedTimestamp\" = @0 " +

@@ -79,6 +79,9 @@ namespace LAS.Simulator
 			tasks.Clear();
 
 			mobilized = false;
+            
+            var lastMessage = (MobilizationCancelled)mdt.Messages.Pop();            
+            mdt.ConfirmCancellation(lastMessage.AllocationId);
 
 			var cancelSource = new CancellationTokenSource();
 			cancelSources.Add(cancelSource);
@@ -106,6 +109,8 @@ namespace LAS.Simulator
 				mdt.RefuseMobilization(lastMessage.AllocationId);
 				return;
 			}
+
+            mdt.AcceptMobilization(lastMessage.AllocationId);
 
 			// Cancel all current tasks, we got something to do!
 			foreach (var tt in cancelSources) {

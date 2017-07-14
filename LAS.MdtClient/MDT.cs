@@ -34,8 +34,9 @@ namespace LAS.MdtClient
 		public event OnMobilizationCancelled MobilizationCancelled;
 
 		AVLS avls;
-		MDTServerListener listener;
-		MessageSender sender;
+        //MDTServerListener listener;
+        MDTServerRabbitMQListener listener;
+		RabbitMQMessageSender sender;
 
 		public MDT(string identifier, float latitude, float longitude, Func<bool> sendPosition)
 		{
@@ -44,11 +45,14 @@ namespace LAS.MdtClient
 			this.longitude = longitude;
 
 			lockPosition = new object();
-			sender = new MessageSender();
+			sender = new RabbitMQMessageSender();
 			Messages = new Stack<Message>();
 
 			avls = new AVLS(this, sendPosition);
-			listener = new MDTServerListener(this);
+			listener = new MDTServerRabbitMQListener("mdt_" + ambulanceId, this);
+            var ts = new ThreadStart(listener.Run);
+            var t = new Thread(ts);
+            t.Start();
 
 			Register();
 		}
@@ -56,7 +60,7 @@ namespace LAS.MdtClient
 		void Register()
 		{
 			var message = new RegisterAmbulanceMessage(ambulanceId, 
-			                                           listener.Port,
+			                                           "mdt_" + ambulanceId,
 			                                           latitude,
 			                                           longitude);
 			Send(message);
@@ -118,6 +122,18 @@ namespace LAS.MdtClient
 			Send(message);
 		}
 
+        public void AcceptMobilization(int allocationId)
+        {
+            var message = new MobilizationConfirmation(ambulanceId, allocationId);
+            Send(message);
+        }
+
+        public void ConfirmCancellation (int incidentIdentifier)
+        {
+            var message = new CancellationConfirmation (ambulanceId, incidentIdentifier);
+            Send(message);
+        }
+
 		public void InTrafficJam(bool inTrafficJam)
 		{
 			Message message;
@@ -153,7 +169,7 @@ namespace LAS.MdtClient
 		internal void Send(Message m)
 		{
 			logger.Info("Sending ({0}): {1}", ambulanceId, m.ToString ());
-			sender.Send(m);
+			sender.Send(m, "internal_comm_queue");
 		}
 	}
 }

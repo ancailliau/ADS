@@ -10,7 +10,7 @@ namespace LAS.CADConsole
 		{
 			Console.WriteLine("Hello World!");
 
-			var sender = new MessageSender();
+			var sender = new RabbitMQMessageSender();
 
 			// bounds for the map
 			var minlat = 50.645f;
@@ -36,7 +36,7 @@ namespace LAS.CADConsole
 			var incidentLong = (float) (minlon + random.NextDouble() * (maxlon - minlon));
 
 			var m = new IncidentForm(incidentLat, incidentLong);
-			sender.Send(m);
+			sender.Send(m, "incident_queue");
 		}
 	}
 }

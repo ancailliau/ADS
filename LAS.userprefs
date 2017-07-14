@@ -1,4 +1,4 @@
-﻿<Properties StartupConfiguration="{2F67A7DD-C296-4B55-88C7-4D20AE2647C3}|Default" NuGet.AddPackagesDialog.IncludePrerelease="True">
+﻿<Properties StartupConfiguration="{2F67A7DD-C296-4B55-88C7-4D20AE2647C3}|Default">
   <MonoDevelop.Ide.Workbench ActiveDocument="LAS.Monitoring/Program.cs">
     <Files>
       <File FileName="LAS.Monitoring/Program.cs" Line="172" Column="25" />

@@ -83,7 +83,7 @@ namespace LAS.Core.Repository
 				return amb;
 		}
 
-		public Ambulance AddAmbulance(string identifier, float latitude, float longitude, AmbulanceStatus status, int listeningPort)
+		public Ambulance AddAmbulance(string identifier, float latitude, float longitude, AmbulanceStatus status, string listeningPort)
 		{
 				var amb = new Ambulance(identifier) {
 					Latitude = latitude,
