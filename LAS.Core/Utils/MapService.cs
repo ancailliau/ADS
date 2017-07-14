@@ -4,7 +4,6 @@ using Itinero;
 using Itinero.IO.Osm;
 using Itinero.Osm.Vehicles;
 using NLog;
-using OsmSharp.Osm.PBF.Streams;
 using Itinero.Exceptions;
 
 namespace UCLouvain.AmbulanceSystem.Core.Utils
