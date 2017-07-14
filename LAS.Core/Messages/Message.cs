@@ -17,6 +17,7 @@ namespace LAS.Core.Messages
 	[XmlInclude(typeof(NotInTrafficJamMessage))]
 	[XmlInclude(typeof(DestinationUnreachableMessage))]
 	[XmlInclude(typeof(MobilizationCancelled))]
+	[XmlInclude(typeof(DeployAllocatorMessage))]
 	public abstract class Message
 	{
 		public string MessageId {

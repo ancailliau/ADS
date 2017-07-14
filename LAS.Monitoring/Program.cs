@@ -17,10 +17,11 @@ using LAS.Core.Repository;
 using System.Configuration;
 using LAS.Core.Domain;
 using Itinero.LocalGeo;
+using LAS.Core.Messages;
 
 namespace LAS.Monitoring
 {
-	class MainClass
+	public class MainClass
 	{
 		static readonly Logger logger = LogManager.GetCurrentClassLogger();
 
@@ -33,11 +34,15 @@ namespace LAS.Monitoring
 		static AmbulanceRepository ambulanceRepository;
 		static AllocationRepository allocationRepository;
 		static HospitalRepository hospitalRepository;
+		static ConfigurationRepository configurationRepository;
 
 		static CSVGoalExportProcessor csvExport;
 
 		public static void Main(string[] args)
 		{
+			//DeployAmbulanceAtStationAllocator();
+			//Thread.Sleep(TimeSpan.FromSeconds(10));
+
 			Console.WriteLine("Hello World!");
 			var monitoringDelay = TimeSpan.FromSeconds(1);
 
@@ -54,12 +59,16 @@ namespace LAS.Monitoring
 			ambulanceRepository = new AmbulanceRepository(db);
 			allocationRepository = new AllocationRepository(db);
 			hospitalRepository = new HospitalRepository(db);
+			configurationRepository = new ConfigurationRepository(db);
 			logger.Info("Connected to database");
 
 			logger.Info("Building KAOS model.");
 			var filename = "./Models/simple.kaos";
 			var parser = new KAOSTools.Parsing.ModelBuilder();
 			model = parser.Parse(File.ReadAllText(filename), filename);
+			var model2 = parser.Parse(File.ReadAllText(filename), filename);
+
+			ActiveResolutions = Enumerable.Empty<Resolution>();
 
 			var declarations = parser.Declarations;
 			logger.Info("(done)");
@@ -69,8 +78,7 @@ namespace LAS.Monitoring
 			KAOSMetaModelElement[] goals = model.Goals().ToArray();
 			KAOSMetaModelElement[] obstacles = model.LeafObstacles().ToArray();
 			var projection = new HashSet<string>(GetAllPredicates(goals));
-			monitor = new GoalMonitor(model, goals.Union(obstacles), projection, (element) =>
-			                          new InfiniteStateInformationStorage (),
+			monitor = new GoalMonitor(model, goals.Union(obstacles), projection, HandleFunc,
 			                          // new TimedStateInformationStorage(TimeSpan.FromMinutes(60), TimeSpan.FromMinutes(120)),
 			                          monitoringDelay);
 			logger.Info("(done)");
@@ -101,10 +109,146 @@ namespace LAS.Monitoring
 			new Timer((state) => MonitorStep(), null, monitoringDelay, monitoringDelay);
 			Thread.Sleep(TimeSpan.FromSeconds(5));
 			logger.Info("Launching processors");
-			new Timer((state) => LogStatistic(), null, monitoringDelay, monitoringDelay);
+			//new Timer((state) => LogStatistic(), null, monitoringDelay, monitoringDelay);
 			new Timer((state) => LogCSV(), null, monitoringDelay, monitoringDelay);
 
+			// Configure optimization process.
+			optimizer = new Optimizer(monitor, model2);
+			new Timer((state) => Optimize(), null, TimeSpan.FromSeconds(30), TimeSpan.FromSeconds(60));
+
 			while (true);
+		}
+
+		static IStateInformationStorage HandleFunc(KAOSMetaModelElement arg)
+		{
+			if (arg is Obstacle) {
+				if (arg.Identifier == "mobilization_on_road") {
+					return new TimedStateInformationStorage(TimeSpan.FromMinutes(5), TimeSpan.FromMinutes(20));
+
+				} else if (arg.Identifier == "mobilization_on_road_when_na") {
+					return new TimedStateInformationStorage(TimeSpan.FromMinutes(5), TimeSpan.FromMinutes(20));
+				}
+			}
+			return new InfiniteStateInformationStorage();
+		}
+
+		static Optimizer optimizer;
+		static IEnumerable<Resolution> ActiveResolutions;
+
+		static void DeployReallocator()
+		{
+			logger.Info("Deploy reallocator");
+		}
+
+		static void RemoveReallocator()
+		{
+			logger.Info("Remove reallocator");
+		}
+
+		static MessageSender sender = new MessageSender();
+
+		public static void DeployAmbulanceAtStationAllocator()
+		{
+			logger.Info("Deploy AmbulanceAtStationAllocator");
+			var m = new DeployAllocatorMessage("AmbulanceAtStationAllocator");
+			sender.Send(m);
+		}
+
+		public static void RemoveAmbulanceAtStationAllocator()
+		{
+			logger.Info("Deploy DefaultAmbulanceAllocator");
+			var m = new DeployAllocatorMessage("DefaultAmbulanceAllocator");
+			sender.Send(m);
+		}
+
+		static DateTime startTime = DateTime.Now;
+
+		static void Optimize()
+		{
+			logger.Info("Optimize :-)");
+			var goal = model.Goal(x => x.Identifier == "avoid_ambulance_mobilized_on_road");
+			if (DateTime.Now - startTime > TimeSpan.FromMinutes(25)) {
+				optimizer.model.Goal(x => x.Identifier == goal.Identifier).RDS = .8;
+				if (goal.CPS > .8) {
+					return;
+				}
+			} else {
+				optimizer.model.Goal(x => x.Identifier == goal.Identifier).RDS = .5;
+				if (goal.CPS > .5) {
+					return;
+				}
+			}
+
+			var countermeasures = optimizer.Optimize();
+			if (countermeasures == null)
+				return;
+
+			logger.Info("---- Selected CM");
+			foreach (var item in countermeasures) {
+				logger.Info(item.ResolvingGoal().FriendlyName);
+			}
+			logger.Info("---");
+
+			Type simType = typeof(LAS.Monitoring.MainClass);
+
+			// Adapt the software
+			foreach (var cm in ActiveResolutions.Except(countermeasures)) {
+				if (cm.ResolvingGoal().CustomData.ContainsKey("onremove")) {
+					var method = cm.ResolvingGoal().CustomData["onremove"];
+					var mi = simType.GetMethod(method);
+					if (mi != null) {
+						mi.Invoke(null, new object[] { });
+					} else {
+						logger.Warn("Cannot find the method " + method);
+					}
+				} else {
+					logger.Info("Miss onremove for " + cm.ResolvingGoal().FriendlyName);
+				}
+			}
+			foreach (var cm in countermeasures.Except(ActiveResolutions)) {
+				if (cm.ResolvingGoal().CustomData.ContainsKey("ondeploy")) {
+					var method = cm.ResolvingGoal().CustomData["ondeploy"];
+					var mi = simType.GetMethod(method);
+					if (mi != null) {
+						mi.Invoke(null, new object[] { });
+					} else {
+						logger.Warn("Cannot find the method " + method);
+					}
+				} else {
+					logger.Info("Miss ondeploy for " + cm.ResolvingGoal().FriendlyName);
+				}
+			}
+
+			// Update the requirement model
+			logger.Info("Countermeasures to withold:");
+			foreach (var cm in ActiveResolutions.Except(countermeasures)) {
+				logger.Info("- {0}", cm.ResolvingGoal().FriendlyName);
+
+				var resolutionToWithold = model.Elements.OfType<Resolution>()
+											  .Single(x => x.ResolvingGoalIdentifier == cm.ResolvingGoalIdentifier
+													  & x.ObstacleIdentifier == cm.ObstacleIdentifier);
+
+				ResolutionIntegrationHelper.Desintegrate(resolutionToWithold);
+
+			}
+			logger.Info("Countermeasures to deploy: ");
+			foreach (var cm in countermeasures.Except(ActiveResolutions)) {
+				logger.Info("- {0}", cm.ResolvingGoal().FriendlyName);
+
+				var resolutionToDeploy = model.Elements.OfType<Resolution>()
+											  .Single(x => x.ResolvingGoalIdentifier == cm.ResolvingGoalIdentifier
+													  & x.ObstacleIdentifier == cm.ObstacleIdentifier);
+
+				ResolutionIntegrationHelper.Integrate(resolutionToDeploy);
+			}
+
+			ActiveResolutions = countermeasures;
+
+			// Update the obstruction sets
+			ComputeObstructionSets();
+			UpdateCPS();
+			logger.Info("New configuration deployed");
+
 		}
 
 		static IEnumerable<Goal> cpsGoals;
@@ -193,18 +337,18 @@ namespace LAS.Monitoring
 						obstructionSuperset = goal.GetObstructionSuperset(true);
 					}
 					obstructions.Add(goal, obstructionSuperset);
-					foreach (var kv in obstructionSuperset.mapping) {
-						logger.Info("{0} => {1}", kv.Key.FriendlyName, kv.Value);
-					}
+					//foreach (var kv in obstructionSuperset.mapping) {
+					//	logger.Info("{0} => {1}", kv.Key.FriendlyName, kv.Value);
+					//}
 				}
 
 				foreach (var obstacle in cpsObstacles) {
 					logger.Info("Obstruction set for " + obstacle.FriendlyName);
 					ObstructionSuperset obstructionSuperset = obstacle.GetObstructionSuperset();
 					obstructions.Add(obstacle, obstructionSuperset);
-					foreach (var kv in obstructionSuperset.mapping) {
-						logger.Info("{0} => {1}", kv.Key.FriendlyName, kv.Value);
-					}
+					//foreach (var kv in obstructionSuperset.mapping) {
+					//	logger.Info("{0} => {1}", kv.Key.FriendlyName, kv.Value);
+					//}
 				}
 				logger.Info("---- obstruction sets");
 			}
@@ -222,11 +366,12 @@ namespace LAS.Monitoring
 							if (lmon.Max != null) {
 								sampleVector.Add(o.Value, lmon.Max.Mean);
 							} else {
-								sampleVector.Add(o.Value, 1); // no data = 1
-								logger.Warn("No data available for " + kv.Key.FriendlyName);
+								sampleVector.Add(o.Value, 0); // no data = 1
+								//logger.Warn("No data available for " + kv.Key.FriendlyName);
 							}
 						} else {
-							logger.Error("No key {0} in monitors", o.Key.FriendlyName);
+							//logger.Error("No key {0} in monitors", o.Key.FriendlyName);
+							sampleVector.Add(o.Value, ((Obstacle)o.Key).EPS);
 						}
 					}
 
@@ -243,7 +388,7 @@ namespace LAS.Monitoring
 		static void MonitorStep()
 		{
 			var ms = GetMonitoredState();
-			logger.Info("Size of the monitored state " + ms.state.Count);
+			//logger.Info("Size of the monitored state " + ms.state.Count);
 
 			//var sb = new StringBuilder();
 			//var maxLen = ms.state.Max(x => x.Key.Name.Length);
@@ -305,9 +450,9 @@ namespace LAS.Monitoring
 				return incidents[arg % nIncident];
 			});
 
-			for (int i = 0; i < nIncident; i++) {
-				logger.Info("incident " + i + " = " + incidents[i]?.IncidentId);
-			}
+			//for (int i = 0; i < nIncident; i++) {
+			//	logger.Info("incident " + i + " = " + incidents[i]?.IncidentId);
+			//}
 
 			// TODO Fix FirstOrDefault to SingleOrDefault
 			var alloc = new Allocation[nIncident];
@@ -381,11 +526,29 @@ namespace LAS.Monitoring
 				ms.Set("AmbA" + id + "MobilizedAndLeaving", allocations.Any(x => x.AmbulanceId == a[i].AmbulanceId && !x.Refused && !x.Cancelled) & a[i].Status == AmbulanceStatus.Leaving);
 			}
 
+			ms.Set("AmbMobilized",
+			       amb.Any(ai => incidents.Any(ii => ii != null && allocations.Any(x => x.AmbulanceId == ai.AmbulanceId & !x.Refused & !x.Cancelled & x.IncidentId == ii.IncidentId & x.MobilizationConfirmedTimestamp != null))
+									 ));
 			for (int i = 0; i < 15; i++) {
 				int id = i + 1;
 				ms.Set("AmbA" + id + "Mobilized", 
-				       incidents.Any (ii => ii != null && allocations.Any(x => x.AmbulanceId == a[i].AmbulanceId & !x.Refused & !x.Cancelled & x.IncidentId == ii.IncidentId))
+				       incidents.Any (ii => ii != null && allocations.Any(x => x.AmbulanceId == a[i].AmbulanceId & !x.Refused & !x.Cancelled & x.IncidentId == ii.IncidentId & x.MobilizationConfirmedTimestamp != null))
 				                     );
+			}
+
+			ms.Set("AmbAllocated",
+			       amb.Any(ai => 
+			               incidents.Any(
+				               ii => ii != null && allocations.Any(
+					               x => x.AmbulanceId == ai.AmbulanceId & !x.Refused & !x.Cancelled & x.IncidentId == ii.IncidentId))));
+			for (int i = 0; i < 15; i++) {
+				int id = i + 1;
+				bool allocated = incidents.Any(ii => ii != null && !ii.Resolved
+				                               && allocations.Any(x => x.AmbulanceId == a[i].AmbulanceId & !x.Refused & !x.Cancelled 
+				                                                  & x.IncidentId == ii.IncidentId));
+				ms.Set("AmbA" + id + "Allocated", allocated);
+				//logger.Info("Amb A" + id + "Allocated: " + allocated + " and on road: " + (a[i].Status == AmbulanceStatus.AvailableRadio));
+				
 			}
 
 			ms.Set("AmbLeaving", amb.Any(ai => ai.Status == AmbulanceStatus.Leaving));
@@ -393,6 +556,12 @@ namespace LAS.Monitoring
 				int id = i + 1;
 				ms.Set("AmbA" + id + "Leaving", a[i].Status == AmbulanceStatus.Leaving);
 			}
+
+			for (int i = 0; i < 15; i++) {
+				int id = i + 1;
+				ms.Set("AmbA" + id + "AvailableAtRadio", a[i].Status == AmbulanceStatus.AvailableRadio);
+			}
+
 
 			for (int i = 0; i < 15; i++) {
 				int id = i + 1;
@@ -430,9 +599,9 @@ namespace LAS.Monitoring
 			for (int i = 0; i < nIncident; i++) {
 				var condition = alloc[i] != null && getAmbulance(alloc[i].AmbulanceId).Status == AmbulanceStatus.OnScene;
 				ms.Set("AmbulanceOnScene" + (i + 1), condition);
-				if (condition) {
-					logger.Info("ambulance on scene: " + alloc[i].AmbulanceId + " - " + getAmbulance(alloc[i].AmbulanceId).AmbulanceId + " - " + incidents[i].Unreachable);
-				}
+				//if (condition) {
+				//	logger.Info("ambulance on scene: " + alloc[i].AmbulanceId + " - " + getAmbulance(alloc[i].AmbulanceId).AmbulanceId + " - " + incidents[i].Unreachable);
+				//}
 			}
 
 			//ms.Set("AmbulanceOnScene1", alloc1 != null && getAmbulance(alloc1.AmbulanceId).Status == AmbulanceStatus.OnScene);
@@ -456,9 +625,9 @@ namespace LAS.Monitoring
 						new Coordinate(allocinc.Latitude, allocinc.Longitude),
 						new Coordinate(a[i].Latitude, a[i].Longitude)
 					);
-					if (dist <= radius) {
-						logger.Info("Distance from incident: " + dist + " status: " + a[i].Status);
-					}
+					//if (dist <= radius) {
+					//	logger.Info("Distance from incident: " + dist + " status: " + a[i].Status);
+					//}
 					ms.Set("AmbulanceA"+id+"OnSceneLocation", dist <= radius);
 					onSceneLocation |= dist <= radius;
 				} else {
@@ -521,6 +690,10 @@ namespace LAS.Monitoring
 			//ms.Set("AmbulanceA9AtStation", a9.Status == AmbulanceStatus.AvailableAtStation);
 			//ms.Set("AmbulanceA2AtStation", a2.Status == AmbulanceStatus.AvailableAtStation);
 			//ms.Set("AmbulanceA15AtStation", a15.Status == AmbulanceStatus.AvailableAtStation);
+
+			var currentAllocator = configurationRepository.GetActiveAllocator();
+			ms.Set("DefaultAllocator", currentAllocator == "DefaultAmbulanceAllocator");
+			ms.Set("AmbulanceAtStationAllocator", currentAllocator == "AmbulanceAtStationAllocator");
 
 			return ms;
 		}

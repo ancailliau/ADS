@@ -17,7 +17,7 @@ namespace LAS.Server.Allocators
 	/// <summary>
 	/// This module is responsible for allocating ambulance in its own thread.
 	/// </summary>
-	public class AmbulanceAllocator
+	public class DefaultAmbulanceAllocator : IAmbulanceAllocator
 	{
 		static readonly Logger logger = LogManager.GetCurrentClassLogger();
 
@@ -32,7 +32,7 @@ namespace LAS.Server.Allocators
 		/// Initializes a new instance of the <see cref="T:LAS.Server.AmbulanceAllocator"/> class.
 		/// </summary>
 		/// <param name="db">Db. Do not share among threads.</param>
-		public AmbulanceAllocator(MapService mapService, IDatabase db)
+		public DefaultAmbulanceAllocator(MapService mapService, IDatabase db)
 		{
 			ambulanceRepository = new AmbulanceRepository(db);
 			hospitalRepository = new HospitalRepository(db);
@@ -44,7 +44,7 @@ namespace LAS.Server.Allocators
 			new Thread(this.Start).Start();
 		}
 
-		internal void Allocate(Incident i)
+		public void Allocate(Incident i)
 		{
 			incidentsToProcess.Add(i);
 		}

@@ -15,7 +15,7 @@ namespace LAS.Server
 	{
 		static readonly Logger logger = LogManager.GetCurrentClassLogger();
 
-		AmbulanceAllocator allocator;
+		IAmbulanceAllocator allocator;
 		AmbulanceMobilizator mobilizator;
 		TrafficJamReallocator trafficJamReallocator;
 		Cancelator cancelator;
@@ -24,24 +24,46 @@ namespace LAS.Server
 		internal readonly HospitalRepository hospitalRepository;
 		internal readonly IncidentRepository incidentRepository;
 		internal readonly AllocationRepository allocationRepository;
+		internal readonly ConfigurationRepository configurationRepository;
 
 		internal MapService mapService;
+		IDatabaseBuildConfiguration config;
 
 		public Checker(IDatabaseBuildConfiguration config)
 		{
+			this.config = config;
 			var db = new Database(config);
 			ambulanceRepository = new AmbulanceRepository(db);
 			hospitalRepository = new HospitalRepository(db);
 			incidentRepository = new IncidentRepository(db);
 			allocationRepository = new AllocationRepository(db);
+			configurationRepository = new ConfigurationRepository(db);
 
 			mapService = new MapService();
 
-			allocator = new AmbulanceAllocator(mapService, new LoggedDatabase(config));
+			allocator = new DefaultAmbulanceAllocator(mapService, new LoggedDatabase(config));
+			configurationRepository.UpdateActiveAllocator("DefaultAmbulanceAllocator");
+
 			mobilizator = new AmbulanceMobilizator(new Database(config));
 			trafficJamReallocator = new TrafficJamReallocator(mapService, new LoggedDatabase(config));
 			cancelator = new Cancelator(new Database(config));
 
+		}
+
+		internal void ReplaceAllocator(string s)
+		{
+			logger.Info("Replace allocator: " + s);
+			if (s == "AmbulanceAtStationAllocator") {
+				allocator = new AmbulanceAtStationAllocator(mapService, new LoggedDatabase(config));
+				configurationRepository.UpdateActiveAllocator(s);
+
+			} else if (s == "DefaultAmbulanceAllocator") {
+				allocator = new DefaultAmbulanceAllocator(mapService, new LoggedDatabase(config));
+				configurationRepository.UpdateActiveAllocator(s);
+
+			} else {
+				logger.Info("Allocator name not known");
+			}
 		}
 
 		internal void Start()
@@ -116,5 +138,6 @@ namespace LAS.Server
 				logger.Info(e.StackTrace);
 			}
 		}
-	}
+
+}
 }

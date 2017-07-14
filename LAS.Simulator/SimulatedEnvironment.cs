@@ -32,8 +32,15 @@ namespace LAS.Simulator
 		public static bool PressOnSceneButton(SimulatedAmbulance a)
 		{
 			var coin = r.NextDouble();
-			if (coin > .9) {
-				return false;
+			// Scenario 2
+			if (DateTime.Now - startTime > TimeSpan.FromSeconds(15 * 60)) {
+				if (coin > .7) {
+					return false;
+				}
+			} else {
+				if (coin > .9) {
+					return false;
+				}
 			}
 
 			return true;
@@ -42,8 +49,15 @@ namespace LAS.Simulator
 		public static bool PressAtHospitalButton(SimulatedAmbulance a)
 		{
 			var coin = r.NextDouble();
-			if (coin > .99) {
-				return false;
+			// Scenario 2
+			if (DateTime.Now - startTime > TimeSpan.FromSeconds(15 * 60)) {
+				if (coin > .7) {
+					return false;
+				}
+			} else {
+				if (coin > .99) {
+					return false;
+				}
 			}
 
 			return true;
@@ -52,8 +66,16 @@ namespace LAS.Simulator
 		public static bool PressAtStationButton(SimulatedAmbulance a)
 		{
 			var coin = r.NextDouble();
-			if (coin > .5) {
-				return false;
+
+			// Scenario 2
+			if (DateTime.Now - startTime > TimeSpan.FromSeconds(15 * 60)) {
+				if (coin > .2) {
+					return false;
+				}
+			} else {
+				if (coin > .5) {
+					return false;
+				}
 			}
 
 			return true;
@@ -62,15 +84,16 @@ namespace LAS.Simulator
 		public static bool InTrafficJam(SimulatedAmbulance a) {
 			var coin = r.NextDouble();
 
-			if (DateTime.Now - startTime > TimeSpan.FromSeconds(15 * 60)) {
-				if (coin > .5) {
-					return false;
-				}
-			} else {
+			// Scenario 1
+			//if (DateTime.Now - startTime > TimeSpan.FromSeconds(15 * 60)) {
+			//	if (coin > .7) {
+			//		return false;
+			//	}
+			//} else {
 				if (coin > .01) {
 					return false;
 				}
-			}
+			//}
 
 			return true;
 		}

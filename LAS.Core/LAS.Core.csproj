@@ -98,6 +98,8 @@
     <Compile Include="Messages\NotInTrafficJamMessage.cs" />
     <Compile Include="Messages\DestinationUnreachableMessage.cs" />
     <Compile Include="Messages\MobilizationCancelled.cs" />
+    <Compile Include="Messages\DeployAllocatorMessage.cs" />
+    <Compile Include="Repository\ConfigurationRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

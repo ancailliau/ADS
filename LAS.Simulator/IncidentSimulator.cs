@@ -32,6 +32,8 @@ namespace LAS.Simulator
 			new Thread(Loop).Start();
 		}
 
+		static DateTime startTime = DateTime.Now;
+
 		void Loop()
 		{
 			while (true) {
@@ -46,7 +48,21 @@ namespace LAS.Simulator
 				} else {
 					logger.Info("10 incidents are yet open");
 				}
-				Thread.Sleep(TimeSpan.FromSeconds(6));
+				// Scenario 2
+				//if (DateTime.Now - startTime > TimeSpan.FromMinutes(12)) {
+				//	if (DateTime.Now - startTime < TimeSpan.FromMinutes(30)) {
+				//		var time = 20 - ((DateTime.Now - startTime - TimeSpan.FromMinutes(12)).Minutes);
+				//		logger.Info("Sleep " + Math.Max(5, time) + " seconds");
+				//		Thread.Sleep(TimeSpan.FromSeconds(Math.Max(5, time)));
+				//	} else {
+				//		var time = 5 + ((DateTime.Now - startTime - TimeSpan.FromMinutes(30)).Minutes);
+				//		logger.Info("Sleep "+Math.Min(20, time)+" seconds");
+				//		Thread.Sleep(TimeSpan.FromSeconds(Math.Min(20, time)));
+				//	}
+				//} else {
+				//logger.Info("Sleep 20 seconds");
+					Thread.Sleep(TimeSpan.FromSeconds(20));
+				//}
 			}
 		}
 	}

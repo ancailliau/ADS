@@ -23,6 +23,10 @@ namespace LAS.Server.Migrations
 
 			Alter.Table("allocations")
 				 .AddColumn("cancelConfirmed").AsBoolean().WithDefaultValue(false);
+
+			Create.Table("configuration")
+			      .WithColumn("key").AsString().PrimaryKey ()
+			      .WithColumn("value").AsString();
 			
 		}
 

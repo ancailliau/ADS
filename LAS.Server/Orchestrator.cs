@@ -29,6 +29,8 @@ namespace LAS.Server
 
 		internal MapService mapService;
 
+		Checker checker;
+
 		public Orchestrator(IDatabaseBuildConfiguration config)
 		{
 			var db = new Database(config);
@@ -45,7 +47,7 @@ namespace LAS.Server
 			//trafficJamReallocator = new TrafficJamReallocator(mapService, new LoggedDatabase(config));
 			//cancelator = new Cancelator(new Database(config));
 
-			var checker = new Checker(config);
+			checker = new Checker(config);
 			checker.Start();
 
 		}
@@ -85,6 +87,11 @@ namespace LAS.Server
 
 				} else if (m is NotInTrafficJamMessage) {
 					ambulanceRepository.MarkInTrafficJam(((NotInTrafficJamMessage)m).AmbulanceId, false);
+
+				} else if (m is DeployAllocatorMessage) {
+					logger.Info("Message DeployAllocatorMessage Received");
+					var ma = (DeployAllocatorMessage)m;
+					checker.ReplaceAllocator(ma.Allocator);
 
 				} else {
 					throw new NotImplementedException();

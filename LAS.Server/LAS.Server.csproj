@@ -105,10 +105,12 @@
     <Compile Include="Migrations\Migration3.cs" />
     <Compile Include="Migrations\Migration4.cs" />
     <Compile Include="Allocators\TrafficJamReallocator.cs" />
-    <Compile Include="Allocators\AmbulanceAllocator.cs" />
+    <Compile Include="Allocators\DefaultAmbulanceAllocator.cs" />
     <Compile Include="Cancelator.cs" />
     <Compile Include="Checker.cs" />
     <Compile Include="UnreachableResolver.cs" />
+    <Compile Include="Allocators\AmbulanceAtStationAllocator.cs" />
+    <Compile Include="Allocators\IAmbulanceAllocator.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="NLog.xsd" />

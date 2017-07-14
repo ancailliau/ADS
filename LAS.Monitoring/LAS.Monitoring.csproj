@@ -61,6 +61,7 @@
   <ItemGroup>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Optimizer.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\" />
@@ -83,10 +84,6 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Development\BDDSharp\BDDSharp\BDDSharp.csproj">
-      <Project>{0F303658-80AD-4637-B587-BD076A80DCF5}</Project>
-      <Name>BDDSharp</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\..\Development\ExpertOpinionSharp\ExpertOpinionSharp\ExpertOpinionSharp.csproj">
       <Project>{17EE1289-7F54-404E-BD17-2FAB7D0C59C5}</Project>
       <Name>ExpertOpinionSharp</Name>
@@ -94,10 +91,6 @@
     <ProjectReference Include="..\LAS.Core\LAS.Core.csproj">
       <Project>{6D0D19CE-37E3-4D8F-97B0-3A18E2E220C4}</Project>
       <Name>LAS.Core</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\Development\LtlSharp\LtlSharp\LtlSharp.csproj">
-      <Project>{AA561918-B98E-40DA-93B1-A6BFE524AF42}</Project>
-      <Name>LtlSharp</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\..\Development\KAOSTools\MetaModel\MetaModel.csproj">
       <Project>{BCF014E2-1425-4F2D-BDB1-693A1F6FABE2}</Project>
@@ -114,10 +107,6 @@
     <ProjectReference Include="..\..\MinePump\Simulator\Simulator.csproj">
       <Project>{B452940F-0D2C-4DD6-A320-01063102B12F}</Project>
       <Name>Simulator</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\Development\KAOSTools\UncertaintySimulation\UncertaintySimulation.csproj">
-      <Project>{F37A9A4A-DE7F-4C0E-84A6-8D3EA29AFB4F}</Project>
-      <Name>UncertaintySimulation</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
