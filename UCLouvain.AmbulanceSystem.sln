@@ -1,17 +1,17 @@
 
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UCLouvain.AmbulanceSystem.MDTClient", "LAS.MdtClient\UCLouvain.AmbulanceSystem.MdtClient.csproj", "{8F4E5A2D-A24A-49CE-A68B-A56047EF139B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UCLouvain.AmbulanceSystem.MDTClient", "UCLouvain.AmbulanceSystem.MdtClient\UCLouvain.AmbulanceSystem.MdtClient.csproj", "{8F4E5A2D-A24A-49CE-A68B-A56047EF139B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UCLouvain.AmbulanceSystem.Server", "LAS.Server\UCLouvain.AmbulanceSystem.Server.csproj", "{BC186BE7-2FDC-4315-A4BD-1C68163E0214}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UCLouvain.AmbulanceSystem.Server", "UCLouvain.AmbulanceSystem.Server\UCLouvain.AmbulanceSystem.Server.csproj", "{BC186BE7-2FDC-4315-A4BD-1C68163E0214}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UCLouvain.AmbulanceSystem.Core", "LAS.Core\UCLouvain.AmbulanceSystem.Core.csproj", "{6D0D19CE-37E3-4D8F-97B0-3A18E2E220C4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UCLouvain.AmbulanceSystem.Core", "UCLouvain.AmbulanceSystem.Core\UCLouvain.AmbulanceSystem.Core.csproj", "{6D0D19CE-37E3-4D8F-97B0-3A18E2E220C4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UCLouvain.AmbulanceSystem.CADConsole", "LAS.CADConsole\UCLouvain.AmbulanceSystem.CADConsole.csproj", "{2F67A7DD-C296-4B55-88C7-4D20AE2647C3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UCLouvain.AmbulanceSystem.CADConsole", "UCLouvain.AmbulanceSystem.CADConsole\UCLouvain.AmbulanceSystem.CADConsole.csproj", "{2F67A7DD-C296-4B55-88C7-4D20AE2647C3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UCLouvain.AmbulanceSystem.Simulator", "LAS.Simulator\UCLouvain.AmbulanceSystem.Simulator.csproj", "{5A0C81A1-02EC-407B-B0F2-DB69EAC2205A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UCLouvain.AmbulanceSystem.Simulator", "UCLouvain.AmbulanceSystem.Simulator\UCLouvain.AmbulanceSystem.Simulator.csproj", "{5A0C81A1-02EC-407B-B0F2-DB69EAC2205A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UCLouvain.AmbulanceSystem.ServerVisualization", "LAS.ServerVisualization\UCLouvain.AmbulanceSystem.ServerVisualization.csproj", "{1AF262B9-A031-4BED-820F-9F5711F0FF85}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UCLouvain.AmbulanceSystem.ServerVisualization", "UCLouvain.AmbulanceSystem.ServerVisualization\UCLouvain.AmbulanceSystem.ServerVisualization.csproj", "{1AF262B9-A031-4BED-820F-9F5711F0FF85}"
 EndProject
 Project("{9344BDBB-3E7F-41FC-A0DD-8665D75EE146}") = "LAS.Monitoring", "LAS.Monitoring\LAS.Monitoring.csproj", "{3208E35F-AB26-4CAD-9CAE-46031E30BEA9}"
 EndProject

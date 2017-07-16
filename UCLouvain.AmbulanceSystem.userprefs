@@ -1,0 +1,18 @@
+﻿<Properties StartupConfiguration="{1AF262B9-A031-4BED-820F-9F5711F0FF85}|">
+  <MonoDevelop.Ide.ItemProperties.UCLouvain.AmbulanceSystem.MDTClient PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|x86" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches>
+    <Watch file="../ReqTesting/TestCaseGenerator/Program.cs" line="199" offsetX="329" offsetY="2970" expression="currentTestSuite" liveUpdate="False" />
+  </MonoDevelop.Ide.DebuggingService.PinnedWatches>
+  <MonoDevelop.Ide.ItemProperties.UCLouvain.AmbulanceSystem.CADConsole PreferredExecutionTarget="MonoDevelop.Default" />
+  <MultiItemStartupConfigurations />
+  <DisabledProjects>
+    <String>../MinePump/Simulator/Simulator.csproj</String>
+    <String>LAS.Monitoring/LAS.Monitoring.csproj</String>
+  </DisabledProjects>
+  <MonoDevelop.Ide.ItemProperties.UCLouvain.AmbulanceSystem.ServerVisualization PreferredExecutionTarget="MonoDevelop.Default" />
+</Properties>

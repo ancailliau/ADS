@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProjectGuid>{922569C4-683E-4513-85D8-EF00595DDFEE}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>LAS.Monitoring</RootNamespace>
+    <AssemblyName>LAS.Monitoring</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug</OutputPath>
+    <DefineConstants>DEBUG;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ExternalConsole>true</ExternalConsole>
+    <PlatformTarget>x86</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ExternalConsole>true</ExternalConsole>
+    <PlatformTarget>x86</PlatformTarget>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="MathNet.Numerics">
+      <HintPath>..\packages\MathNet.Numerics.3.12.0\lib\net40\MathNet.Numerics.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Numerics" />
+    <Reference Include="MoreLinq">
+      <HintPath>..\packages\morelinq.2.0.0-beta04\lib\net35\MoreLinq.dll</HintPath>
+    </Reference>
+    <Reference Include="NLog">
+      <HintPath>..\packages\NLog.4.4.0-betaV15\lib\net45\NLog.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.IO.Compression" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Npgsql">
+      <HintPath>..\packages\Npgsql.3.1.7\lib\net45\Npgsql.dll</HintPath>
+    </Reference>
+    <Reference Include="Reminiscence">
+      <HintPath>..\packages\Reminiscence.1.0.2\lib\portable-net403+sl50+win+wp80+Xamarin.iOS10+MonoAndroid10+MonoTouch10\Reminiscence.dll</HintPath>
+    </Reference>
+    <Reference Include="Itinero">
+      <HintPath>..\packages\Itinero.0.16.1-rc1\lib\net45\Itinero.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Optimizer.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Models\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Models\las.kaos">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Models\obstacles.kaos" />
+    <None Include="Models\resolutions.kaos" />
+    <None Include="packages.config" />
+    <None Include="app.config" />
+    <None Include="Models\simple.kaos">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="NLog.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Development\ExpertOpinionSharp\ExpertOpinionSharp\ExpertOpinionSharp.csproj">
+      <Project>{17EE1289-7F54-404E-BD17-2FAB7D0C59C5}</Project>
+      <Name>ExpertOpinionSharp</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\LAS.Core\LAS.Core.csproj">
+      <Project>{6D0D19CE-37E3-4D8F-97B0-3A18E2E220C4}</Project>
+      <Name>LAS.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Development\KAOSTools\MetaModel\MetaModel.csproj">
+      <Project>{BCF014E2-1425-4F2D-BDB1-693A1F6FABE2}</Project>
+      <Name>MetaModel</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Hamm\OpenMapleSharp\OpenMapleSharp.csproj">
+      <Project>{000DFB47-DCB1-448D-8E68-1AC183CFB15C}</Project>
+      <Name>OpenMapleSharp</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Development\KAOSTools\Parsing\Parsing.csproj">
+      <Project>{52C948A2-30AD-40A7-89A3-9D66B2FCDD9F}</Project>
+      <Name>Parsing</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\MinePump\Simulator\Simulator.csproj">
+      <Project>{B452940F-0D2C-4DD6-A320-01063102B12F}</Project>
+      <Name>Simulator</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+</Project>

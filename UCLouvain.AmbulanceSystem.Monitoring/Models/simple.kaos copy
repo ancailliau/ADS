@@ -1,0 +1,461 @@
+﻿
+#
+
+declare goal
+	id goal1
+	name "Goal 1"
+#	formalspec 
+#		always ( 
+#			(if (IncReported1() and not Allocated1()) then sooner-or-later, before 30 seconds, Allocated1())
+#			and (if (IncReported2() and not Allocated2()) then sooner-or-later, before 30 seconds, Allocated2())
+#			and (if (IncReported3() and not Allocated3()) then sooner-or-later, before 30 seconds, Allocated3())
+#		)
+#		and when IncReported2() then sooner-or-later, before 30 seconds, Allocated2()
+#		and when IncReported3() then sooner-or-later, before 30 seconds, Allocated3()
+#		and when IncReported4() then sooner-or-later, before 30 seconds, Allocated4()
+#		and when IncReported5() then sooner-or-later, before 30 seconds, Allocated5()
+#		and when IncReported6() then sooner-or-later, before 30 seconds, Allocated6()
+#		and when IncReported7() then sooner-or-later, before 30 seconds, Allocated7()
+#		and when IncReported8() then sooner-or-later, before 30 seconds, Allocated8()
+#		and when IncReported9() then sooner-or-later, before 30 seconds, Allocated9()
+end
+
+# Leaf obstacles
+
+declare obstacle
+	id no_ambulance_available
+	name "NoAmbulanceAvailable"
+	formalspec sooner-or-later (
+		((IncReported1() and not IncAllocated1()) 
+		 or (IncReported2() and not IncAllocated2()) 
+		 or (IncReported3()) and not IncAllocated3()) 
+		and always, for 2 minutes, not AmbAvailable())
+end
+
+declare obstacle
+	id position_not_updated
+	name "Position Not Sent"
+	refinedby a9_position_not_updated
+	refinedby a2_position_not_updated
+	refinedby a15_position_not_updated
+end
+
+	declare obstacle
+		id a9_position_not_updated
+		name "A9 Position Not Sent"
+		formalspec sooner-or-later (
+			( always, for 5 minutes, not AmbA9PositionKnown() )
+		)
+	end
+
+	declare obstacle
+		id a2_position_not_updated
+		name "A2 Position Not Sent"
+		formalspec sooner-or-later (
+			( always, for 5 minutes, not AmbA2PositionKnown() )
+		)
+	end
+
+	declare obstacle
+		id a15_position_not_updated
+		name "A15 Position Not Sent"
+		formalspec sooner-or-later (
+			( always, for 5 minutes, not AmbA15PositionKnown() )
+		)
+	end
+
+declare obstacle
+	id moborder_not_confirmed
+	name "Mobilization Order Not Confirmed In Time"
+	refinedby moborder1_not_confirmed
+	refinedby moborder2_not_confirmed
+	refinedby moborder3_not_confirmed
+end
+
+	declare obstacle
+		id moborder1_not_confirmed
+		name "Mobilization Order 1 Not Confirmed In Time"
+		formalspec sooner-or-later (
+			(IncAllocated1() and always, for 2 minutes, MobilizationOrderNotConfirmed1())
+		)
+	end
+
+	declare obstacle
+		id moborder2_not_confirmed
+		name "Mobilization Order 2 Not Confirmed In Time"
+		formalspec sooner-or-later (
+			(IncAllocated2() and always, for 2 minutes, MobilizationOrderNotConfirmed2())
+		)
+	end
+
+	declare obstacle
+		id moborder3_not_confirmed
+		name "Mobilization Order 3 Not Confirmed In Time"
+		formalspec sooner-or-later (
+			(IncAllocated3() and always, for 2 minutes, MobilizationOrderNotConfirmed3())
+		)
+	end
+
+declare obstacle
+	id moborder_refused
+	name "Mobilization Refused"
+	refinedby moborder1_refused
+	refinedby moborder2_refused
+	refinedby moborder3_refused
+end
+
+	declare obstacle
+		id moborder1_refused
+		name "Mobilization 1 Refused"
+		formalspec sooner-or-later (
+			(IncAllocated1() and always, for 2 minutes, MobilizationOrderRefused1())
+		)
+	end
+
+	declare obstacle
+		id moborder2_refused
+		name "Mobilization 2 Refused"
+		formalspec sooner-or-later (
+			(IncAllocated2() and always, for 2 minutes, MobilizationOrderRefused2())
+		)
+	end
+
+	declare obstacle
+		id moborder3_refused
+		name "Mobilization 3 Refused"
+		formalspec sooner-or-later (
+			(IncAllocated3() and always, for 2 minutes, MobilizationOrderRefused3())
+		)
+	end
+
+declare obstacle
+	id stuck_while_leaving
+	name "Ambulance Stuck In Traffic Jam Toward Incident"
+	refinedby a9_stuck_while_leaving
+	refinedby a2_stuck_while_leaving
+	refinedby a15_stuck_while_leaving
+end
+
+	declare obstacle
+		id a9_stuck_while_leaving
+		name "Ambulance A9 Stuck In Traffic Jam Toward Incident"
+		formalspec sooner-or-later (
+			(AmbA9MobilizedAndLeaving() and always, for 5 minutes, AmbA9StuckInTraffic())
+		)
+	end
+
+	declare obstacle
+		id a2_stuck_while_leaving
+		name "Ambulance A2 Stuck In Traffic Jam Toward Incident"
+		formalspec sooner-or-later (
+			(AmbA2MobilizedAndLeaving() and always, for 5 minutes, AmbA2StuckInTraffic())
+		)
+	end
+
+	declare obstacle
+		id a15_stuck_while_leaving
+		name "Ambulance A15 Stuck In Traffic Jam Toward Incident"
+		formalspec sooner-or-later (
+			(AmbA15MobilizedAndLeaving() and always, for 5 minutes, AmbA15StuckInTraffic())
+		)
+	end
+
+declare obstacle
+	id stuck_while_tohosp
+	name "Ambulance Stuck In Traffic Jam Toward Hospital"
+	refinedby a9_stuck_while_tohosp
+	refinedby a2_stuck_while_tohosp
+	refinedby a15_stuck_while_tohosp
+end
+
+	declare obstacle
+		id a9_stuck_while_tohosp
+		name "Ambulance A9 Stuck In Traffic Jam Toward Hospital"
+		formalspec sooner-or-later (
+			(AmbA9MobilizedAndToHospital() and always, for 5 minutes, AmbA9StuckInTraffic())
+		)
+	end
+
+	declare obstacle
+		id a2_stuck_while_tohosp
+		name "Ambulance A2 Stuck In Traffic Jam Toward Hospital"
+		formalspec sooner-or-later (
+			(AmbA2MobilizedAndToHospital() and always, for 5 minutes, AmbA2StuckInTraffic())
+		)
+	end
+
+	declare obstacle
+		id a15_stuck_while_tohosp
+		name "Ambulance A15 Stuck In Traffic Jam Toward Hospital"
+		formalspec sooner-or-later (
+			(AmbA15MobilizedAndToHospital() and always, for 5 minutes, AmbA15StuckInTraffic())
+		)
+	end
+
+declare obstacle
+	id hospital_too_far
+	name "Hospital Too Far"
+	refinedby a9_hospital_too_far
+	refinedby a2_hospital_too_far
+	refinedby a15_hospital_too_far
+end
+
+	declare obstacle
+		id a9_hospital_too_far
+		name "Hospital Too Far From A9"
+		formalspec sooner-or-later (
+			(AmbA9MobilizedAndToHospital() and always, for 5 minutes, (AmbA9NotStuckInTrafficAndNotAmbA9AtHospital() ))
+		)
+	end
+
+	declare obstacle
+		id a2_hospital_too_far
+		name "Hospital Too Far From A2"
+		formalspec sooner-or-later (
+			(AmbA2MobilizedAndToHospital() and always, for 5 minutes, (AmbA2NotStuckInTrafficAndNotAmbA2AtHospital() ))
+		)
+	end
+
+	declare obstacle
+		id a15_hospital_too_far
+		name "Hospital Too Far From A15"
+		formalspec sooner-or-later (
+			(AmbA15MobilizedAndToHospital() and always, for 5 minutes, (AmbA15NotStuckInTrafficAndNotAmbA15AtHospital() ))
+		)
+	end
+
+declare obstacle
+	id destination_unreachable
+	name "Incident Unreachable"
+	refinedby destination_unreachable1
+	refinedby destination_unreachable2
+	refinedby destination_unreachable3
+end
+
+	declare obstacle
+		id destination_unreachable1
+		name "Incident 1 Unreachable"
+		formalspec sooner-or-later (
+			(AmbulanceOnScene1() and always, for 2 minutes, DestinationUnreachable1())
+		)
+	end
+
+	declare obstacle
+		id destination_unreachable2
+		name "Incident 2 Unreachable"
+		formalspec sooner-or-later (
+			(AmbulanceOnScene2() and always, for 2 minutes, DestinationUnreachable2())
+		)
+	end
+
+	declare obstacle
+		id destination_unreachable3
+		name "Incident 3 Unreachable"
+		formalspec sooner-or-later (
+			(AmbulanceOnScene3() and always, for 2 minutes, DestinationUnreachable3())
+		)
+	end
+
+declare obstacle
+	id onscene_button_not_pressed
+	name "On Scene Button Not Pressed"
+	refinedby a9_onscene_button_not_pressed
+	refinedby a2_onscene_button_not_pressed
+	refinedby a15_onscene_button_not_pressed
+end
+
+	declare obstacle
+		id a9_onscene_button_not_pressed
+		name "A9 On Scene Button Not Pressed"
+		formalspec sooner-or-later (
+			(AmbulanceA9OnSceneLocation() and always, for 2 minutes, not AmbulanceA9OnScene())
+		)
+	end
+
+	declare obstacle
+		id a2_onscene_button_not_pressed
+		name "A2 On Scene Button Not Pressed"
+		formalspec sooner-or-later (
+			(AmbulanceA2OnSceneLocation() and always, for 2 minutes, not AmbulanceA2OnScene())
+		)
+	end
+
+	declare obstacle
+		id a15_onscene_button_not_pressed
+		name "A15 On Scene Button Not Pressed"
+		formalspec sooner-or-later (
+			(AmbulanceA15OnSceneLocation() and always, for 2 minutes, not AmbulanceA15OnScene())
+		)
+	end
+
+declare obstacle
+	id athospital_button_not_pressed
+	name "At Hospital Button Not Pressed"
+	refinedby a9_athospital_button_not_pressed
+	refinedby a2_athospital_button_not_pressed
+	refinedby a15_athospital_button_not_pressed
+end
+
+	declare obstacle
+		id a9_athospital_button_not_pressed
+		name "A9 At Hospital Button Not Pressed"
+		formalspec sooner-or-later (
+			(AmbulanceA9AtHospitalLocation() and always, for 2 minutes, not AmbulanceA9AtHospital())
+		)
+	end
+
+	declare obstacle
+		id a2_athospital_button_not_pressed
+		name "A2 At Hospital Button Not Pressed"
+		formalspec sooner-or-later (
+			(AmbulanceA2AtHospitalLocation() and always, for 2 minutes, not AmbulanceA2AtHospital())
+		)
+	end
+
+	declare obstacle
+		id a15_athospital_button_not_pressed
+		name "A15 At Hospital Button Not Pressed"
+		formalspec sooner-or-later (
+			(AmbulanceA15AtHospitalLocation() and always, for 2 minutes, not AmbulanceA15AtHospital())
+		)
+	end
+
+declare obstacle
+	id atstation_button_not_pressed
+	name "At Station Button Not Pressed"
+	refinedby a1_atstation_button_not_pressed
+	refinedby a2_atstation_button_not_pressed
+	refinedby a3_atstation_button_not_pressed
+	refinedby a4_atstation_button_not_pressed
+	refinedby a5_atstation_button_not_pressed
+	refinedby a6_atstation_button_not_pressed
+	refinedby a7_atstation_button_not_pressed
+	refinedby a8_atstation_button_not_pressed
+	refinedby a9_atstation_button_not_pressed
+	refinedby a10_atstation_button_not_pressed
+	refinedby a11_atstation_button_not_pressed
+	refinedby a12_atstation_button_not_pressed
+	refinedby a13_atstation_button_not_pressed
+	refinedby a14_atstation_button_not_pressed
+	refinedby a15_atstation_button_not_pressed
+end
+
+	declare obstacle
+		id a1_atstation_button_not_pressed
+		name "A1 At Station Button Not Pressed"
+		formalspec sooner-or-later (
+			(AmbulanceA1AtStationLocation() and always, for 2 minutes, not AmbulanceA1AtStation())
+		)
+	end
+
+	declare obstacle
+		id a2_atstation_button_not_pressed
+		name "A2 At Station Button Not Pressed"
+		formalspec sooner-or-later (
+			(AmbulanceA2AtStationLocation() and always, for 2 minutes, not AmbulanceA2AtStation())
+		)
+	end
+
+	declare obstacle
+		id a3_atstation_button_not_pressed
+		name "A3 At Station Button Not Pressed"
+		formalspec sooner-or-later (
+			(AmbulanceA3AtStationLocation() and always, for 2 minutes, not AmbulanceA3AtStation())
+		)
+	end
+
+	declare obstacle
+		id a4_atstation_button_not_pressed
+		name "A4 At Station Button Not Pressed"
+		formalspec sooner-or-later (
+			(AmbulanceA4AtStationLocation() and always, for 2 minutes, not AmbulanceA4AtStation())
+		)
+	end
+
+	declare obstacle
+		id a5_atstation_button_not_pressed
+		name "A5 At Station Button Not Pressed"
+		formalspec sooner-or-later (
+			(AmbulanceA5AtStationLocation() and always, for 2 minutes, not AmbulanceA5AtStation())
+		)
+	end
+
+	declare obstacle
+		id a6_atstation_button_not_pressed
+		name "A6 At Station Button Not Pressed"
+		formalspec sooner-or-later (
+			(AmbulanceA6AtStationLocation() and always, for 2 minutes, not AmbulanceA6AtStation())
+		)
+	end
+
+	declare obstacle
+		id a7_atstation_button_not_pressed
+		name "A7 At Station Button Not Pressed"
+		formalspec sooner-or-later (
+			(AmbulanceA7AtStationLocation() and always, for 2 minutes, not AmbulanceA7AtStation())
+		)
+	end
+
+	declare obstacle
+		id a8_atstation_button_not_pressed
+		name "A8 At Station Button Not Pressed"
+		formalspec sooner-or-later (
+			(AmbulanceA8AtStationLocation() and always, for 2 minutes, not AmbulanceA8AtStation())
+		)
+	end
+
+	declare obstacle
+		id a9_atstation_button_not_pressed
+		name "A9 At Station Button Not Pressed"
+		formalspec sooner-or-later (
+			(AmbulanceA9AtStationLocation() and always, for 2 minutes, not AmbulanceA9AtStation())
+		)
+	end
+
+	declare obstacle
+		id a10_atstation_button_not_pressed
+		name "A10 At Station Button Not Pressed"
+		formalspec sooner-or-later (
+			(AmbulanceA10AtStationLocation() and always, for 2 minutes, not AmbulanceA10AtStation())
+		)
+	end
+
+	declare obstacle
+		id a11_atstation_button_not_pressed
+		name "A11 At Station Button Not Pressed"
+		formalspec sooner-or-later (
+			(AmbulanceA11AtStationLocation() and always, for 2 minutes, not AmbulanceA11AtStation())
+		)
+	end
+
+	declare obstacle
+		id a12_atstation_button_not_pressed
+		name "A12 At Station Button Not Pressed"
+		formalspec sooner-or-later (
+			(AmbulanceA12AtStationLocation() and always, for 2 minutes, not AmbulanceA12AtStation())
+		)
+	end
+
+	declare obstacle
+		id a13_atstation_button_not_pressed
+		name "A13 At Station Button Not Pressed"
+		formalspec sooner-or-later (
+			(AmbulanceA13AtStationLocation() and always, for 2 minutes, not AmbulanceA13AtStation())
+		)
+	end
+
+	declare obstacle
+		id a14_atstation_button_not_pressed
+		name "A14 At Station Button Not Pressed"
+		formalspec sooner-or-later (
+			(AmbulanceA14AtStationLocation() and always, for 2 minutes, not AmbulanceA14AtStation())
+		)
+	end
+
+	declare obstacle
+		id a15_atstation_button_not_pressed
+		name "A15 At Station Button Not Pressed"
+		formalspec sooner-or-later (
+			(AmbulanceA15AtStationLocation() and always, for 2 minutes, not AmbulanceA15AtStation())
+		)
+	end
