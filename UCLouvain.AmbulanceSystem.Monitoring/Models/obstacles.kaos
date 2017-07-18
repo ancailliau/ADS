@@ -1,13 +1,11 @@
 # Obstacles for moborder_printed
 
-override goal
-  id moborder_printed
+override goal [ moborder_printed ]
   name "Achieve [Mobilization Order Printed]"
   obstructedby moborder_not_printed
 end
 
-declare obstacle
-  id moborder_not_printed
+declare obstacle [ moborder_not_printed ]
   name "Mobilization Order Not Printed"
   refinedby 
 		declare obstacle 
@@ -49,14 +47,12 @@ end
 
 # Obstacles for moborder_displayed
 
-override goal
-  id moborder_displayed
+override goal [ moborder_displayed ]
   name "Achieve [Mobilization Order Displayed]"
   obstructedby moborder_not_displayed
 end
 
-declare obstacle
-  id moborder_not_displayed
+declare obstacle [ moborder_not_displayed ]
   name "Mobilization Order Not Displayed"
   refinedby
 		declare obstacle
@@ -71,14 +67,12 @@ end
 
 # Obstacles for maintain_location_info_known
 
-override goal
-  id maintain_location_info_known
+override goal [ maintain_location_info_known ]
   name "Maintain [Accurate Ambulance Location Known]"
   obstructedby location_known_not_info_known
 end
 
-declare obstacle
-  id location_known_not_info_known
+declare obstacle [ location_known_not_info_known ]
   name "Accurate Ambulance Location Known"
   refinedby
 		declare obstacle 
@@ -111,14 +105,12 @@ end
 
 # Obstacles for accurate_availability_information_encoded
 
-override goal
-  id accurate_availability_information_encoded
+override goal [ accurate_availability_information_encoded ]
   name "Maintain [Accurate Information Encoded On MDT]"
   obstructedby accurate_availability_information_not_encoded
 end
 
-declare obstacle
-  id accurate_availability_information_not_encoded
+declare obstacle [ accurate_availability_information_not_encoded ]
   name "Accurate Information Not Encoded On MDT"
   refinedby 
 		declare obstacle 
@@ -142,22 +134,19 @@ end
 
 # Obstacles for achieve_mobilized_ambulance_intervention
 
-override goal
-  id achieve_mobilized_ambulance_intervention
+override goal [ achieve_mobilized_ambulance_intervention ]
   name "Achieve [Mobilized Ambulance Intervention]"
   obstructedby mobilized_ambulance_not_intervention
 end
 
-declare obstacle
-  id mobilized_ambulance_not_intervention
+declare obstacle [ mobilized_ambulance_not_intervention ]
   name "No Ambulance Intervention When Mobilized"
   refinedby service_end
   refinedby mobilization_retracted
   refinedby ambulance_stopped_or_in_wrong_direction
 end
 
-declare obstacle 
-  id service_end 
+declare obstacle [ service_end ] 
   name "Service End Before Intervention"
 	#probability[e1] (46.67%, 53.33%, 66.67%)
 	#probability[e2] (0.00%, 5.00%, 15.00%)
@@ -166,16 +155,14 @@ declare obstacle
 	#probability[e5] (10.00%, 10.00%, 20.00%)
 end
 
-declare obstacle 
-  id mobilization_retracted 
+declare obstacle [ mobilization_retracted ] 
   name "Mobilization Retracted"
   refinedby destination_changed
   refinedby destination_forgotten
   refinedby mobilization_cancelled
 end
 
-declare obstacle
-  id destination_changed
+declare obstacle [ destination_changed ]
   name "Destination Changed"
   #probability[e1] (0.00%, 6.67%, 13.33%)
   #probability[e2] (0.00%, 0.00%, 5.00%)
@@ -184,8 +171,7 @@ declare obstacle
   #probability[e5] (0.00%, 0.00%, 0.00%)
 end
   
-declare obstacle
-  id destination_forgotten
+declare obstacle [ destination_forgotten ]
   name "Destination Forgotten"
   #probability[e1] (0.00%, 0.00%, 6.67%)
   #probability[e2] (0.00%, 0.00%, 0.00%)
@@ -194,8 +180,7 @@ declare obstacle
   #probability[e5] (0.00%, 0.00%, 0.00%)
 end
   
-declare obstacle 
-  id mobilization_cancelled
+declare obstacle [ mobilization_cancelled ]
   name "Mobilization Cancelled"
   #probability[e1] (13.33%, 20.00%, 33.33%)
   #probability[e2] (0.00%, 25.00%, 40.00%)
@@ -204,19 +189,16 @@ declare obstacle
   #probability[e5] (4.00%, 6.00%, 10.00%)
 end
 
-declare obstacle 
-  id ambulance_stopped_or_in_wrong_direction 
+declare obstacle [ ambulance_stopped_or_in_wrong_direction ] 
   name "Ambulance Stopped Or In Wrong Direction"
   refinedby ambulance_stopped
   refinedby ambulance_in_wrong_direction
 end
 
-declare obstacle 
-  id ambulance_stopped
+declare obstacle [ ambulance_stopped ]
   name "Ambulance Stopped"
   refinedby 
-		declare obstacle 
-			id ambulance_broken 
+		declare obstacle [ ambulance_broken ] 
 			name "Ambulance Broken Down Or Accident"
 			#probability[e1] (0.00%, 0.00%, 6.67%)
 			#probability[e2] (0.00%, 0.00%, 5.00%)
@@ -235,8 +217,7 @@ declare obstacle
 		end
 end
 
-declare obstacle 
-  id ambulance_in_wrong_direction 
+declare obstacle [ ambulance_in_wrong_direction ] 
   name "Ambulance In Wrong Direction"
   refinedby declare obstacle 
               name "Ambulance Lost"
@@ -253,8 +234,7 @@ declare obstacle
   refinedby ambulance_traffic_deviation
 end
 
-declare obstacle
-  id ambulance_in_unfamiliar_area
+declare obstacle [ ambulance_in_unfamiliar_area ]
   name "Ambulance In Unfamiliar Area"
 	#probability[e1] (6.67%, 13.33%, 20.00%)
 	#probability[e2] (15.00%, 30.00%, 50.00%)
@@ -263,8 +243,7 @@ declare obstacle
 	#probability[e5] (20.00%, 24.00%, 30.00%)
 end
 
-declare obstacle
-  id ambulance_traffic_deviation
+declare obstacle [ ambulance_traffic_deviation ]
   name "Ambulance In Traffic Deviation"
 	#probability[e1] (6.67%, 20.00%, 33.33%)
 	#probability[e2] (15.00%, 50.00%, 75.00%)
@@ -275,36 +254,31 @@ end
 
 # Obstacles for achieve_incident_resolved_by_intervention
 
-override goal
-  id achieve_incident_resolved_by_intervention
+override goal [ achieve_incident_resolved_by_intervention ]
   name "Achieve [Incident Resolved By Ambulance Intervention]"
   obstructedby incident_not_resolved_by_intervention
 end
 
-declare obstacle
-  id incident_not_resolved_by_intervention
+declare obstacle [ incident_not_resolved_by_intervention ]
   name "Incident Not Resolved By Intervention"
   refinedby patient_not_treated_at_location
   refinedby patient_not_admitted_or_transported_at_hospital
 end
 
-declare obstacle
-  id patient_not_treated_at_location
+declare obstacle [ patient_not_treated_at_location ]
   name "Patient Not Treated At Location"
   refinedby critical_care_not_given
   refinedby patient_unreachable_safely
 end
 
-declare obstacle
-  id patient_unreachable_safely
+declare obstacle [ patient_unreachable_safely ]
   name "Patient Not Safely Reachable"
   refinedby fire_environment
   refinedby hazardous_environment
   refinedby unreachable_patient
 end
 
-declare obstacle 
-  id fire_environment 
+declare obstacle [ fire_environment ] 
   name "Fire Environment" 
 	#probability[e1] (0.00%, 0.00%, 6.67%)
 	#probability[e2] (0.00%, 0.00%, 5.00%)
@@ -313,8 +287,7 @@ declare obstacle
 	#probability[e5] (0.00%, 2.00%, 2.00%)
 end
 
-declare obstacle 
-  id hazardous_environment 
+declare obstacle [ hazardous_environment ] 
   name "Hazardous Environment" 
 	#probability[e1] (0.00%, 6.67%, 13.33%)
 	#probability[e2] (0.00%, 0.00%, 10.00%)
@@ -323,8 +296,7 @@ declare obstacle
 	#probability[e5] (2.00%, 4.00%, 6.00%)
 end
 
-declare obstacle 
-  id unreachable_patient 
+declare obstacle [ unreachable_patient ] 
   name "Unreachable Patient" 
 	#probability[e1] (0.00%, 6.67%, 6.67%)
 	#probability[e2] (0.00%, 0.00%, 10.00%)
@@ -333,8 +305,7 @@ declare obstacle
 	#probability[e5] (0.00%, 0.00%, 0.00%)
 end
 
-declare obstacle
-  id critical_care_not_given
+declare obstacle [ critical_care_not_given ]
   name "Critical Care Not Given"
   refinedby insufficient_ressource
   refinedby declare obstacle 
@@ -361,8 +332,7 @@ declare obstacle
             end
 end
 
-declare obstacle 
-  id insufficient_ressource
+declare obstacle [ insufficient_ressource ]
   name "Insufficient Ressource"
   refinedby 
 		declare obstacle 
@@ -385,15 +355,13 @@ declare obstacle
   refinedby wrong_info_about_patient
 end
 
-declare obstacle
-  id patient_not_admitted_or_transported_at_hospital
+declare obstacle [ patient_not_admitted_or_transported_at_hospital ]
   name "Patient Not Admitted Or Transported At Hospital"
   refinedby patient_not_transported
   refinedby patient_not_admitted
 end
 
-declare obstacle 
-  id wrong_info_about_patient
+declare obstacle [ wrong_info_about_patient ]
   name "Wrong Info About Patient"
   #probability[e1] (33.33%, 66.67%, 100.00%)
   #probability[e2] (75.00%, 100.00%, 100.00%)
@@ -402,8 +370,7 @@ declare obstacle
   #probability[e5] (2.00%, 6.00%, 10.00%)
 end
 
-declare obstacle
-  id patient_not_transported
+declare obstacle [ patient_not_transported ]
   refinedby declare obstacle 
               name "Patient Not In Ambulance"
               refinedby insufficient_capacity
@@ -425,8 +392,7 @@ declare obstacle
             end
 end
 
-declare obstacle
-  id insufficient_capacity
+declare obstacle [ insufficient_capacity ]
   name "Insufficient Capacity"
 	#probability[e1] (0.00%, 6.67%, 6.67%)
 	#probability[e2] (0.00%, 0.00%, 0.00%)
@@ -435,8 +401,7 @@ declare obstacle
 	#probability[e5] (0.00%, 0.00%, 0.00%)
 end
 
-declare obstacle
-  id overweight_patient
+declare obstacle [ overweight_patient ]
   name "Overweight Patient"
 	#probability[e1] (0.00%, 0.00%, 6.67%)
 	#probability[e2] (0.00%, 0.00%, 5.00%)
@@ -445,8 +410,7 @@ declare obstacle
 	#probability[e5] (2.00%, 2.00%, 2.00%)
 end
 
-declare obstacle
-  id patient_cannot_reach_ambulance
+declare obstacle [ patient_cannot_reach_ambulance ]
   name "Patient Cannot Reach Ambulance"
 	#probability[e1] (0.00%, 13.33%, 20.00%)
 	#probability[e2] (0.00%, 10.00%, 25.00%)
@@ -455,8 +419,7 @@ declare obstacle
 	#probability[e5] (2.00%, 4.00%, 6.00%)
 end
 
-declare obstacle
-  id patient_not_admitted
+declare obstacle [ patient_not_admitted ]
   refinedby no_bed
   refinedby 
 		declare obstacle 
@@ -478,8 +441,7 @@ declare obstacle
 		end
 end
 
-declare obstacle 
-  id no_bed
+declare obstacle [ no_bed ]
   name "No Bed Available"
 	#probability[e1] (0.00%, 0.00%, 0.00%)
 	#probability[e2] (0.00%, 0.00%, 5.00%)
@@ -490,14 +452,12 @@ end
 
 # Obstacles for achieve_allocation_when_moborder_printed
 
-override goal
-  id achieve_allocation_when_moborder_printed
+override goal [ achieve_allocation_when_moborder_printed ]
   name "Achieve [Allocated Ambulance Mobilization When Mobilization Order Printed]"
   obstructedby not_allocation_when_moborder_printed
 end
 
-declare obstacle
-  id not_allocation_when_moborder_printed
+declare obstacle [ not_allocation_when_moborder_printed ]
   name "Allocated Ambulance Not Mobilized And Mobilization Order Printed"
   refinedby ambulance_not_at_station
   refinedby allocated_ambulance_not_available
@@ -506,8 +466,7 @@ declare obstacle
   refinedby mobilized_to_wrong_destination
 end
 
-declare obstacle
-  id ambulance_not_at_station
+declare obstacle [ ambulance_not_at_station ]
   name "Allocated Ambulance Not At Station"
   #probability[e1] (13.33%, 33.33%, 53.33%)
   #probability[e2] (15.00%, 40.00%, 75.00%)
@@ -516,8 +475,7 @@ declare obstacle
   #probability[e5] (2.00%, 4.00%, 10.00%)
 end
 
-declare obstacle 
-  id allocated_ambulance_not_available
+declare obstacle [ allocated_ambulance_not_available ]
   name "Allocated Ambulance Not Available"
   #probability[e1] (0.00%, 0.00%, 6.67%)
   #probability[e2] (0.00%, 0.00%, 5.00%)
@@ -526,8 +484,7 @@ declare obstacle
   #probability[e5] (20.00%, 30.00%, 40.00%)
 end
 
-declare obstacle
-  id printed_mobilization_order_ignored
+declare obstacle [ printed_mobilization_order_ignored ]
   name "Printed Mobilization Order Ignored"
   refinedby 
 		declare obstacle 
@@ -540,8 +497,7 @@ declare obstacle
 		end
 end
 
-declare obstacle
-  id mobilization_taken_by_other_ambulance
+declare obstacle [ mobilization_taken_by_other_ambulance ]
   name "Mobilization Taken By Other Ambulance"
   #probability[e1] (0.00%, 0.00%, 0.00%)
   #probability[e2] (0.00%, 0.00%, 0.00%)
@@ -550,8 +506,7 @@ declare obstacle
   #probability[e5] (0.00%, 0.00%, 0.00%)
 end
 
-declare obstacle
-  id mobilized_to_wrong_destination
+declare obstacle [ mobilized_to_wrong_destination ]
   name "Mobilization For Wrong Destination"
   #probability[e1] (0.00%, 6.67%, 13.33%)
   #probability[e2] (0.00%, 0.00%, 5.00%)
@@ -562,14 +517,12 @@ end
 
 # Obstacles for moborder_sent_to_mdt_based_on_am
 
-override goal
-  id moborder_sent_to_mdt_based_on_am
+override goal [ moborder_sent_to_mdt_based_on_am ]
   name "Achieve [Mobilization Order Sent To MDT Based On Mapping]"
   obstructedby moborder_not_sent_to_mdt_based_on_am
 end
 
-declare obstacle
-  id moborder_not_sent_to_mdt_based_on_am
+declare obstacle [ moborder_not_sent_to_mdt_based_on_am ]
   name "Mobilization Order Not Sent To MDT Based On Mapping"
   refinedby 
 		declare obstacle 
@@ -584,14 +537,12 @@ end
 
 # Obstacles for moborder_sent_to_printer_based_on_am
 
-override goal
-  id moborder_sent_to_printer_based_on_am
+override goal [ moborder_sent_to_printer_based_on_am ]
   name "Achieve [Mobilization Order Sent To Printer Based On Mapping]"
   obstructedby moborder_not_sent_to_printer_based_on_am
 end
 
-declare obstacle
-  id moborder_not_sent_to_printer_based_on_am
+declare obstacle [ moborder_not_sent_to_printer_based_on_am ]
   name "Mobilization Order Not Sent To Printer Based On Mapping"
   refinedby "No Line Free"
 end
@@ -599,14 +550,12 @@ end
 
 # Obstacles for moborder_transmitted_to_mdt
 
-override goal
-  id moborder_transmitted_to_mdt
+override goal [ moborder_transmitted_to_mdt ]
   name "Achieve [Mobilization Order Transmitted]"
   obstructedby moborder_not_transmitted_to_mdt
 end
 
-declare obstacle
-  id moborder_not_transmitted_to_mdt
+declare obstacle [ moborder_not_transmitted_to_mdt ]
   name "Mobilization Order Not Transmitted To MDT"
   refinedby 
 		declare obstacle 
@@ -639,22 +588,19 @@ end
 
 # Obstacles for achieve_allocation_when_moborder_displayed
 
-override goal
-  id achieve_allocation_when_moborder_displayed
+override goal [ achieve_allocation_when_moborder_displayed ]
   name "Achieve [Allocated Ambulance Mobilization When Mobilization Order Displayed]"
   obstructedby no_allocation_when_moborder_displayed
 end
 
-declare obstacle
-  id no_allocation_when_moborder_displayed
+declare obstacle [ no_allocation_when_moborder_displayed ]
   name "Allocated Ambulance Not Mobilized And Mobilization Order Displayed"
   refinedby ambulance_not_available_when_moborder_displayed
   refinedby displayed_mobilization_order_ignored
   refinedby mobilized_to_wrong_destination_when_displayed
 end
 
-declare obstacle
-  id ambulance_not_available_when_moborder_displayed
+declare obstacle [ ambulance_not_available_when_moborder_displayed ]
   name "Ambulance Not Available And Mobilization Order Displayed"
   #probability[e1] (0.00%, 0.00%, 0.00%)
   #probability[e2] (0.00%, 0.00%, 0.00%)
@@ -663,8 +609,7 @@ declare obstacle
   #probability[e5] (20.00%, 30.00%, 40.00%)
 end
 
-declare obstacle 
-  id mobilized_to_wrong_destination_when_displayed
+declare obstacle [ mobilized_to_wrong_destination_when_displayed ]
   name "Wrong Destination"
   refinedby 
 		declare obstacle 
@@ -677,8 +622,7 @@ declare obstacle
 		end
 end
 
-declare obstacle 
-  id displayed_mobilization_order_ignored
+declare obstacle [ displayed_mobilization_order_ignored ]
   name "Displayed Mobilization Order Ignored"
   refinedby crew_distracted
   refinedby 
@@ -692,8 +636,7 @@ declare obstacle
 		end
 end
 
-declare obstacle
-  id crew_distracted
+declare obstacle [ crew_distracted ]
   name "Crew Distracted"
   #probability[e1] (0.00%, 6.67%, 6.67%)
   #probability[e2] (0.00%, 0.00%, 0.00%)
@@ -704,28 +647,23 @@ end
 
 #### Calibrations
 
-declare expert
-	id e1
+declare expert [ e1 ]
 	name "Expert 1"
 end
 
-declare expert
-	id e2
+declare expert [ e2 ]
 	name "Expert 2"
 end
 
-declare expert
-	id e3
+declare expert [ e3 ]
 	name "Expert 3"
 end
 
-declare expert
-	id e4
+declare expert [ e4 ]
 	name "Expert 4"
 end
 
-declare expert
-	id e5
+declare expert [ e5 ]
 	name "Expert 5"
 end
 

@@ -101,7 +101,7 @@
     <Content Include="Global.asax" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\LAS.Core\UCLouvain.AmbulanceSystem.Core.csproj">
+    <ProjectReference Include="..\UCLouvain.AmbulanceSystem.Core\UCLouvain.AmbulanceSystem.Core.csproj">
       <Project>{6D0D19CE-37E3-4D8F-97B0-3A18E2E220C4}</Project>
       <Name>UCLouvain.AmbulanceSystem.Core</Name>
     </ProjectReference>

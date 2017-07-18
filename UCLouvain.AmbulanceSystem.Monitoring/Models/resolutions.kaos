@@ -1,121 +1,102 @@
 # Resolutions for mobilization_taken_by_other_ambulance
 
-override obstacle
-  id mobilization_taken_by_other_ambulance
+override obstacle [ mobilization_taken_by_other_ambulance ]
   name "Mobilization Taken By Other Ambulance"
   resolvedby(mitigation[achieve_ambulance_mobilization]) mobilization_known_by_other
   resolvedby(prevention) avoid_mobilization_without_order
 end
 
-declare goal
-  id mobilization_known_by_other
+declare goal [ mobilization_known_by_other ]
   name "Achieve [Mobilization By Other Known]"
 end
 
-declare goal
-  id avoid_mobilization_without_order
-  name "Avoid [Mobilization Without Order]"
+declare goal [ avoid_mobilization_without_order ]
+  name "Avo [  ][Mobilization Without Order]"
 end
 
 # Resolutions for displayed_mobilization_order_ignored
 
-override obstacle 
-  id displayed_mobilization_order_ignored
+override obstacle [ displayed_mobilization_order_ignored ]
   name "Displayed Mobilization Order Ignored"
   resolvedby(prevention) achieve_alarm_when_moborder_received
   resolvedby(mitigation[achieve_ambulance_mobilization]) failed_mobilization_recovered
   resolvedby(mitigation[achieve_ambulance_mobilization]) late_mobilization
 end
 
-declare goal
-  id achieve_alarm_when_moborder_received
+declare goal [ achieve_alarm_when_moborder_received ]
   name "Achieve [Alarm When Mobilization Order Displayed]"
 end
 
-declare goal
-  id failed_mobilization_recovered
+declare goal [ failed_mobilization_recovered ]
   name "Achieve [Failed Mobilization Recovered]"
 end
 
-declare goal
-  id late_mobilization
+declare goal [ late_mobilization ]
   name "Achieve [Late Mobilization When Crew Not Responsive]"
 end
 
 # Resolutions for ambulance_not_at_station
 
-override obstacle
-  id ambulance_not_at_station
+override obstacle [ ambulance_not_at_station ]
   name "Allocated Ambulance Not At Station"
   resolvedby(mitigation[achieve_allocation_at_station]) moborder_displayed_on_mdt_when_at_station
   resolvedby(prevention) ambulance_leaving_station_when_allocated
 end
 
-declare goal
-  id ambulance_leaving_station_when_allocated
-  name "Avoid [Ambulance Leaving Station When Allocated]"
+declare goal [ ambulance_leaving_station_when_allocated ]
+  name "Avo [  ][Ambulance Leaving Station When Allocated]"
 end
 
-declare goal
-  id moborder_displayed_on_mdt_when_at_station
+declare goal [ moborder_displayed_on_mdt_when_at_station ]
   name "Achieve [Mobilization Order Displayed On MDT When At Station]"
 end
 
 # Resolutions for allocated_ambulance_not_available
 
-override obstacle 
-  id allocated_ambulance_not_available
+override obstacle [ allocated_ambulance_not_available ]
   name "Allocated Ambulance Not Available"
   resolvedby(mitigation[achieve_ambulance_mobilization]) other_ambulance_mobilized_when_not_available
   resolvedby(prevention) avoid_ambulance_unavailable_when_allocated
 end
 
-declare goal
-  id other_ambulance_mobilized_when_not_available
+declare goal [ other_ambulance_mobilized_when_not_available ]
   name "Achieve [Other Ambulance Mobilized When Allocated Ambulance Not Available]"
 end
 
-declare goal
-  id avoid_ambulance_unavailable_when_allocated
+declare goal [ avoid_ambulance_unavailable_when_allocated ]
   name "Avoid [Ambulance Unavailable When Allocated]"
 end
 
 # Resolutions for printed_mobilization_order_ignored
 
-override obstacle
-  id printed_mobilization_order_ignored
+override obstacle [ printed_mobilization_order_ignored ]
   name "Printed Mobilization Order Ignored"
   resolvedby(mitigation[achieve_ambulance_mobilization]) other_ambulance_mobilized_when_moborder_ignored
   resolvedby(prevention) alarm_when_moborder_printed
 end
 
-declare goal
-  id other_ambulance_mobilized_when_moborder_ignored
+declare goal [ other_ambulance_mobilized_when_moborder_ignored ]
   name "Achieve [Other Ambulance Mobilized After Timeout]"
 end
 
-declare goal
-  id alarm_when_moborder_printed
+declare goal [ alarm_when_moborder_printed ]
   name "Achieve [Alarm When Mobilization Order Printed]"
 end
 
 # Resolutions for mobilized_to_wrong_destination
 
-override obstacle
-  id mobilized_to_wrong_destination
+override obstacle [ mobilized_to_wrong_destination ]
   name "Mobilization For Wrong Destination"
   resolvedby(prevention) phone_call_for_confirmation
 end
 
-declare goal
-  id phone_call_for_confirmation
+declare goal [ phone_call_for_confirmation ]
   name "Achieve [Phone Call When Allocated]"
 end
 
 # Resolutions for ambulance_not_available_when_moborder_displayed
 
-override obstacle
-  id ambulance_not_available_when_moborder_displayed
+override obstacle [ ambulance_not_available_when_moborder_displayed ]
   name "Ambulance Not Available"
   resolvedby(mitigation[achieve_ambulance_mobilization]) 
             other_ambulance_mobilized_when_not_available
@@ -124,34 +105,29 @@ end
 
 # Resolutions for mobilized_to_wrong_destination
 
-override obstacle 
-  id mobilized_to_wrong_destination_when_displayed
+override obstacle [ mobilized_to_wrong_destination_when_displayed ]
   name "Wrong Destination"
 end
 
-declare goal
-  id radio_call_for_confirmation
+declare goal [ radio_call_for_confirmation ]
   name "Achieve [Radio Confirmation When Allocated]"
 end
 
 # Resolutions for insufficient_ressource
 
-override obstacle 
-  id insufficient_ressource
+override obstacle [ insufficient_ressource ]
   name "Insufficient Ressource"
   resolvedby(mitigation[achieve_incident_resolved_by_intervention]) 
             other_ambulance_on_scene_when_insufficient_ressource
 end
 
-declare goal
-  id other_ambulance_on_scene_when_insufficient_ressource
+declare goal [ other_ambulance_on_scene_when_insufficient_ressource ]
   name "Achieve [Additional Ambulance On Scene When Insufficient Ressource]"
 end
 
 # Resolutions for wrong_info_about_patient
 
-override obstacle 
-  id wrong_info_about_patient
+override obstacle [ wrong_info_about_patient ]
   name "Wrong Info About Patient"
   resolvedby (mitigation[achieve_incident_resolved_by_intervention]) 
              baby_unit_when_required
@@ -161,39 +137,33 @@ override obstacle
              medical_doctor_when_required
 end
 
-declare goal
-  id baby_unit_when_required
+declare goal [ baby_unit_when_required ]
   name "Achieve [Baby Emergency Unit On Scene When Baby Patient]"
 end
 
-declare goal
-  id obesity_ambulance_when_required
+declare goal [ obesity_ambulance_when_required ]
   name "Achieve [Obesity Ambulance On Scene When Overweight Patient]"
 end
 
-declare goal
-  id medical_doctor_when_required
+declare goal [ medical_doctor_when_required ]
   name "Achieve [Medical Doctor On Scene When Specific Critical Care Required]"
 end
 
 # Resolutions for insufficient_capacity
 
-override obstacle
-  id insufficient_capacity
+override obstacle [ insufficient_capacity ]
   name "Insufficient Capacity"
   resolvedby (mitigation[achieve_incident_resolved_by_intervention]) 
              more_ambulance_on_scene
 end
 
-declare goal
-  id more_ambulance_on_scene
+declare goal [ more_ambulance_on_scene ]
   name "Achieve [Ambulances On Scene When Insufficient Capacity]"
 end
 
 # Resolutions for overweight_patient
 
-override obstacle
-  id overweight_patient
+override obstacle [ overweight_patient ]
   name "Overweight Patient"
   resolvedby (mitigation[achieve_incident_resolved_by_intervention]) 
              obesity_ambulance_when_required
@@ -201,46 +171,39 @@ end
 
 # Resolutions for patient_unreachable_safely
 
-override obstacle 
-  id fire_environment 
+override obstacle [ fire_environment ] 
   name "Fire Environment" 
   resolvedby (mitigation[achieve_incident_resolved_by_intervention]) 
              fire_brigade_on_scene
 end
 
-declare goal
-  id fire_brigade_on_scene
+declare goal [ fire_brigade_on_scene ]
   name "Achieve [Fire Brigade On Scene When Fire Environment]"
 end
 
-override obstacle 
-  id hazardous_environment 
+override obstacle [ hazardous_environment ] 
   name "Hazardous Environment" 
   resolvedby (mitigation[achieve_incident_resolved_by_intervention]) 
              hart_team_on_scene
 end
 
-declare goal
-  id hart_team_on_scene
+declare goal [ hart_team_on_scene ]
   name "Achieve [HART Team On Scene When Fire Environment]"
 end
 
-override obstacle 
-  id unreachable_patient 
+override obstacle [ unreachable_patient ] 
   name "Unreachable Patient"
   resolvedby (mitigation[achieve_incident_resolved_by_intervention]) 
              rescue_unit_on_scene
 end
 
-declare goal
-  id rescue_unit_on_scene
+declare goal [ rescue_unit_on_scene ]
   name "Achieve [Rescue Unit On Scene When Unreachable Patient]"
 end
 
 # Resolutions for patient_cannot_reach_ambulance
 
-override obstacle
-  id patient_cannot_reach_ambulance
+override obstacle [ patient_cannot_reach_ambulance ]
   name "Patient Cannot Reach Ambulance"
   resolvedby (mitigation[achieve_incident_resolved_by_intervention]) 
              rescue_unit_on_scene
@@ -248,58 +211,50 @@ end
 
 # Resolutions for patient_not_admitted
 
-override obstacle
-  id patient_not_admitted
+override obstacle [ patient_not_admitted ]
   resolvedby (prevention) 
              assign_dest_hospital
 end
 
-declare goal
-  id assign_dest_hospital
+declare goal [ assign_dest_hospital ]
   name "Achieve [Ambulance To Assigned Hospital]"
 end
 
 # Resolutions for no_bed
 
-override obstacle 
-  id no_bed
+override obstacle [ no_bed ]
   name "No Bed Available"
   resolvedby (prevention) avoid_sending_ambulance_to_full_hopital
 end
 
-declare goal
-  id avoid_sending_ambulance_to_full_hopital
-  name "Avoid [Sending Ambulance To Hospital With No Bed Available]"
+declare goal [ avoid_sending_ambulance_to_full_hopital ]
+  name "Avo [  ][Sending Ambulance To Hospital With No Bed Available]"
 end
 
 # Resolutions for service_end
 
-override obstacle 
-  id service_end 
+override obstacle [ service_end ] 
   name "Service End Before Intervention"
-  resolvedby (prevention) "Avoid [Service End Before Intervention]"
+  resolvedby (prevention) "Avo [  ][Service End Before Intervention]"
 end
 
 # Resolutions for destination_changed
 
-override obstacle
-  id destination_changed
+override obstacle [ destination_changed ]
   name "Destination Changed"
   resolvedby (restoration) "Achieve [New Destination Notified]"
 end
 
 # Resolutions for destination_forgotten
   
-override obstacle
-  id destination_forgotten
+override obstacle [ destination_forgotten ]
   name "Destination Forgotten"
   resolvedby (prevention) "Maintain [Destination Known Unless Intervention]"
 end
 
 # Resolutions for mobilization_cancelled
   
-override obstacle 
-  id mobilization_cancelled
+override obstacle [ mobilization_cancelled ]
   name "Mobilization Cancelled"
   resolvedby (weakening [achieve_mobilized_ambulance_intervention])
              "Achieve [Mobilized Ambulance Intervention Or Mobilization Cancelled]"
@@ -307,8 +262,7 @@ end
 
 # Resolutions for ambulance_stopped
 
-override obstacle 
-  id ambulance_stopped
+override obstacle [ ambulance_stopped ]
   name "Ambulance Stopped"
   resolvedby (restoration [achieve_mobilized_ambulance_intervention]) 
              "Achieve [Other Ambulance Mobilized When Mobilized Ambulance Stopped]"
@@ -316,16 +270,14 @@ end
 
 # Resolutions for ambulance_in_unfamiliar_area
 
-override obstacle
-  id ambulance_in_unfamiliar_area
+override obstacle [ ambulance_in_unfamiliar_area ]
   name "Ambulance In Unfamiliar Area"
-  resolvedby (prevention) "Avoid [Ambulance In Unfamiliar Area]"
+  resolvedby (prevention) "Avo [  ][Ambulance In Unfamiliar Area]"
 end
 
 # Resolutions for ambulance_traffic_deviation
 
-override obstacle
-  id ambulance_traffic_deviation
+override obstacle [ ambulance_traffic_deviation ]
   name "Ambulance In Traffic Deviation"
-  resolvedby (prevention) "Avoid [Ambulance In Traffic Deviation]"
+  resolvedby (prevention) "Avo [  ][Ambulance In Traffic Deviation]"
 end

@@ -1,0 +1,1848 @@
+﻿#
+
+declare goal [ goal1 ]
+	name "Goal 1"
+  rsr 0
+  obstructedby o1
+  $log_cps "TRUE"
+end
+
+declare goal [ goal2 ]
+	name "Goal 2"
+  rsr 0
+  refinedby anchor_g2, anchor_g22
+  $log_cps "TRUE"
+end
+
+declare goal [ anchor_g2 ]
+  obstructedby stuck_while_leaving
+end
+
+declare goal [ anchor_g22 ]
+  obstructedby stuck_while_tohosp
+end
+
+declare goal [ goal3 ]
+	name "Goal 3"
+  rsr 0
+  $log_cps "TRUE"
+end
+
+declare goal [ goal4 ]
+	name "Goal 4"
+  rsr 0
+  $log_cps "TRUE"
+  refinedby sg4scene, sg4hosp, sg4station
+end
+
+declare goal [ sg4scene ]
+  obstructedby onscene_button_not_pressed
+end
+
+declare goal [ sg4hosp ]
+  obstructedby athospital_button_not_pressed
+end
+
+declare goal [ sg4station ]
+  obstructedby atstation_button_not_pressed
+end
+
+declare obstacle [ o1 ]
+  refinedby no_ambulance_available
+  refinedby position_not_updated
+  refinedby moborder_not_confirmed
+  refinedby moborder_refused
+end
+
+#declare obstacle
+# [ o2 ]
+#  refinedby stuck_while_leaving
+#  refinedby stuck_while_tohosp
+#end
+
+declare obstacle [ o3 ]
+  refinedby hospital_too_far
+  refinedby destination_unreachable
+end
+
+#declare obstacle
+# [ o4 ]
+#  refinedby onscene_button_not_pressed
+#  refinedby athospital_button_not_pressed
+#  refinedby atstation_button_not_pressed
+#end
+
+# Leaf obstacles
+
+declare obstacle [ no_ambulance_available ]
+	name "NoAmbulanceAvailable"
+	formalspec sooner-or-later (
+    PendingIncident() and always, for 12 seconds, not AmbAvailable()
+  )
+  $log_cps "TRUE"
+end # 2 minutes = 12 seconds
+
+declare obstacle [ position_not_updated ]
+	name "Position Not Sent"
+	refinedby a1_position_not_updated
+	refinedby a2_position_not_updated
+	refinedby a3_position_not_updated
+	refinedby a4_position_not_updated
+	refinedby a5_position_not_updated
+	refinedby a6_position_not_updated
+	refinedby a7_position_not_updated
+	refinedby a8_position_not_updated
+	refinedby a9_position_not_updated
+	refinedby a10_position_not_updated
+	refinedby a11_position_not_updated
+	refinedby a12_position_not_updated
+	refinedby a13_position_not_updated
+	refinedby a14_position_not_updated
+	refinedby a15_position_not_updated
+  $log_cps "TRUE"
+end # 5 minutes = 5 * 60 / 10 seconds
+
+	declare obstacle [ a1_position_not_updated ]
+		name "A1 Position Not Sent"
+		formalspec sooner-or-later (
+			( always, for 30 seconds, not AmbA1PositionKnown() )
+		)
+    $hashProjection "AmbPositionKnown"
+    $monitored "true"
+	end
+
+	declare obstacle [ a2_position_not_updated ]
+		name "A2 Position Not Sent"
+		formalspec sooner-or-later (
+			( always, for 30 seconds, not AmbA2PositionKnown() )
+		)
+    $hashProjection "AmbPositionKnown"
+    $monitored "true"
+	end
+
+	declare obstacle [ a3_position_not_updated ]
+		name "A3 Position Not Sent"
+		formalspec sooner-or-later (
+			( always, for 30 seconds, not AmbA3PositionKnown() )
+		)
+    $hashProjection "AmbPositionKnown"
+    $monitored "true"
+	end
+
+	declare obstacle [ a4_position_not_updated ]
+		name "A4 Position Not Sent"
+		formalspec sooner-or-later (
+			( always, for 30 seconds, not AmbA4PositionKnown() )
+		)
+    $hashProjection "AmbPositionKnown"
+    $monitored "true"
+	end
+
+	declare obstacle [ a5_position_not_updated ]
+		name "A5 Position Not Sent"
+		formalspec sooner-or-later (
+			( always, for 30 seconds, not AmbA5PositionKnown() )
+		)
+    $hashProjection "AmbPositionKnown"
+    $monitored "true"
+	end
+
+	declare obstacle [ a6_position_not_updated ]
+		name "A6 Position Not Sent"
+		formalspec sooner-or-later (
+			( always, for 30 seconds, not AmbA6PositionKnown() )
+		)
+    $hashProjection "AmbPositionKnown"
+    $monitored "true"
+	end
+
+	declare obstacle [ a7_position_not_updated ]
+		name "A7 Position Not Sent"
+		formalspec sooner-or-later (
+			( always, for 30 seconds, not AmbA7PositionKnown() )
+		)
+    $hashProjection "AmbPositionKnown"
+    $monitored "true"
+	end
+
+	declare obstacle [ a8_position_not_updated ]
+		name "A8 Position Not Sent"
+		formalspec sooner-or-later (
+			( always, for 30 seconds, not AmbA8PositionKnown() )
+		)
+    $hashProjection "AmbPositionKnown"
+    $monitored "true"
+	end
+
+	declare obstacle [ a9_position_not_updated ]
+		name "A9 Position Not Sent"
+		formalspec sooner-or-later (
+			( always, for 30 seconds, not AmbA9PositionKnown() )
+		)
+    $hashProjection "AmbPositionKnown"
+    $monitored "true"
+	end
+
+	declare obstacle [ a10_position_not_updated ]
+		name "A10 Position Not Sent"
+		formalspec sooner-or-later (
+			( always, for 30 seconds, not AmbA10PositionKnown() )
+		)
+    $hashProjection "AmbPositionKnown"
+    $monitored "true"
+	end
+
+	declare obstacle [ a11_position_not_updated ]
+		name "A11 Position Not Sent"
+		formalspec sooner-or-later (
+			( always, for 30 seconds, not AmbA11PositionKnown() )
+		)
+    $hashProjection "AmbPositionKnown"
+    $monitored "true"
+	end
+
+	declare obstacle [ a12_position_not_updated ]
+		name "A12 Position Not Sent"
+		formalspec sooner-or-later (
+			( always, for 30 seconds, not AmbA12PositionKnown() )
+		)
+    $hashProjection "AmbPositionKnown"
+    $monitored "true"
+	end
+
+	declare obstacle [ a13_position_not_updated ]
+		name "A13 Position Not Sent"
+		formalspec sooner-or-later (
+			( always, for 30 seconds, not AmbA13PositionKnown() )
+		)
+    $hashProjection "AmbPositionKnown"
+    $monitored "true"
+	end
+
+	declare obstacle [ a14_position_not_updated ]
+		name "A14 Position Not Sent"
+		formalspec sooner-or-later (
+			( always, for 30 seconds, not AmbA14PositionKnown() )
+		)
+    $hashProjection "AmbPositionKnown"
+    $monitored "true"
+	end
+
+	declare obstacle [ a15_position_not_updated ]
+		name "A15 Position Not Sent"
+		formalspec sooner-or-later (
+			( always, for 30 seconds, not AmbA15PositionKnown() )
+		)
+    $hashProjection "AmbPositionKnown"
+    $monitored "true"
+	end
+
+declare obstacle [ moborder_not_confirmed ]
+	name "Mobilization Order Not Confirmed In Time"
+	refinedby moborder1_not_confirmed
+	refinedby moborder2_not_confirmed
+	refinedby moborder3_not_confirmed
+	refinedby moborder4_not_confirmed
+	refinedby moborder5_not_confirmed
+	refinedby moborder6_not_confirmed
+	refinedby moborder7_not_confirmed
+	refinedby moborder8_not_confirmed
+	refinedby moborder9_not_confirmed
+	refinedby moborder10_not_confirmed
+  $log_cps "TRUE"
+end # 2 minutes = 12 secondes
+
+	declare obstacle [ moborder1_not_confirmed ]
+		name "Mobilization Order 1 Not Confirmed In Time"
+		formalspec sooner-or-later (
+			(IncAllocated1() and always, for 30 seconds, IncPending1())
+		)
+    $hashProjection "IncAllocated"
+    $monitored "true"
+	end
+
+	declare obstacle [ moborder2_not_confirmed ]
+		name "Mobilization Order 2 Not Confirmed In Time"
+		formalspec sooner-or-later (
+			(IncAllocated2() and always, for 30 seconds, IncPending2())
+		)
+    $hashProjection "IncAllocated"
+    $monitored "true"
+	end
+
+	declare obstacle [ moborder3_not_confirmed ]
+		name "Mobilization Order 3 Not Confirmed In Time"
+		formalspec sooner-or-later (
+			(IncAllocated3() and always, for 30 seconds, IncPending3())
+		)
+    $hashProjection "IncAllocated"
+    $monitored "true"
+	end
+
+	declare obstacle [ moborder4_not_confirmed ]
+		name "Mobilization Order 4 Not Confirmed In Time"
+		formalspec sooner-or-later (
+			(IncAllocated4() and always, for 30 seconds, IncPending4())
+		)
+    $hashProjection "IncAllocated"
+    $monitored "true"
+	end
+
+	declare obstacle [ moborder5_not_confirmed ]
+		name "Mobilization Order 5 Not Confirmed In Time"
+		formalspec sooner-or-later (
+			(IncAllocated5() and always, for 30 seconds, IncPending5())
+		)
+    $hashProjection "IncAllocated"
+    $monitored "true"
+	end
+
+	declare obstacle [ moborder6_not_confirmed ]
+		name "Mobilization Order 6 Not Confirmed In Time"
+		formalspec sooner-or-later (
+			(IncAllocated6() and always, for 30 seconds, IncPending6())
+		)
+    $hashProjection "IncAllocated"
+    $monitored "true"
+	end
+
+	declare obstacle [ moborder7_not_confirmed ]
+		name "Mobilization Order 7 Not Confirmed In Time"
+		formalspec sooner-or-later (
+			(IncAllocated7() and always, for 30 seconds, IncPending7())
+		)
+    $hashProjection "IncAllocated"
+    $monitored "true"
+	end
+
+	declare obstacle [ moborder8_not_confirmed ]
+		name "Mobilization Order 8 Not Confirmed In Time"
+		formalspec sooner-or-later (
+			(IncAllocated8() and always, for 30 seconds, IncPending8())
+		)
+    $hashProjection "IncAllocated"
+    $monitored "true"
+	end
+
+	declare obstacle [ moborder9_not_confirmed ]
+		name "Mobilization Order 9 Not Confirmed In Time"
+		formalspec sooner-or-later (
+			(IncAllocated9() and always, for 30 seconds, IncPending9())
+		)
+    $hashProjection "IncAllocated"
+    $monitored "true"
+	end
+
+	declare obstacle [ moborder10_not_confirmed ]
+		name "Mobilization Order 10 Not Confirmed In Time"
+		formalspec sooner-or-later (
+			(IncAllocated10() and always, for 30 seconds, IncPending10())
+		)
+    $hashProjection "IncAllocated"
+    $monitored "true"
+	end
+
+declare obstacle [ moborder_refused ]
+	name "Mobilization Refused"
+	refinedby moborder1_refused
+	refinedby moborder2_refused
+	refinedby moborder3_refused
+	refinedby moborder4_refused
+	refinedby moborder5_refused
+	refinedby moborder6_refused
+	refinedby moborder7_refused
+	refinedby moborder8_refused
+	refinedby moborder9_refused
+	refinedby moborder10_refused
+  $log_cps "TRUE"
+end # 5 minutes = 30 seconds
+
+	declare obstacle [ moborder1_refused ]
+		name "Mobilization 1 Refused"
+		formalspec sooner-or-later (
+			(IncAllocated1() and always, for 30 seconds, MobilizationOrderRefused1())
+		)
+    $hashProjection "IncAllocated"
+    $monitored "true"
+	end
+
+	declare obstacle [ moborder2_refused ]
+		name "Mobilization 2 Refused"
+		formalspec sooner-or-later (
+			(IncAllocated2() and always, for 30 seconds, MobilizationOrderRefused2())
+		)
+    $hashProjection "IncAllocated"
+    $monitored "true"
+	end
+
+	declare obstacle [ moborder3_refused ]
+		name "Mobilization 3 Refused"
+		formalspec sooner-or-later (
+			(IncAllocated3() and always, for 30 seconds, MobilizationOrderRefused3())
+		)
+    $hashProjection "IncAllocated"
+    $monitored "true"
+	end
+
+	declare obstacle [ moborder4_refused ]
+		name "Mobilization 4 Refused"
+		formalspec sooner-or-later (
+			(IncAllocated4() and always, for 30 seconds, MobilizationOrderRefused4())
+		)
+    $hashProjection "IncAllocated"
+    $monitored "true"
+	end
+
+	declare obstacle [ moborder5_refused ]
+		name "Mobilization 5 Refused"
+		formalspec sooner-or-later (
+			(IncAllocated5() and always, for 30 seconds, MobilizationOrderRefused5())
+		)
+    $hashProjection "IncAllocated"
+    $monitored "true"
+	end
+
+	declare obstacle [ moborder6_refused ]
+		name "Mobilization 6 Refused"
+		formalspec sooner-or-later (
+			(IncAllocated6() and always, for 30 seconds, MobilizationOrderRefused6())
+		)
+    $hashProjection "IncAllocated"
+    $monitored "true"
+	end
+
+	declare obstacle [ moborder7_refused ]
+		name "Mobilization 7 Refused"
+		formalspec sooner-or-later (
+			(IncAllocated7() and always, for 30 seconds, MobilizationOrderRefused7())
+		)
+    $hashProjection "IncAllocated"
+    $monitored "true"
+	end
+
+	declare obstacle [ moborder8_refused ]
+		name "Mobilization 8 Refused"
+		formalspec sooner-or-later (
+			(IncAllocated8() and always, for 30 seconds, MobilizationOrderRefused8())
+		)
+    $hashProjection "IncAllocated"
+    $monitored "true"
+	end
+
+	declare obstacle [ moborder9_refused ]
+		name "Mobilization 9 Refused"
+		formalspec sooner-or-later (
+			(IncAllocated9() and always, for 30 seconds, MobilizationOrderRefused9())
+		)
+    $hashProjection "IncAllocated"
+    $monitored "true"
+	end
+
+	declare obstacle [ moborder10_refused ]
+		name "Mobilization 10 Refused"
+		formalspec sooner-or-later (
+			(IncAllocated10() and always, for 30 seconds, MobilizationOrderRefused10())
+		)
+    $hashProjection "IncAllocated"
+    $monitored "true"
+	end
+
+declare obstacle [ stuck_while_leaving ]
+	name "Ambulance Stuck In Traffic Jam Toward Incident"
+	refinedby a1_stuck_while_leaving
+	refinedby a2_stuck_while_leaving
+	refinedby a3_stuck_while_leaving
+	refinedby a4_stuck_while_leaving
+	refinedby a5_stuck_while_leaving
+	refinedby a6_stuck_while_leaving
+	refinedby a7_stuck_while_leaving
+	refinedby a8_stuck_while_leaving
+	refinedby a9_stuck_while_leaving
+	refinedby a10_stuck_while_leaving
+	refinedby a11_stuck_while_leaving
+	refinedby a12_stuck_while_leaving
+	refinedby a13_stuck_while_leaving
+	refinedby a14_stuck_while_leaving
+	refinedby a15_stuck_while_leaving
+  $log_cps "TRUE"
+#  resolvedby [substitution:anchor_g2] reallocateTrafficJam
+#  resolvedby [substitution:anchor_g22] relaxTimetoHosp
+end # 4 minutes = 4 * 60 / 10 seconds = 24 seconds
+
+	declare obstacle [ a1_stuck_while_leaving ]
+		name "Ambulance A1 Stuck In Traffic Jam Toward Incident"
+		formalspec sooner-or-later (
+			(AmbA1Leaving() and always, for 24 seconds, AmbA1StuckInTraffic())
+		)
+    $hashProjection "AmbLeaving"
+    $monitored "true"
+	end
+
+	declare obstacle [ a2_stuck_while_leaving ]
+		name "Ambulance A2 Stuck In Traffic Jam Toward Incident"
+		formalspec sooner-or-later (
+			(AmbA2Leaving() and always, for 24 seconds, AmbA2StuckInTraffic())
+		)
+    $hashProjection "AmbLeaving"
+    $monitored "true"
+	end
+
+	declare obstacle [ a3_stuck_while_leaving ]
+		name "Ambulance A3 Stuck In Traffic Jam Toward Incident"
+		formalspec sooner-or-later (
+			(AmbA3Leaving() and always, for 24 seconds, AmbA3StuckInTraffic())
+		)
+    $hashProjection "AmbLeaving"
+    $monitored "true"
+	end
+
+	declare obstacle [ a4_stuck_while_leaving ]
+		name "Ambulance A4 Stuck In Traffic Jam Toward Incident"
+		formalspec sooner-or-later (
+			(AmbA4Leaving() and always, for 24 seconds, AmbA4StuckInTraffic())
+		)
+    $hashProjection "AmbLeaving"
+    $monitored "true"
+	end
+
+	declare obstacle [ a5_stuck_while_leaving ]
+		name "Ambulance A5 Stuck In Traffic Jam Toward Incident"
+		formalspec sooner-or-later (
+			(AmbA5Leaving() and always, for 24 seconds, AmbA5StuckInTraffic())
+		)
+    $hashProjection "AmbLeaving"
+    $monitored "true"
+	end
+
+	declare obstacle [ a6_stuck_while_leaving ]
+		name "Ambulance A6 Stuck In Traffic Jam Toward Incident"
+		formalspec sooner-or-later (
+			(AmbA6Leaving() and always, for 24 seconds, AmbA6StuckInTraffic())
+		)
+    $hashProjection "AmbLeaving"
+    $monitored "true"
+	end
+
+	declare obstacle [ a7_stuck_while_leaving ]
+		name "Ambulance A7 Stuck In Traffic Jam Toward Incident"
+		formalspec sooner-or-later (
+			(AmbA7Leaving() and always, for 24 seconds, AmbA7StuckInTraffic())
+		)
+    $hashProjection "AmbLeaving"
+    $monitored "true"
+	end
+
+	declare obstacle [ a8_stuck_while_leaving ]
+		name "Ambulance A8 Stuck In Traffic Jam Toward Incident"
+		formalspec sooner-or-later (
+			(AmbA8Leaving() and always, for 24 seconds, AmbA8StuckInTraffic())
+		)
+    $hashProjection "AmbLeaving"
+    $monitored "true"
+	end
+
+	declare obstacle [ a9_stuck_while_leaving ]
+		name "Ambulance A9 Stuck In Traffic Jam Toward Incident"
+		formalspec sooner-or-later (
+			(AmbA9Leaving() and always, for 24 seconds, AmbA9StuckInTraffic())
+		)
+    $hashProjection "AmbLeaving"
+    $monitored "true"
+	end
+
+	declare obstacle [ a10_stuck_while_leaving ]
+		name "Ambulance A10 Stuck In Traffic Jam Toward Incident"
+		formalspec sooner-or-later (
+			(AmbA10Leaving() and always, for 24 seconds, AmbA10StuckInTraffic())
+		)
+    $hashProjection "AmbLeaving"
+    $monitored "true"
+	end
+
+	declare obstacle [ a11_stuck_while_leaving ]
+		name "Ambulance A11 Stuck In Traffic Jam Toward Incident"
+		formalspec sooner-or-later (
+			(AmbA11Leaving() and always, for 24 seconds, AmbA11StuckInTraffic())
+		)
+    $hashProjection "AmbLeaving"
+    $monitored "true"
+	end
+
+	declare obstacle [ a12_stuck_while_leaving ]
+		name "Ambulance A12 Stuck In Traffic Jam Toward Incident"
+		formalspec sooner-or-later (
+			(AmbA12Leaving() and always, for 24 seconds, AmbA12StuckInTraffic())
+		)
+    $hashProjection "AmbLeaving"
+    $monitored "true"
+	end
+
+	declare obstacle [ a13_stuck_while_leaving ]
+		name "Ambulance A13 Stuck In Traffic Jam Toward Incident"
+		formalspec sooner-or-later (
+			(AmbA13Leaving() and always, for 24 seconds, AmbA13StuckInTraffic())
+		)
+    $hashProjection "AmbLeaving"
+    $monitored "true"
+	end
+
+	declare obstacle [ a14_stuck_while_leaving ]
+		name "Ambulance A14 Stuck In Traffic Jam Toward Incident"
+		formalspec sooner-or-later (
+			(AmbA14Leaving() and always, for 24 seconds, AmbA14StuckInTraffic())
+		)
+    $hashProjection "AmbLeaving"
+    $monitored "true"
+	end
+
+	declare obstacle [ a15_stuck_while_leaving ]
+		name "Ambulance A15 Stuck In Traffic Jam Toward Incident"
+		formalspec sooner-or-later (
+			(AmbA15Leaving() and always, for 24 seconds, AmbA15StuckInTraffic())
+		)
+    $hashProjection "AmbLeaving"
+    $monitored "true"
+	end
+
+declare obstacle [ stuck_while_tohosp ]
+	name "Ambulance Stuck In Traffic Jam Toward Hospital"
+	refinedby a1_stuck_while_tohosp
+	refinedby a2_stuck_while_tohosp
+	refinedby a3_stuck_while_tohosp
+	refinedby a4_stuck_while_tohosp
+	refinedby a5_stuck_while_tohosp
+	refinedby a6_stuck_while_tohosp
+	refinedby a7_stuck_while_tohosp
+	refinedby a8_stuck_while_tohosp
+	refinedby a9_stuck_while_tohosp
+	refinedby a10_stuck_while_tohosp
+	refinedby a11_stuck_while_tohosp
+	refinedby a12_stuck_while_tohosp
+	refinedby a13_stuck_while_tohosp
+	refinedby a14_stuck_while_tohosp
+	refinedby a15_stuck_while_tohosp
+  $log_cps "TRUE"
+end # 6 minutes = 6 * 60 / 10 = 36 seconds
+
+	declare obstacle [ a1_stuck_while_tohosp ]
+		name "Ambulance A1 Stuck In Traffic Jam Toward Hospital"
+		formalspec sooner-or-later (
+			(AmbA1MobilizedAndToHospital() and always, for 36 seconds, AmbA1StuckInTraffic())
+		)
+    $hashProjection "AmbMobilizedAndToHospital"
+    $monitored "true"
+	end
+
+	declare obstacle [ a2_stuck_while_tohosp ]
+		name "Ambulance A2 Stuck In Traffic Jam Toward Hospital"
+		formalspec sooner-or-later (
+			(AmbA2MobilizedAndToHospital() and always, for 36 seconds, AmbA2StuckInTraffic())
+		)
+    $hashProjection "AmbMobilizedAndToHospital"
+    $monitored "true"
+	end
+
+	declare obstacle [ a3_stuck_while_tohosp ]
+		name "Ambulance A3 Stuck In Traffic Jam Toward Hospital"
+		formalspec sooner-or-later (
+			(AmbA3MobilizedAndToHospital() and always, for 36 seconds, AmbA3StuckInTraffic())
+		)
+    $hashProjection "AmbMobilizedAndToHospital"
+    $monitored "true"
+	end
+
+	declare obstacle [ a4_stuck_while_tohosp ]
+		name "Ambulance A4 Stuck In Traffic Jam Toward Hospital"
+		formalspec sooner-or-later (
+			(AmbA4MobilizedAndToHospital() and always, for 36 seconds, AmbA4StuckInTraffic())
+		)
+    $hashProjection "AmbMobilizedAndToHospital"
+    $monitored "true"
+	end
+
+	declare obstacle [ a5_stuck_while_tohosp ]
+		name "Ambulance A5 Stuck In Traffic Jam Toward Hospital"
+		formalspec sooner-or-later (
+			(AmbA5MobilizedAndToHospital() and always, for 36 seconds, AmbA5StuckInTraffic())
+		)
+    $hashProjection "AmbMobilizedAndToHospital"
+    $monitored "true"
+	end
+
+	declare obstacle [ a6_stuck_while_tohosp ]
+		name "Ambulance A6 Stuck In Traffic Jam Toward Hospital"
+		formalspec sooner-or-later (
+			(AmbA6MobilizedAndToHospital() and always, for 36 seconds, AmbA6StuckInTraffic())
+		)
+    $hashProjection "AmbMobilizedAndToHospital"
+    $monitored "true"
+	end
+
+	declare obstacle [ a7_stuck_while_tohosp ]
+		name "Ambulance A7 Stuck In Traffic Jam Toward Hospital"
+		formalspec sooner-or-later (
+			(AmbA7MobilizedAndToHospital() and always, for 36 seconds, AmbA7StuckInTraffic())
+		)
+    $hashProjection "AmbMobilizedAndToHospital"
+    $monitored "true"
+	end
+
+	declare obstacle [ a8_stuck_while_tohosp ]
+		name "Ambulance A8 Stuck In Traffic Jam Toward Hospital"
+		formalspec sooner-or-later (
+			(AmbA8MobilizedAndToHospital() and always, for 36 seconds, AmbA8StuckInTraffic())
+		)
+    $hashProjection "AmbMobilizedAndToHospital"
+    $monitored "true"
+	end
+
+	declare obstacle [ a9_stuck_while_tohosp ]
+		name "Ambulance A9 Stuck In Traffic Jam Toward Hospital"
+		formalspec sooner-or-later (
+			(AmbA9MobilizedAndToHospital() and always, for 36 seconds, AmbA9StuckInTraffic())
+		)
+    $hashProjection "AmbMobilizedAndToHospital"
+    $monitored "true"
+	end
+
+	declare obstacle [ a10_stuck_while_tohosp ]
+		name "Ambulance A10 Stuck In Traffic Jam Toward Hospital"
+		formalspec sooner-or-later (
+			(AmbA10MobilizedAndToHospital() and always, for 36 seconds, AmbA10StuckInTraffic())
+		)
+    $hashProjection "AmbMobilizedAndToHospital"
+    $monitored "true"
+	end
+
+	declare obstacle [ a11_stuck_while_tohosp ]
+		name "Ambulance A11 Stuck In Traffic Jam Toward Hospital"
+		formalspec sooner-or-later (
+			(AmbA11MobilizedAndToHospital() and always, for 36 seconds, AmbA11StuckInTraffic())
+		)
+    $hashProjection "AmbMobilizedAndToHospital"
+    $monitored "true"
+	end
+
+	declare obstacle [ a12_stuck_while_tohosp ]
+		name "Ambulance A12 Stuck In Traffic Jam Toward Hospital"
+		formalspec sooner-or-later (
+			(AmbA12MobilizedAndToHospital() and always, for 36 seconds, AmbA12StuckInTraffic())
+		)
+    $hashProjection "AmbMobilizedAndToHospital"
+    $monitored "true"
+	end
+
+	declare obstacle [ a13_stuck_while_tohosp ]
+		name "Ambulance A13 Stuck In Traffic Jam Toward Hospital"
+		formalspec sooner-or-later (
+			(AmbA13MobilizedAndToHospital() and always, for 36 seconds, AmbA13StuckInTraffic())
+		)
+    $hashProjection "AmbMobilizedAndToHospital"
+    $monitored "true"
+	end
+
+	declare obstacle [ a14_stuck_while_tohosp ]
+		name "Ambulance A14 Stuck In Traffic Jam Toward Hospital"
+		formalspec sooner-or-later (
+			(AmbA14MobilizedAndToHospital() and always, for 36 seconds, AmbA14StuckInTraffic())
+		)
+    $hashProjection "AmbMobilizedAndToHospital"
+    $monitored "true"
+	end
+
+	declare obstacle [ a15_stuck_while_tohosp ]
+		name "Ambulance A15 Stuck In Traffic Jam Toward Hospital"
+		formalspec sooner-or-later (
+			(AmbA15MobilizedAndToHospital() and always, for 36 seconds, AmbA15StuckInTraffic())
+		)
+    $hashProjection "AmbMobilizedAndToHospital"
+    $monitored "true"
+	end
+
+declare obstacle [ hospital_too_far ]
+	name "Hospital Too Far"
+	refinedby a1_hospital_too_far
+	refinedby a2_hospital_too_far
+	refinedby a3_hospital_too_far
+	refinedby a4_hospital_too_far
+	refinedby a5_hospital_too_far
+	refinedby a6_hospital_too_far
+	refinedby a7_hospital_too_far
+	refinedby a8_hospital_too_far
+	refinedby a9_hospital_too_far
+	refinedby a10_hospital_too_far
+	refinedby a11_hospital_too_far
+	refinedby a12_hospital_too_far
+	refinedby a13_hospital_too_far
+	refinedby a14_hospital_too_far
+	refinedby a15_hospital_too_far
+  $log_cps "TRUE"
+end # 5 minutes = 30 seconds
+
+	declare obstacle [ a1_hospital_too_far ]
+		name "Hospital Too Far From A1"
+		formalspec sooner-or-later (
+			(AmbA1MobilizedAndToHospital() and always, for 30 seconds, (AmbA1NotStuckInTrafficAndNotAmbA1AtHospital() ))
+		)
+    $hashProjection "AmbMobilizedAndToHospital"
+    $monitored "true"
+	end
+
+	declare obstacle [ a2_hospital_too_far ]
+		name "Hospital Too Far From A2"
+		formalspec sooner-or-later (
+			(AmbA2MobilizedAndToHospital() and always, for 30 seconds, (AmbA2NotStuckInTrafficAndNotAmbA2AtHospital() ))
+		)
+    $hashProjection "AmbMobilizedAndToHospital"
+    $monitored "true"
+	end
+
+	declare obstacle [ a3_hospital_too_far ]
+		name "Hospital Too Far From A3"
+		formalspec sooner-or-later (
+			(AmbA3MobilizedAndToHospital() and always, for 30 seconds, (AmbA3NotStuckInTrafficAndNotAmbA3AtHospital() ))
+		)
+    $hashProjection "AmbMobilizedAndToHospital"
+    $monitored "true"
+	end
+
+	declare obstacle [ a4_hospital_too_far ]
+		name "Hospital Too Far From A4"
+		formalspec sooner-or-later (
+			(AmbA4MobilizedAndToHospital() and always, for 30 seconds, (AmbA4NotStuckInTrafficAndNotAmbA4AtHospital() ))
+		)
+    $hashProjection "AmbMobilizedAndToHospital"
+    $monitored "true"
+	end
+
+	declare obstacle [ a5_hospital_too_far ]
+		name "Hospital Too Far From A5"
+		formalspec sooner-or-later (
+			(AmbA5MobilizedAndToHospital() and always, for 30 seconds, (AmbA5NotStuckInTrafficAndNotAmbA5AtHospital() ))
+		)
+    $hashProjection "AmbMobilizedAndToHospital"
+    $monitored "true"
+	end
+
+	declare obstacle [ a6_hospital_too_far ]
+		name "Hospital Too Far From A6"
+		formalspec sooner-or-later (
+			(AmbA6MobilizedAndToHospital() and always, for 30 seconds, (AmbA6NotStuckInTrafficAndNotAmbA6AtHospital() ))
+		)
+    $hashProjection "AmbMobilizedAndToHospital"
+    $monitored "true"
+	end
+
+	declare obstacle [ a7_hospital_too_far ]
+		name "Hospital Too Far From A7"
+		formalspec sooner-or-later (
+			(AmbA7MobilizedAndToHospital() and always, for 30 seconds, (AmbA7NotStuckInTrafficAndNotAmbA7AtHospital() ))
+		)
+    $hashProjection "AmbMobilizedAndToHospital"
+    $monitored "true"
+	end
+
+	declare obstacle [ a8_hospital_too_far ]
+		name "Hospital Too Far From A8"
+		formalspec sooner-or-later (
+			(AmbA8MobilizedAndToHospital() and always, for 30 seconds, (AmbA8NotStuckInTrafficAndNotAmbA8AtHospital() ))
+		)
+    $hashProjection "AmbMobilizedAndToHospital"
+    $monitored "true"
+	end
+
+	declare obstacle [ a9_hospital_too_far ]
+		name "Hospital Too Far From A9"
+		formalspec sooner-or-later (
+			(AmbA9MobilizedAndToHospital() and always, for 30 seconds, (AmbA9NotStuckInTrafficAndNotAmbA9AtHospital() ))
+		)
+    $hashProjection "AmbMobilizedAndToHospital"
+    $monitored "true"
+	end
+
+	declare obstacle [ a10_hospital_too_far ]
+		name "Hospital Too Far From A10"
+		formalspec sooner-or-later (
+			(AmbA10MobilizedAndToHospital() and always, for 30 seconds, (AmbA10NotStuckInTrafficAndNotAmbA10AtHospital() ))
+		)
+    $hashProjection "AmbMobilizedAndToHospital"
+    $monitored "true"
+	end
+
+	declare obstacle [ a11_hospital_too_far ]
+		name "Hospital Too Far From A11"
+		formalspec sooner-or-later (
+			(AmbA11MobilizedAndToHospital() and always, for 30 seconds, (AmbA11NotStuckInTrafficAndNotAmbA11AtHospital() ))
+		)
+    $hashProjection "AmbMobilizedAndToHospital"
+    $monitored "true"
+	end
+
+	declare obstacle [ a12_hospital_too_far ]
+		name "Hospital Too Far From A12"
+		formalspec sooner-or-later (
+			(AmbA12MobilizedAndToHospital() and always, for 30 seconds, (AmbA12NotStuckInTrafficAndNotAmbA12AtHospital() ))
+		)
+    $hashProjection "AmbMobilizedAndToHospital"
+    $monitored "true"
+	end
+
+	declare obstacle [ a13_hospital_too_far ]
+		name "Hospital Too Far From A13"
+		formalspec sooner-or-later (
+			(AmbA13MobilizedAndToHospital() and always, for 30 seconds, (AmbA13NotStuckInTrafficAndNotAmbA13AtHospital() ))
+		)
+    $hashProjection "AmbMobilizedAndToHospital"
+    $monitored "true"
+	end
+
+	declare obstacle [ a14_hospital_too_far ]
+		name "Hospital Too Far From A14"
+		formalspec sooner-or-later (
+			(AmbA14MobilizedAndToHospital() and always, for 30 seconds, (AmbA14NotStuckInTrafficAndNotAmbA14AtHospital() ))
+		)
+    $hashProjection "AmbMobilizedAndToHospital"
+    $monitored "true"
+	end
+
+	declare obstacle [ a15_hospital_too_far ]
+		name "Hospital Too Far From A15"
+		formalspec sooner-or-later (
+			(AmbA15MobilizedAndToHospital() and always, for 30 seconds, (AmbA15NotStuckInTrafficAndNotAmbA15AtHospital() ))
+		)
+    $hashProjection "AmbMobilizedAndToHospital"
+    $monitored "true"
+	end
+
+declare obstacle [ destination_unreachable ]
+	name "Incident Unreachable"
+	refinedby destination_unreachable1
+	refinedby destination_unreachable2
+	refinedby destination_unreachable3
+	refinedby destination_unreachable4
+	refinedby destination_unreachable5
+	refinedby destination_unreachable6
+	refinedby destination_unreachable7
+	refinedby destination_unreachable8
+	refinedby destination_unreachable9
+	refinedby destination_unreachable10
+  $log_cps "TRUE"
+end # 2 minutes = 2 * 60 / 10 = 12 seconds
+
+	declare obstacle [ destination_unreachable1 ]
+		name "Incident 1 Unreachable"
+		formalspec sooner-or-later (
+			(AmbulanceOnScene1() and always, for 12 seconds, DestinationUnreachable1())
+		)
+    $hashProjection "AmbulanceOnScene"
+    $monitored "true"
+	end
+
+	declare obstacle [ destination_unreachable2 ]
+		name "Incident 2 Unreachable"
+		formalspec sooner-or-later (
+			(AmbulanceOnScene2() and always, for 12 seconds, DestinationUnreachable2())
+		)
+    $hashProjection "AmbulanceOnScene"
+    $monitored "true"
+	end
+
+	declare obstacle [ destination_unreachable3 ]
+		name "Incident 3 Unreachable"
+		formalspec sooner-or-later (
+			(AmbulanceOnScene3() and always, for 12 seconds, DestinationUnreachable3())
+		)
+    $hashProjection "AmbulanceOnScene"
+    $monitored "true"
+	end
+
+	declare obstacle [ destination_unreachable4 ]
+		name "Incident 4 Unreachable"
+		formalspec sooner-or-later (
+			(AmbulanceOnScene4() and always, for 12 seconds, DestinationUnreachable4())
+		)
+    $hashProjection "AmbulanceOnScene"
+    $monitored "true"
+	end
+
+	declare obstacle [ destination_unreachable5 ]
+		name "Incident 5 Unreachable"
+		formalspec sooner-or-later (
+			(AmbulanceOnScene5() and always, for 12 seconds, DestinationUnreachable5())
+		)
+    $hashProjection "AmbulanceOnScene"
+    $monitored "true"
+	end
+
+	declare obstacle [ destination_unreachable6 ]
+		name "Incident 6 Unreachable"
+		formalspec sooner-or-later (
+			(AmbulanceOnScene6() and always, for 12 seconds, DestinationUnreachable6())
+		)
+    $hashProjection "AmbulanceOnScene"
+    $monitored "true"
+	end
+
+	declare obstacle [ destination_unreachable7 ]
+		name "Incident 7 Unreachable"
+		formalspec sooner-or-later (
+			(AmbulanceOnScene7() and always, for 12 seconds, DestinationUnreachable7())
+		)
+    $hashProjection "AmbulanceOnScene"
+    $monitored "true"
+	end
+
+	declare obstacle [ destination_unreachable8 ]
+		name "Incident 8 Unreachable"
+		formalspec sooner-or-later (
+			(AmbulanceOnScene8() and always, for 12 seconds, DestinationUnreachable8())
+		)
+    $hashProjection "AmbulanceOnScene"
+    $monitored "true"
+	end
+
+	declare obstacle [ destination_unreachable9 ]
+		name "Incident 9 Unreachable"
+		formalspec sooner-or-later (
+			(AmbulanceOnScene9() and always, for 12 seconds, DestinationUnreachable9())
+		)
+    $hashProjection "AmbulanceOnScene"
+    $monitored "true"
+	end
+
+	declare obstacle [ destination_unreachable10 ]
+		name "Incident 10 Unreachable"
+		formalspec sooner-or-later (
+			(AmbulanceOnScene10() and always, for 12 seconds, DestinationUnreachable10())
+		)
+    $hashProjection "AmbulanceOnScene"
+    $monitored "true"
+	end
+
+declare obstacle [ onscene_button_not_pressed ]
+	name "On Scene Button Not Pressed"
+	refinedby a1_onscene_button_not_pressed
+	refinedby a2_onscene_button_not_pressed
+	refinedby a3_onscene_button_not_pressed
+	refinedby a4_onscene_button_not_pressed
+	refinedby a5_onscene_button_not_pressed
+	refinedby a6_onscene_button_not_pressed
+	refinedby a7_onscene_button_not_pressed
+	refinedby a8_onscene_button_not_pressed
+	refinedby a9_onscene_button_not_pressed
+	refinedby a10_onscene_button_not_pressed
+	refinedby a11_onscene_button_not_pressed
+	refinedby a12_onscene_button_not_pressed
+	refinedby a13_onscene_button_not_pressed
+	refinedby a14_onscene_button_not_pressed
+	refinedby a15_onscene_button_not_pressed
+  $log_cps "TRUE"
+  resolvedby [substitution:sg4scene] automated_onscene_detection
+end # 2 minutes = 12 seconds
+
+	declare obstacle [ a1_onscene_button_not_pressed ]
+		name "A1 On Scene Button Not Pressed"
+		formalspec sooner-or-later (
+			(always, for 12 seconds, (AmbulanceA1OnSceneLocation() and not (AmbulanceA1OnScene() or AmbulanceA1ToHospital())))
+		)
+    $hashProjection "AmbulanceOnSceneLocation"
+    $monitored "true"
+	end
+
+	declare obstacle [ a2_onscene_button_not_pressed ]
+		name "A2 On Scene Button Not Pressed"
+		formalspec sooner-or-later (
+			(always, for 12 seconds, (AmbulanceA2OnSceneLocation() and not (AmbulanceA2OnScene() or AmbulanceA2ToHospital())))
+		)
+    $hashProjection "AmbulanceOnSceneLocation"
+    $monitored "true"
+	end
+
+	declare obstacle [ a3_onscene_button_not_pressed ]
+		name "A3 On Scene Button Not Pressed"
+		formalspec sooner-or-later (
+			(always, for 12 seconds, (AmbulanceA3OnSceneLocation() and not (AmbulanceA3OnScene() or AmbulanceA3ToHospital())))
+		)
+    $hashProjection "AmbulanceOnSceneLocation"
+	end
+
+	declare obstacle [ a4_onscene_button_not_pressed ]
+		name "A4 On Scene Button Not Pressed"
+		formalspec sooner-or-later (
+			(always, for 12 seconds, (AmbulanceA4OnSceneLocation() and not (AmbulanceA4OnScene() or AmbulanceA4ToHospital())))
+		)
+    $hashProjection "AmbulanceOnSceneLocation"
+    $monitored "true"
+	end
+
+	declare obstacle [ a5_onscene_button_not_pressed ]
+		name "A5 On Scene Button Not Pressed"
+		formalspec sooner-or-later (
+			(always, for 12 seconds, (AmbulanceA5OnSceneLocation() and not (AmbulanceA5OnScene() or AmbulanceA5ToHospital())))
+		)
+    $hashProjection "AmbulanceOnSceneLocation"
+    $monitored "true"
+	end
+
+	declare obstacle [ a6_onscene_button_not_pressed ]
+		name "A6 On Scene Button Not Pressed"
+		formalspec sooner-or-later (
+			(always, for 12 seconds, (AmbulanceA6OnSceneLocation() and not (AmbulanceA6OnScene() or AmbulanceA6ToHospital())))
+		)
+    $hashProjection "AmbulanceOnSceneLocation"
+    $monitored "true"
+	end
+
+	declare obstacle [ a7_onscene_button_not_pressed ]
+		name "A7 On Scene Button Not Pressed"
+		formalspec sooner-or-later (
+			(always, for 12 seconds, (AmbulanceA7OnSceneLocation() and not (AmbulanceA7OnScene() or AmbulanceA7ToHospital())))
+		)
+    $hashProjection "AmbulanceOnSceneLocation"
+    $monitored "true"
+	end
+
+	declare obstacle [ a8_onscene_button_not_pressed ]
+		name "A8 On Scene Button Not Pressed"
+		formalspec sooner-or-later (
+			(always, for 12 seconds, (AmbulanceA8OnSceneLocation() and not (AmbulanceA8OnScene() or AmbulanceA8ToHospital())))
+		)
+    $hashProjection "AmbulanceOnSceneLocation"
+    $monitored "true"
+	end
+
+	declare obstacle [ a9_onscene_button_not_pressed ]
+		name "A9 On Scene Button Not Pressed"
+		formalspec sooner-or-later (
+			(always, for 12 seconds, (AmbulanceA9OnSceneLocation() and not (AmbulanceA9OnScene() or AmbulanceA9ToHospital())))
+		)
+    $hashProjection "AmbulanceOnSceneLocation"
+    $monitored "true"
+	end
+
+	declare obstacle [ a10_onscene_button_not_pressed ]
+		name "A10 On Scene Button Not Pressed"
+		formalspec sooner-or-later (
+			(always, for 12 seconds, (AmbulanceA10OnSceneLocation() and not (AmbulanceA10OnScene() or AmbulanceA10ToHospital())))
+		)
+    $hashProjection "AmbulanceOnSceneLocation"
+    $monitored "true"
+	end
+
+	declare obstacle [ a11_onscene_button_not_pressed ]
+		name "A11 On Scene Button Not Pressed"
+		formalspec sooner-or-later (
+			(always, for 12 seconds, (AmbulanceA11OnSceneLocation() and not (AmbulanceA11OnScene() or AmbulanceA11ToHospital())))
+		)
+    $hashProjection "AmbulanceOnSceneLocation"
+    $monitored "true"
+	end
+
+	declare obstacle [ a12_onscene_button_not_pressed ]
+		name "A12 On Scene Button Not Pressed"
+		formalspec sooner-or-later (
+			(always, for 12 seconds, (AmbulanceA12OnSceneLocation() and not (AmbulanceA12OnScene() or AmbulanceA12ToHospital())))
+		)
+    $hashProjection "AmbulanceOnSceneLocation"
+    $monitored "true"
+	end
+
+	declare obstacle [ a13_onscene_button_not_pressed ]
+		name "A13 On Scene Button Not Pressed"
+		formalspec sooner-or-later (
+			(always, for 12 seconds, (AmbulanceA13OnSceneLocation() and not (AmbulanceA13OnScene() or AmbulanceA13ToHospital())))
+		)
+    $hashProjection "AmbulanceOnSceneLocation"
+    $monitored "true"
+	end
+
+	declare obstacle [ a14_onscene_button_not_pressed ]
+		name "A14 On Scene Button Not Pressed"
+		formalspec sooner-or-later (
+			(always, for 12 seconds, (AmbulanceA14OnSceneLocation() and not (AmbulanceA14OnScene() or AmbulanceA14ToHospital())))
+		)
+    $hashProjection "AmbulanceOnSceneLocation"
+    $monitored "true"
+	end
+
+	declare obstacle [ a15_onscene_button_not_pressed ]
+		name "A15 On Scene Button Not Pressed"
+		formalspec sooner-or-later (
+			(always, for 12 seconds, (AmbulanceA15OnSceneLocation() and not (AmbulanceA15OnScene() or AmbulanceA15ToHospital())))
+		)
+    $hashProjection "AmbulanceOnSceneLocation"
+    $monitored "true"
+	end
+
+declare obstacle [ athospital_button_not_pressed ]
+	name "At Hospital Button Not Pressed"
+	refinedby a1_athospital_button_not_pressed
+	refinedby a2_athospital_button_not_pressed
+	refinedby a3_athospital_button_not_pressed
+	refinedby a4_athospital_button_not_pressed
+	refinedby a5_athospital_button_not_pressed
+	refinedby a6_athospital_button_not_pressed
+	refinedby a7_athospital_button_not_pressed
+	refinedby a8_athospital_button_not_pressed
+	refinedby a9_athospital_button_not_pressed
+	refinedby a10_athospital_button_not_pressed
+	refinedby a11_athospital_button_not_pressed
+	refinedby a12_athospital_button_not_pressed
+	refinedby a13_athospital_button_not_pressed
+	refinedby a14_athospital_button_not_pressed
+	refinedby a15_athospital_button_not_pressed
+  $log_cps "TRUE"
+  resolvedby [substitution:sg4hosp] automated_at_hospital_detection
+end # 4 minutes = 6 seconds
+
+	declare obstacle [ a1_athospital_button_not_pressed ]
+		name "A1 At Hospital Button Not Pressed"
+		formalspec sooner-or-later (
+			(AmbulanceA1AtHospitalLocation() and always, for 6 seconds, not AmbulanceA1AtHospital())
+		)
+    $hashProjection "AmbulanceAtHospitalLocation"
+    $monitored "true"
+	end
+
+	declare obstacle [ a2_athospital_button_not_pressed ]
+		name "A2 At Hospital Button Not Pressed"
+		formalspec sooner-or-later (
+			(AmbulanceA2AtHospitalLocation() and always, for 6 seconds, not AmbulanceA2AtHospital())
+		)
+    $hashProjection "AmbulanceAtHospitalLocation"
+    $monitored "true"
+	end
+
+	declare obstacle [ a3_athospital_button_not_pressed ]
+		name "A3 At Hospital Button Not Pressed"
+		formalspec sooner-or-later (
+			(AmbulanceA3AtHospitalLocation() and always, for 6 seconds, not AmbulanceA3AtHospital())
+		)
+    $hashProjection "AmbulanceAtHospitalLocation"
+    $monitored "true"
+	end
+
+	declare obstacle [ a4_athospital_button_not_pressed ]
+		name "A4 At Hospital Button Not Pressed"
+		formalspec sooner-or-later (
+			(AmbulanceA4AtHospitalLocation() and always, for 6 seconds, not AmbulanceA4AtHospital())
+		)
+    $hashProjection "AmbulanceAtHospitalLocation"
+    $monitored "true"
+	end
+
+	declare obstacle [ a5_athospital_button_not_pressed ]
+		name "A5 At Hospital Button Not Pressed"
+		formalspec sooner-or-later (
+			(AmbulanceA5AtHospitalLocation() and always, for 6 seconds, not AmbulanceA5AtHospital())
+		)
+    $hashProjection "AmbulanceAtHospitalLocation"
+    $monitored "true"
+	end
+
+	declare obstacle [ a6_athospital_button_not_pressed ]
+		name "A6 At Hospital Button Not Pressed"
+		formalspec sooner-or-later (
+			(AmbulanceA6AtHospitalLocation() and always, for 6 seconds, not AmbulanceA6AtHospital())
+		)
+    $hashProjection "AmbulanceAtHospitalLocation"
+    $monitored "true"
+	end
+
+	declare obstacle [ a7_athospital_button_not_pressed ]
+		name "A7 At Hospital Button Not Pressed"
+		formalspec sooner-or-later (
+			(AmbulanceA7AtHospitalLocation() and always, for 6 seconds, not AmbulanceA7AtHospital())
+		)
+    $hashProjection "AmbulanceAtHospitalLocation"
+    $monitored "true"
+	end
+
+	declare obstacle [ a8_athospital_button_not_pressed ]
+		name "A8 At Hospital Button Not Pressed"
+		formalspec sooner-or-later (
+			(AmbulanceA8AtHospitalLocation() and always, for 6 seconds, not AmbulanceA8AtHospital())
+		)
+    $hashProjection "AmbulanceAtHospitalLocation"
+    $monitored "true"
+	end
+
+	declare obstacle [ a9_athospital_button_not_pressed ]
+		name "A9 At Hospital Button Not Pressed"
+		formalspec sooner-or-later (
+			(AmbulanceA9AtHospitalLocation() and always, for 6 seconds, not AmbulanceA9AtHospital())
+		)
+    $hashProjection "AmbulanceAtHospitalLocation"
+    $monitored "true"
+	end
+
+	declare obstacle [ a10_athospital_button_not_pressed ]
+		name "A10 At Hospital Button Not Pressed"
+		formalspec sooner-or-later (
+			(AmbulanceA10AtHospitalLocation() and always, for 6 seconds, not AmbulanceA10AtHospital())
+		)
+    $hashProjection "AmbulanceAtHospitalLocation"
+    $monitored "true"
+	end
+
+	declare obstacle [ a11_athospital_button_not_pressed ]
+		name "A11 At Hospital Button Not Pressed"
+		formalspec sooner-or-later (
+			(AmbulanceA11AtHospitalLocation() and always, for 6 seconds, not AmbulanceA11AtHospital())
+		)
+    $hashProjection "AmbulanceAtHospitalLocation"
+    $monitored "true"
+	end
+
+	declare obstacle [ a12_athospital_button_not_pressed ]
+		name "A12 At Hospital Button Not Pressed"
+		formalspec sooner-or-later (
+			(AmbulanceA12AtHospitalLocation() and always, for 6 seconds, not AmbulanceA12AtHospital())
+		)
+    $hashProjection "AmbulanceAtHospitalLocation"
+    $monitored "true"
+	end
+
+	declare obstacle [ a13_athospital_button_not_pressed ]
+		name "A13 At Hospital Button Not Pressed"
+		formalspec sooner-or-later (
+			(AmbulanceA13AtHospitalLocation() and always, for 6 seconds, not AmbulanceA13AtHospital())
+		)
+    $hashProjection "AmbulanceAtHospitalLocation"
+    $monitored "true"
+	end
+
+	declare obstacle [ a14_athospital_button_not_pressed ]
+		name "A14 At Hospital Button Not Pressed"
+		formalspec sooner-or-later (
+			(AmbulanceA14AtHospitalLocation() and always, for 6 seconds, not AmbulanceA14AtHospital())
+		)
+    $hashProjection "AmbulanceAtHospitalLocation"
+    $monitored "true"
+	end
+
+	declare obstacle [ a15_athospital_button_not_pressed ]
+		name "A15 At Hospital Button Not Pressed"
+		formalspec sooner-or-later (
+			(AmbulanceA15AtHospitalLocation() and always, for 6 seconds, not AmbulanceA15AtHospital())
+		)
+    $hashProjection "AmbulanceAtHospitalLocation"
+    $monitored "true"
+	end
+
+declare obstacle [ atstation_button_not_pressed ]
+	name "At Station Button Not Pressed"
+	refinedby a1_atstation_button_not_pressed
+	refinedby a2_atstation_button_not_pressed
+	refinedby a3_atstation_button_not_pressed
+	refinedby a4_atstation_button_not_pressed
+	refinedby a5_atstation_button_not_pressed
+	refinedby a6_atstation_button_not_pressed
+	refinedby a7_atstation_button_not_pressed
+	refinedby a8_atstation_button_not_pressed
+	refinedby a9_atstation_button_not_pressed
+	refinedby a10_atstation_button_not_pressed
+	refinedby a11_atstation_button_not_pressed
+	refinedby a12_atstation_button_not_pressed
+	refinedby a13_atstation_button_not_pressed
+	refinedby a14_atstation_button_not_pressed
+	refinedby a15_atstation_button_not_pressed
+  $log_cps "TRUE"
+#  resolvedby [substitution:sg4station] automated_station_detection
+end # 4 minutes = 6 seconds
+
+	declare obstacle [ a1_atstation_button_not_pressed ]
+		name "A1 At Station Button Not Pressed"
+		formalspec sooner-or-later (
+			(AmbulanceA1AtStationLocation() and always, for 6 seconds, not AmbulanceA1AtStation())
+		)
+    $hashProjection "AmbulanceAtStationLocation"
+    $monitored "true"
+	end
+
+	declare obstacle [ a2_atstation_button_not_pressed ]
+		name "A2 At Station Button Not Pressed"
+		formalspec sooner-or-later (
+			(AmbulanceA2AtStationLocation() and always, for 6 seconds, not AmbulanceA2AtStation())
+		)
+    $hashProjection "AmbulanceAtStationLocation"
+    $monitored "true"
+	end
+
+	declare obstacle [ a3_atstation_button_not_pressed ]
+		name "A3 At Station Button Not Pressed"
+		formalspec sooner-or-later (
+			(AmbulanceA3AtStationLocation() and always, for 6 seconds, not AmbulanceA3AtStation())
+		)
+    $hashProjection "AmbulanceAtStationLocation"
+    $monitored "true"
+	end
+
+	declare obstacle [ a4_atstation_button_not_pressed ]
+		name "A4 At Station Button Not Pressed"
+		formalspec sooner-or-later (
+			(AmbulanceA4AtStationLocation() and always, for 6 seconds, not AmbulanceA4AtStation())
+		)
+    $hashProjection "AmbulanceAtStationLocation"
+    $monitored "true"
+	end
+
+	declare obstacle [ a5_atstation_button_not_pressed ]
+		name "A5 At Station Button Not Pressed"
+		formalspec sooner-or-later (
+			(AmbulanceA5AtStationLocation() and always, for 6 seconds, not AmbulanceA5AtStation())
+		)
+    $hashProjection "AmbulanceAtStationLocation"
+    $monitored "true"
+	end
+
+	declare obstacle [ a6_atstation_button_not_pressed ]
+		name "A6 At Station Button Not Pressed"
+		formalspec sooner-or-later (
+			(AmbulanceA6AtStationLocation() and always, for 6 seconds, not AmbulanceA6AtStation())
+		)
+    $hashProjection "AmbulanceAtStationLocation"
+    $monitored "true"
+	end
+
+	declare obstacle [ a7_atstation_button_not_pressed ]
+		name "A7 At Station Button Not Pressed"
+		formalspec sooner-or-later (
+			(AmbulanceA7AtStationLocation() and always, for 6 seconds, not AmbulanceA7AtStation())
+		)
+    $hashProjection "AmbulanceAtStationLocation"
+    $monitored "true"
+	end
+
+	declare obstacle [ a8_atstation_button_not_pressed ]
+		name "A8 At Station Button Not Pressed"
+		formalspec sooner-or-later (
+			(AmbulanceA8AtStationLocation() and always, for 6 seconds, not AmbulanceA8AtStation())
+		)
+    $hashProjection "AmbulanceAtStationLocation"
+    $monitored "true"
+	end
+
+	declare obstacle [ a9_atstation_button_not_pressed ]
+		name "A9 At Station Button Not Pressed"
+		formalspec sooner-or-later (
+			(AmbulanceA9AtStationLocation() and always, for 6 seconds, not AmbulanceA9AtStation())
+		)
+    $hashProjection "AmbulanceAtStationLocation"
+    $monitored "true"
+	end
+
+	declare obstacle [ a10_atstation_button_not_pressed ]
+		name "A10 At Station Button Not Pressed"
+		formalspec sooner-or-later (
+			(AmbulanceA10AtStationLocation() and always, for 6 seconds, not AmbulanceA10AtStation())
+		)
+    $hashProjection "AmbulanceAtStationLocation"
+    $monitored "true"
+	end
+
+	declare obstacle [ a11_atstation_button_not_pressed ]
+		name "A11 At Station Button Not Pressed"
+		formalspec sooner-or-later (
+			(AmbulanceA11AtStationLocation() and always, for 6 seconds, not AmbulanceA11AtStation())
+		)
+    $hashProjection "AmbulanceAtStationLocation"
+    $monitored "true"
+	end
+
+	declare obstacle [ a12_atstation_button_not_pressed ]
+		name "A12 At Station Button Not Pressed"
+		formalspec sooner-or-later (
+			(AmbulanceA12AtStationLocation() and always, for 6 seconds, not AmbulanceA12AtStation())
+		)
+    $hashProjection "AmbulanceAtStationLocation"
+    $monitored "true"
+	end
+
+	declare obstacle [ a13_atstation_button_not_pressed ]
+		name "A13 At Station Button Not Pressed"
+		formalspec sooner-or-later (
+			(AmbulanceA13AtStationLocation() and always, for 6 seconds, not AmbulanceA13AtStation())
+		)
+    $hashProjection "AmbulanceAtStationLocation"
+    $monitored "true"
+	end
+
+	declare obstacle [ a14_atstation_button_not_pressed ]
+		name "A14 At Station Button Not Pressed"
+		formalspec sooner-or-later (
+			(AmbulanceA14AtStationLocation() and always, for 6 seconds, not AmbulanceA14AtStation())
+		)
+    $hashProjection "AmbulanceAtStationLocation"
+    $monitored "true"
+	end
+
+	declare obstacle [ a15_atstation_button_not_pressed ]
+		name "A15 At Station Button Not Pressed"
+		formalspec sooner-or-later (
+			(AmbulanceA15AtStationLocation() and always, for 6 seconds, not AmbulanceA15AtStation())
+		)
+    $hashProjection "AmbulanceAtStationLocation"
+    $monitored "true"
+	end
+
+# GM 2
+
+declare goal [ avoid_ambulance_mobilized_on_road ]
+  name "Avo [  ][Ambulance Mobilized At Station]"
+  rsr .8
+  $log_cps "TRUE"
+  refinedby avoid_ambulance_on_road_allocated
+end
+
+declare goal [ avoid_ambulance_on_road_allocated ]
+  obstructedby mobilization_on_road
+end
+
+declare goal [ night_allocator ]
+  $ondeploy "DeployAmbulanceAtStationAllocator"
+  $onremove "RemoveAmbulanceAtStationAllocator"
+  obstructedby mobilization_on_road_when_na
+end
+    
+declare obstacle [ mobilization_on_road ]
+  name "Ambulance Mobilized On Road"
+  refinedby a1_mobilized_on_road
+  refinedby a2_mobilized_on_road
+  refinedby a3_mobilized_on_road
+  refinedby a4_mobilized_on_road
+  refinedby a5_mobilized_on_road
+  refinedby a6_mobilized_on_road
+  refinedby a7_mobilized_on_road
+  refinedby a8_mobilized_on_road
+  refinedby a9_mobilized_on_road
+  refinedby a10_mobilized_on_road
+  refinedby a11_mobilized_on_road
+  refinedby a12_mobilized_on_road
+  refinedby a13_mobilized_on_road
+  refinedby a14_mobilized_on_road
+  refinedby a15_mobilized_on_road
+  $log_cps "TRUE"
+  resolvedby [substitution:avoid_ambulance_on_road_allocated] night_allocator
+end
+
+  declare obstacle [ a1_mobilized_on_road ]
+    formalspec sooner-or-later (
+      (always, for 3 seconds, DefaultAllocator() and AmbA1AvailableAtRadio() and AmbA1Allocated())
+    )
+    $hashProjection "AmbAllocated,DefaultAllocator"
+    $monitored "true"
+  end
+
+  declare obstacle [ a2_mobilized_on_road ]
+    formalspec sooner-or-later (
+      (always, for 3 seconds, DefaultAllocator() and AmbA2AvailableAtRadio() and AmbA2Allocated())
+    )
+    $hashProjection "AmbAllocated,DefaultAllocator"
+    $monitored "true"
+  end
+
+  declare obstacle [ a3_mobilized_on_road ]
+    formalspec sooner-or-later (
+      (always, for 3 seconds, DefaultAllocator() and AmbA3AvailableAtRadio() and AmbA3Allocated())
+    )
+    $hashProjection "AmbAllocated,DefaultAllocator"
+    $monitored "true"
+  end
+
+  declare obstacle [ a4_mobilized_on_road ]
+    formalspec sooner-or-later (
+      (always, for 3 seconds, DefaultAllocator() and AmbA4AvailableAtRadio() and AmbA4Allocated())
+    )
+    $hashProjection "AmbAllocated,DefaultAllocator"
+    $monitored "true"
+  end
+
+  declare obstacle [ a5_mobilized_on_road ]
+    formalspec sooner-or-later (
+      (always, for 3 seconds, DefaultAllocator() and AmbA5AvailableAtRadio() and AmbA5Allocated())
+    )
+    $hashProjection "AmbAllocated,DefaultAllocator"
+    $monitored "true"
+  end
+
+  declare obstacle [ a6_mobilized_on_road ]
+    formalspec sooner-or-later (
+      (always, for 3 seconds, DefaultAllocator() and AmbA6AvailableAtRadio() and AmbA6Allocated())
+    )
+    $hashProjection "AmbAllocated,DefaultAllocator"
+    $monitored "true"
+  end
+
+  declare obstacle [ a7_mobilized_on_road ]
+    formalspec sooner-or-later (
+      (always, for 3 seconds, DefaultAllocator() and AmbA7AvailableAtRadio() and AmbA7Allocated())
+    )
+    $hashProjection "AmbAllocated,DefaultAllocator"
+    $monitored "true"
+  end
+
+  declare obstacle [ a8_mobilized_on_road ]
+    formalspec sooner-or-later (
+      (always, for 3 seconds, DefaultAllocator() and AmbA8AvailableAtRadio() and AmbA8Allocated())
+    )
+    $hashProjection "AmbAllocated,DefaultAllocator"
+    $monitored "true"
+  end
+
+  declare obstacle [ a9_mobilized_on_road ]
+    formalspec sooner-or-later (
+      (always, for 3 seconds, DefaultAllocator() and AmbA9AvailableAtRadio() and AmbA9Allocated())
+    )
+    $hashProjection "AmbAllocated,DefaultAllocator"
+    $monitored "true"
+  end
+
+  declare obstacle [ a10_mobilized_on_road ]
+    formalspec sooner-or-later (
+      (always, for 3 seconds, DefaultAllocator() and AmbA10AvailableAtRadio() and AmbA10Allocated())
+    )
+    $hashProjection "AmbAllocated,DefaultAllocator"
+    $monitored "true"
+  end
+
+  declare obstacle [ a11_mobilized_on_road ]
+    formalspec sooner-or-later (
+      (always, for 3 seconds, DefaultAllocator() and AmbA11AvailableAtRadio() and AmbA11Allocated())
+    )
+    $hashProjection "AmbAllocated,DefaultAllocator"
+    $monitored "true"
+  end
+
+  declare obstacle [ a12_mobilized_on_road ]
+    formalspec sooner-or-later (
+      (always, for 3 seconds, DefaultAllocator() and AmbA12AvailableAtRadio() and AmbA12Allocated())
+    )
+    $hashProjection "AmbAllocated,DefaultAllocator"
+    $monitored "true"
+  end
+
+  declare obstacle [ a13_mobilized_on_road ]
+    formalspec sooner-or-later (
+      (always, for 3 seconds, DefaultAllocator() and AmbA13AvailableAtRadio() and AmbA13Allocated())
+    )
+    $hashProjection "AmbAllocated,DefaultAllocator"
+    $monitored "true"
+  end
+
+  declare obstacle [ a14_mobilized_on_road ]
+    formalspec sooner-or-later (
+      (always, for 3 seconds, DefaultAllocator() and AmbA14AvailableAtRadio() and AmbA14Allocated())
+    )
+    $hashProjection "AmbAllocated,DefaultAllocator"
+    $monitored "true"
+  end
+
+  declare obstacle [ a15_mobilized_on_road ]
+    formalspec sooner-or-later (
+      (always, for 3 seconds, DefaultAllocator() and AmbA15AvailableAtRadio() and AmbA15Allocated())
+    )
+    $hashProjection "AmbAllocated,DefaultAllocator"
+    $monitored "true"
+  end
+
+declare obstacle [ mobilization_on_road_when_na ]
+  name "Ambulance Mobilized On Road When Night Allocator"
+  refinedby a1_mobilized_on_road_when_na
+  refinedby a2_mobilized_on_road_when_na
+  refinedby a3_mobilized_on_road_when_na
+  refinedby a4_mobilized_on_road_when_na
+  refinedby a5_mobilized_on_road_when_na
+  refinedby a6_mobilized_on_road_when_na
+  refinedby a7_mobilized_on_road_when_na
+  refinedby a8_mobilized_on_road_when_na
+  refinedby a9_mobilized_on_road_when_na
+  refinedby a10_mobilized_on_road_when_na
+  refinedby a11_mobilized_on_road_when_na
+  refinedby a12_mobilized_on_road_when_na
+  refinedby a13_mobilized_on_road_when_na
+  refinedby a14_mobilized_on_road_when_na
+  refinedby a15_mobilized_on_road_when_na
+  $log_cps "TRUE"
+end
+
+    declare obstacle [ a1_mobilized_on_road_when_na ]
+      formalspec sooner-or-later (
+        (always, for 3 seconds, AmbulanceAtStationAllocator() and AmbA1AvailableAtRadio() and AmbA1Allocated())
+      )
+      $hashProjection "AmbAllocated,AmbulanceAtStationAllocator"
+    $monitored "true"
+    end
+
+    declare obstacle [ a2_mobilized_on_road_when_na ]
+      formalspec sooner-or-later (
+        (always, for 3 seconds, AmbulanceAtStationAllocator() and AmbA2AvailableAtRadio() and AmbA2Allocated())
+      )
+      $hashProjection "AmbAllocated,AmbulanceAtStationAllocator"
+    $monitored "true"
+    end
+
+    declare obstacle [ a3_mobilized_on_road_when_na ]
+      formalspec sooner-or-later (
+        (always, for 3 seconds, AmbulanceAtStationAllocator() and AmbA3AvailableAtRadio() and AmbA3Allocated())
+      )
+      $hashProjection "AmbAllocated,AmbulanceAtStationAllocator"
+    $monitored "true"
+    end
+
+    declare obstacle [ a4_mobilized_on_road_when_na ]
+      formalspec sooner-or-later (
+        (always, for 3 seconds, AmbulanceAtStationAllocator() and AmbA4AvailableAtRadio() and AmbA4Allocated())
+      )
+      $hashProjection "AmbAllocated,AmbulanceAtStationAllocator"
+    $monitored "true"
+    end
+
+    declare obstacle [ a5_mobilized_on_road_when_na ]
+      formalspec sooner-or-later (
+        (always, for 3 seconds, AmbulanceAtStationAllocator() and AmbA5AvailableAtRadio() and AmbA5Allocated())
+      )
+      $hashProjection "AmbAllocated,AmbulanceAtStationAllocator"
+    $monitored "true"
+    end
+
+    declare obstacle [ a6_mobilized_on_road_when_na ]
+      formalspec sooner-or-later (
+        (always, for 3 seconds, AmbulanceAtStationAllocator() and AmbA6AvailableAtRadio() and AmbA6Allocated())
+      )
+      $hashProjection "AmbAllocated,AmbulanceAtStationAllocator"
+    $monitored "true"
+    end
+
+    declare obstacle [ a7_mobilized_on_road_when_na ]
+      formalspec sooner-or-later (
+        (always, for 3 seconds, AmbulanceAtStationAllocator() and AmbA7AvailableAtRadio() and AmbA7Allocated())
+      )
+      $hashProjection "AmbAllocated,AmbulanceAtStationAllocator"
+    $monitored "true"
+    end
+
+    declare obstacle [ a8_mobilized_on_road_when_na ]
+      formalspec sooner-or-later (
+        (always, for 3 seconds, AmbulanceAtStationAllocator() and AmbA8AvailableAtRadio() and AmbA8Allocated())
+      )
+      $hashProjection "AmbAllocated,AmbulanceAtStationAllocator"
+    $monitored "true"
+    end
+
+    declare obstacle [ a9_mobilized_on_road_when_na ]
+      formalspec sooner-or-later (
+        (always, for 3 seconds, AmbulanceAtStationAllocator() and AmbA9AvailableAtRadio() and AmbA9Allocated())
+      )
+      $hashProjection "AmbAllocated,AmbulanceAtStationAllocator"
+    $monitored "true"
+    end
+
+    declare obstacle [ a10_mobilized_on_road_when_na ]
+      formalspec sooner-or-later (
+        (always, for 3 seconds, AmbulanceAtStationAllocator() and AmbA10AvailableAtRadio() and AmbA10Allocated())
+      )
+      $hashProjection "AmbAllocated,AmbulanceAtStationAllocator"
+    $monitored "true"
+    end
+
+    declare obstacle [ a11_mobilized_on_road_when_na ]
+      formalspec sooner-or-later (
+        (always, for 3 seconds, AmbulanceAtStationAllocator() and AmbA11AvailableAtRadio() and AmbA11Allocated())
+      )
+      $hashProjection "AmbAllocated,AmbulanceAtStationAllocator"
+    $monitored "true"
+    end
+
+    declare obstacle [ a12_mobilized_on_road_when_na ]
+      formalspec sooner-or-later (
+        (always, for 3 seconds, AmbulanceAtStationAllocator() and AmbA12AvailableAtRadio() and AmbA12Allocated())
+      )
+      $hashProjection "AmbAllocated,AmbulanceAtStationAllocator"
+    $monitored "true"
+    end
+
+    declare obstacle [ a13_mobilized_on_road_when_na ]
+      formalspec sooner-or-later (
+        (always, for 3 seconds, AmbulanceAtStationAllocator() and AmbA13AvailableAtRadio() and AmbA13Allocated())
+      )
+      $hashProjection "AmbAllocated,AmbulanceAtStationAllocator"
+    $monitored "true"
+    end
+
+    declare obstacle [ a14_mobilized_on_road_when_na ]
+      formalspec sooner-or-later (
+        (always, for 3 seconds, AmbulanceAtStationAllocator() and AmbA14AvailableAtRadio() and AmbA14Allocated())
+      )
+      $hashProjection "AmbAllocated,AmbulanceAtStationAllocator"
+    $monitored "true"
+    end
+
+    declare obstacle [ a15_mobilized_on_road_when_na ]
+      formalspec sooner-or-later (
+        (always, for 3 seconds, AmbulanceAtStationAllocator() and AmbA15AvailableAtRadio() and AmbA15Allocated())
+      )
+      $hashProjection "AmbAllocated,AmbulanceAtStationAllocator"
+    $monitored "true"
+    end
+
+
+# CM goals
+
+declare goal [ reallocateTrafficJam ]
+  name "Achieve [Ambulance On Scene Location When Mobilized]"
+  refinedby allocateTrafficJam, reallocate
+  $ondeploy "DeployReallocator"
+  $onremove "RemoveReallocator"
+end
+
+  declare goal [ reallocate ]
+    name "Achieve [New Ambulance Allocated When Mobilized In Traffic Jam]"
+    obstructedby destination_unreachable
+  end
+
+  declare goal [ allocateTrafficJam ]
+    name "Achieve [Ambulance On Scene Location When Mobilized]"
+  end
+
+declare goal [ relaxTimetoHosp ]
+  name "Achieve [Ambulance At Hospital When On Scene And Traffic Jam]"
+  $ondeploy "DeployHospitalRelaxation"
+  $onremove "RemoveHospitalRelaxation"
+end
+
+declare goal [ automated_station_detection ]
+  name "Achieve [At Station Sent When At Station Location]"
+  obstructedby false_station_detection
+  $ondeploy "DeployAtStationDetection"
+  $onremove "DeployAtStationDetection"
+end
+
+declare obstacle [ false_station_detection ]
+  name "False Station Detection"
+  probability .02
+end
+
+declare goal [ automated_at_hospital_detection ]
+  name "Achieve [At Hospital Sent When At Hospital Location]"
+  obstructedby false_hospital_detection
+  $ondeploy "DeployAtHospitalDetection"
+  $onremove "DeployAtHospitalDetection"
+end
+
+declare obstacle [ false_hospital_detection ]
+  name "False At Hospital Detection"
+  probability .01
+end
+
+declare goal [ automated_onscene_detection ]
+  name "Achieve [On Scene Sent When On Scene Location]"
+  obstructedby false_onscene_detection
+  $ondeploy "DeployOnSceneDetection"
+  $onremove "DeployOnSceneDetection"
+end
+
+declare obstacle [ false_onscene_detection ]
+  name "False On Scene Detection"
+  probability .01
+end

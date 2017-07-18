@@ -1,7 +1,7 @@
 
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UCLouvain.AmbulanceSystem.MDTClient", "UCLouvain.AmbulanceSystem.MdtClient\UCLouvain.AmbulanceSystem.MdtClient.csproj", "{8F4E5A2D-A24A-49CE-A68B-A56047EF139B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UCLouvain.AmbulanceSystem.MdtClient", "UCLouvain.AmbulanceSystem.MdtClient\UCLouvain.AmbulanceSystem.MdtClient.csproj", "{8F4E5A2D-A24A-49CE-A68B-A56047EF139B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UCLouvain.AmbulanceSystem.Server", "UCLouvain.AmbulanceSystem.Server\UCLouvain.AmbulanceSystem.Server.csproj", "{BC186BE7-2FDC-4315-A4BD-1C68163E0214}"
 EndProject
@@ -13,7 +13,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UCLouvain.AmbulanceSystem.S
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UCLouvain.AmbulanceSystem.ServerVisualization", "UCLouvain.AmbulanceSystem.ServerVisualization\UCLouvain.AmbulanceSystem.ServerVisualization.csproj", "{1AF262B9-A031-4BED-820F-9F5711F0FF85}"
 EndProject
-Project("{9344BDBB-3E7F-41FC-A0DD-8665D75EE146}") = "LAS.Monitoring", "LAS.Monitoring\LAS.Monitoring.csproj", "{3208E35F-AB26-4CAD-9CAE-46031E30BEA9}"
+Project("{9344BDBB-3E7F-41FC-A0DD-8665D75EE146}") = "UCLouvain.AmbulanceSystem.Monitoring", "UCLouvain.AmbulanceSystem.Monitoring\UCLouvain.AmbulanceSystem.Monitoring.csproj", "{4EF975A2-E47A-4AF3-A0B0-2FAD34422B6C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,10 +45,10 @@ Global
 		{1AF262B9-A031-4BED-820F-9F5711F0FF85}.Debug|x86.Build.0 = Debug|Any CPU
 		{1AF262B9-A031-4BED-820F-9F5711F0FF85}.Release|x86.ActiveCfg = Release|Any CPU
 		{1AF262B9-A031-4BED-820F-9F5711F0FF85}.Release|x86.Build.0 = Release|Any CPU
-		{3208E35F-AB26-4CAD-9CAE-46031E30BEA9}.Debug|x86.ActiveCfg = Debug|x86
-		{3208E35F-AB26-4CAD-9CAE-46031E30BEA9}.Debug|x86.Build.0 = Debug|x86
-		{3208E35F-AB26-4CAD-9CAE-46031E30BEA9}.Release|x86.ActiveCfg = Release|x86
-		{3208E35F-AB26-4CAD-9CAE-46031E30BEA9}.Release|x86.Build.0 = Release|x86
+		{4EF975A2-E47A-4AF3-A0B0-2FAD34422B6C}.Debug|x86.ActiveCfg = Debug|x86
+		{4EF975A2-E47A-4AF3-A0B0-2FAD34422B6C}.Debug|x86.Build.0 = Debug|x86
+		{4EF975A2-E47A-4AF3-A0B0-2FAD34422B6C}.Release|x86.ActiveCfg = Release|x86
+		{4EF975A2-E47A-4AF3-A0B0-2FAD34422B6C}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
 		Policies = $0
