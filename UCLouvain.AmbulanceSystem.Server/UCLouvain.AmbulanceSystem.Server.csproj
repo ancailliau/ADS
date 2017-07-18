@@ -175,6 +175,7 @@
     <Compile Include="Allocators\AmbulanceAtStationAllocator.cs" />
     <Compile Include="Allocators\IAmbulanceAllocator.cs" />
     <Compile Include="RabbitMQListeningServer.cs" />
+    <Compile Include="Migrations\Migration5.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="NLog.xsd" />

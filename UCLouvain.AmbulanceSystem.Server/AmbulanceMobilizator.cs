@@ -80,19 +80,15 @@ namespace UCLouvain.AmbulanceSystem.Server
 														i.Latitude,
 														i.Longitude,
 														allocation.HospitalId);
-
-						if (!sender.Send(m, ambulance.Port)) {
-							logger.Info("Unable to contact to ambulance {0}, cancel allocation {1}", 
-							            allocation.AmbulanceId,
-							            allocation.AllocationId);
-							ambulanceRepository.UpdateStatus(allocation.AmbulanceId, 
-							                                 AmbulanceStatus.Unavailable);
-							allocationRepository.CancelAllocation(allocation.AllocationId, true);
-						}
+                                                        
+                        // Send mobilization order to MDT
+                        sender.Send(m, ambulance.Port);
+                        
+                        // Send fax to home station
+                        
+                        // Make radio or phone call
                         
                         OnMobilizationSent(allocation);
-                        
-                        // TODO OnMobilizationReceived(allocation)
 					}
 
 				} catch (Exception e) {

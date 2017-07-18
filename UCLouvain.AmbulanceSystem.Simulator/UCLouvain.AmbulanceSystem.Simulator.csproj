@@ -145,6 +145,7 @@
     <Compile Include="SimulatedAmbulance.cs" />
     <Compile Include="IncidentSimulator.cs" />
     <Compile Include="SimulatedEnvironment.cs" />
+    <Compile Include="SimulatedStation.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

@@ -45,18 +45,18 @@ namespace UCLouvain.AmbulanceSystem.Simulator
 			hospitals.Add ("HOP12", new Coordinate(50.8872628f, 4.3089256f));
 			hospitals.Add ("HOP13", new Coordinate (50.842471f, 4.399073f));
 
-			var pasiDelta = new Coordinate(50.818754f, 4.402740f);
-			var hopIxelles = new Coordinate(50.824938f, 4.379172f);
-			var pasiAnderlecht = new Coordinate(50.832740f, 4.311812f);
-			var pasiEvere = new Coordinate(50.870964f, 4.417631f);
-			var pasiVUB = new Coordinate(50.890831f, 4.308449f);
-			var pasiChenaie = new Coordinate(50.783341f, 4.356218f);
-			var pasiCite = new Coordinate(50.849709f, 4.361116f);
-			var pasiUCL = new Coordinate(50.851937f, 4.460279f);
-			var heliport = new Coordinate(50.859485f, 4.351848f);
-			var moliere = new Coordinate(50.815206f, 4.342141f);
-			var saintpierre = new Coordinate(50.835228f, 4.348342f);
-
+			var pasiDelta       = new SimulatedStation("pasiDelta", "PASI Delta", new Coordinate(50.818754f, 4.402740f), "pasiDelta_printer");
+			var hopIxelles      = new SimulatedStation("hopIxelles", "Hopital d'Ixelles", new Coordinate(50.824938f, 4.379172f), "hopIxelles_printer");
+			var pasiAnderlecht  = new SimulatedStation("pasiAnderlecht", "PASI Anderlecht", new Coordinate(50.832740f, 4.311812f), "pasiAnderlecht_printer");
+			var pasiEvere       = new SimulatedStation("pasiEvere", "PASI Evere", new Coordinate(50.870964f, 4.417631f), "pasiEvere_printer");
+			var pasiVUB         = new SimulatedStation("pasiVUB", "PASI VUB", new Coordinate(50.890831f, 4.308449f), "pasiVUB_printer");
+			var pasiChenaie     = new SimulatedStation("pasiChenaie", "PASI Chenaie", new Coordinate(50.783341f, 4.356218f), "pasiChenaie_printer");
+			var pasiCite        = new SimulatedStation("pasiCite", "PASI Cité", new Coordinate(50.849709f, 4.361116f), "pasiCite_printer");
+			var pasiUCL         = new SimulatedStation("pasiUCL", "PASI UCL", new Coordinate(50.851937f, 4.460279f), "pasiUCL_printer");
+			var heliport        = new SimulatedStation("heliport", "Caserne de l'Héliport", new Coordinate(50.859485f, 4.351848f), "heliport_printer");
+			var moliere         = new SimulatedStation("moliere", "Hopital Molière", new Coordinate(50.815206f, 4.342141f), "moliere_printer");
+			var saintpierre     = new SimulatedStation("saintpierre", "Hopital Saint-Pierre", new Coordinate(50.835228f, 4.348342f), "saintpierre_printer");
+            
 			logger.Info("Adding ambulances");
 
 			var a01 = new SimulatedAmbulance("A1", mapService, hospitals, pasiAnderlecht);

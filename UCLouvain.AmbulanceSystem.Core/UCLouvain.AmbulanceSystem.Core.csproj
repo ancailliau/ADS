@@ -167,6 +167,9 @@
     <Compile Include="Messages\MobilizationConfirmation.cs" />
     <Compile Include="Messages\CancellationConfirmation.cs" />
     <Compile Include="Models\PetaPoco.cs" />
+    <Compile Include="Domain\AmbulanceStation.cs" />
+    <Compile Include="Messages\RegisterAmbulanceStation.cs" />
+    <Compile Include="Repository\AmbulanceStationRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

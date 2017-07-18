@@ -20,6 +20,7 @@ namespace UCLouvain.AmbulanceSystem.Core.Messages
 	[XmlInclude(typeof(DeployAllocatorMessage))]
     [XmlInclude(typeof(MobilizationConfirmation))]
     [XmlInclude(typeof(CancellationConfirmation))]
+    [XmlInclude(typeof(RegisterAmbulanceStation))]
 	public abstract class Message
 	{
 		public string MessageId {

@@ -21,7 +21,7 @@ namespace UCLouvain.AmbulanceSystem.Simulator
 		MDT mdt;
 		MapService mapService;
 		Dictionary<string, Coordinate> hospitals;
-		Coordinate homeStation;
+		SimulatedStation homeStation;
 
 
 		bool mobilized = false;
@@ -38,22 +38,26 @@ namespace UCLouvain.AmbulanceSystem.Simulator
 
 		public SimulatedAmbulance(string identifier, 
 		                          MapService mapService, Dictionary<string, Coordinate> hospitals,
-		                          Coordinate homeStation)
+		                          SimulatedStation homeStation)
 		{
 			this.mapService = mapService;
 			this.hospitals = hospitals;
 			this.homeStation = homeStation;
+            
+            homeStation.AmbulanceAtStation.Add(this);
 
 			tasks = new List<Task>();
 			cancelSources = new List<CancellationTokenSource>();
 			currentRoute = new ConcurrentQueue<Coordinate>();
 
-			mdt = new MDT(identifier, homeStation.Latitude, homeStation.Longitude, () => SimulatedEnvironment.SendPosition(this));
+			mdt = new MDT(identifier, homeStation.Coordinates.Latitude, homeStation.Coordinates.Longitude, () => SimulatedEnvironment.SendPosition(this));
 			mdt.Mobilized += (sender, e) => Task.Run (() => OnMobilized(sender, e));
 			mdt.MobilizationCancelled += (sender, e) => Task.Run(() => OnMobilizationCancelled(sender, e));
 
 			mdt.SetAvailableAtStation();
 			mdt.InTrafficJam(false);
+            
+            
 		}
 
 		void OnMobilizationCancelled(object sender, EventArgs e)
@@ -169,6 +173,8 @@ namespace UCLouvain.AmbulanceSystem.Simulator
 					Console.WriteLine("Task was cancelled.");
 					cancelToken.ThrowIfCancellationRequested();
 				}
+            
+                homeStation.AmbulanceAtStation.Remove(this);
 
 				// Move to incident 
 				logger.Info("Ambulance {0} to incident", mdt.ambulanceId);
@@ -233,18 +239,19 @@ namespace UCLouvain.AmbulanceSystem.Simulator
 		{
 			logger.Info("Ambulance {0} back to station", mdt.ambulanceId);
 			if (Coordinate.DistanceEstimateInMeter(startPosition,
-													homeStation) > 250) {
+													homeStation.Coordinates) > 250) {
 				mdt.SetAvailableRadio();
 				mobilized = false;
 
 				var route = mapService.Calculate(mdt.latitude, mdt.longitude,
-											 homeStation.Latitude,
-											 homeStation.Longitude);
+											 homeStation.Coordinates.Latitude,
+											 homeStation.Coordinates.Longitude);
 				SimulateMove(route, cancelToken);
 			}
 			if (SimulatedEnvironment.PressAtStationButton(this)) {
 				mdt.SetAvailableAtStation();
 			}
+            homeStation.AmbulanceAtStation.Add(this);
 			mobilized = false;
 			mdt.InTrafficJam(false);
 			Thread.Sleep(TimeSpan.FromSeconds(5 * 60 / 10));
