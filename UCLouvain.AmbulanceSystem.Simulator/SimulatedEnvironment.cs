@@ -47,6 +47,25 @@ namespace UCLouvain.AmbulanceSystem.Simulator
 			return false;
 		}
 
+        public static bool PressLeavingButton(SimulatedAmbulance a)
+        {
+            var coin = r.NextDouble();
+
+            // Scenario 2
+            var now = DateTime.Now.TimeOfDay;
+            if (now > start_forget_button & now < end_forget_button) {
+                if (coin > .7) {
+                    return false;
+                }
+            } else {
+                if (coin > .9) {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
 		public static bool PressOnSceneButton(SimulatedAmbulance a)
 		{
 			var coin = r.NextDouble();

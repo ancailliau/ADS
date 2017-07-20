@@ -168,7 +168,10 @@ namespace UCLouvain.AmbulanceSystem.Simulator
 
 				logger.Info("About to confirm leaving");
 				Thread.Sleep(TimeSpan.FromSeconds(120 / 10));
-				mdt.SetLeaving();
+                if (SimulatedEnvironment.PressLeavingButton(this))
+                {
+                    mdt.SetLeaving();
+                }
 				if (cancelToken.IsCancellationRequested == true) {
 					Console.WriteLine("Task was cancelled.");
 					cancelToken.ThrowIfCancellationRequested();
